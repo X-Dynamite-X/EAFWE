@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Tajawal:wght@400;500;700&display=swap');
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -6,6 +7,81 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Cairo', 'Tajawal', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Gold Color Palette */
+    --color-gold-50: #fffbf0;
+    --color-gold-100: #fff7e0;
+    --color-gold-200: #ffedbe;
+    --color-gold-300: #ffe69c;
+    --color-gold-400: #ffdb72;
+    --color-gold-500: #ffc107;
+    --color-gold-600: #f59e0b;
+    --color-gold-700: #d97706;
+    --color-gold-800: #b45309;
+    --color-gold-900: #92400e;
+}
+
+/* Global Styles */
+html {
+    scroll-behavior: smooth;
+    direction: rtl;
+}
+
+body {
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+    direction: rtl;
+}
+
+[dir="ltr"] {
+    direction: ltr;
+}
+
+/* Smooth Transitions */
+* {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Focus States */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #ffc107;
+}
+
+/* Selection Color */
+::selection {
+    background-color: #ffedbe;
+    color: #111827;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f3f4f6;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #f59e0b;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #d97706;
+}
+
+/* Placeholder Text */
+::placeholder {
+    color: #9ca3af;
 }

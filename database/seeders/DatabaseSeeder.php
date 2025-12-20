@@ -3,23 +3,45 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Services\RolePermissionService;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // إنشاء الأدوار والصلاحيات
+        RolePermissionService::createDefaultRolesAndPermissions();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // إنشاء مستخدم admin
+        $admin = User::create([
+            'name' => 'مدير النظام',
+            'email' => 'admin@eafwe.com',
+            'phone' => '+966501234567',
+            'password' => bcrypt('password123'),
+            'is_active' => true,
         ]);
+        $admin->assignRole('admin');
+
+        // إنشاء مستخدم staff
+        $staff = User::create([
+            'name' => 'موظف المراجعة',
+            'email' => 'staff@eafwe.com',
+            'phone' => '+966502345678',
+            'password' => bcrypt('password123'),
+            'is_active' => true,
+        ]);
+        $staff->assignRole('staff');
+
+        // إنشاء مستخدمين عاديين
+        User::factory()
+            ->count(5)
+            ->create()
+            ->each(function ($user) {
+                $user->assignRole('member');
+            });
     }
 }
