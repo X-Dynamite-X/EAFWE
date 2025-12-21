@@ -12,7 +12,7 @@
             ];
         @endphp
 
-        @foreach($stats as $stat)
+        @foreach ($stats as $stat)
             <x-ui.card>
                 <div class="flex items-center justify-between">
                     <div>
@@ -91,5 +91,5 @@
 </x-layout.dashboard>
 
 @push('scripts')
-<script src="{{ mix('resources/js/pages/dashboard.js') }}"></script>
+    @vite(['resources/js/pages/dashboard.js'])
 @endpush

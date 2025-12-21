@@ -6,6 +6,7 @@
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,8 @@
     {{-- Vite CSS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-100 text-gray-900">
+
+<body class="bg-white text-charcoal-900 antialiased">
 
     <div class="flex h-screen">
         {{-- Sidebar --}}
@@ -37,4 +39,5 @@
     @vite('resources/js/app.js')
     @stack('scripts')
 </body>
+
 </html>

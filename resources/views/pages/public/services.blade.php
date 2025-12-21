@@ -1,188 +1,103 @@
 {{-- Services Page --}}
 
-<x-layout.app title="الخدمات">
+<x-layout.app title="مجالات العمل والخدمات">
     {{-- Hero Section --}}
-    <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <h1 class="text-4xl font-bold mb-4">خدماتنا</h1>
-            <p class="text-xl opacity-90">حلول شاملة ومتكاملة لجميع احتياجاتك</p>
+    <div class="bg-charcoal-900 text-white py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="grid grid-cols-6 h-full">
+                @for ($i = 0; $i < 12; $i++)
+                    <div class="border-l border-b border-gold-500/20"></div>
+                @endfor
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 relative text-center">
+            <h1 class="text-4xl lg:text-5xl font-black mb-6">مجالات العمل والخدمات</h1>
+            <p class="text-xl text-gold-400 font-bold max-w-3xl mx-auto">نعمل على تمكين المرأة الإماراتية من خلال مسارات
+                عمل متكاملة وشراكات استراتيجية.</p>
         </div>
     </div>
 
-    {{-- Services Grid --}}
-    <div class="max-w-7xl mx-auto px-6 py-16">
-        {{-- Introduction --}}
+    {{-- Areas of Work --}}
+    <div class="max-w-7xl mx-auto px-6 py-24">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold mb-4">ما الذي نقدمه؟</h2>
-            <p class="text-gray-600 max-w-3xl mx-auto">
-                نقدم مجموعة شاملة من الخدمات المتخصصة المصممة لتلبية احتياجات الأفراد والشركات. 
-                كل خدمة مصممة بعناية لتوفير أفضل قيمة وفائدة.
-            </p>
+            <h2 class="text-3xl lg:text-4xl font-black text-charcoal-900 mb-4">مجالات عمل الجمعية</h2>
+            <div class="w-24 h-1.5 bg-gold-500 mx-auto rounded-full"></div>
         </div>
 
-        {{-- Main Services --}}
-        <div class="grid md:grid-cols-3 gap-8 mb-16">
-            {{-- Service 1 --}}
-            <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-32 flex items-center justify-center">
-                    <div class="text-6xl">📊</div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+            @php
+                $areas = [
+                    ['تشجيع الإبداع والابتكار', '💡'],
+                    ['تدريب وتأهيل رائدات الأعمال', '🎓'],
+                    ['تزويد رائدات الاعمال بالاستشارات المتخصصة', '👔'],
+                    ['تنظيم المؤتمرات والملتقيات والندوات الاقتصادية والمجتمعية', '🤝'],
+                    ['تنظيم المعارض', '🖼️'],
+                    ['تنظيم الوفود الخارجية والداخلية', '✈️'],
+                    ['نشر ثقافة ريادة الاعمال لدى رائدات الأعمال', '📖'],
+                    ['توقيع اتفاقيات استراتيجية مع الشركاء', '📝'],
+                ];
+            @endphp
+            @foreach ($areas as $area)
+                <div
+                    class="bg-white p-8 rounded-4xl shadow-sm border border-gold-100 hover:shadow-xl hover:border-gold-300 transition-all duration-300 group">
+                    <div class="mb-6 group-hover:scale-110 transition-transform">
+                        <span
+                            class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center text-3xl">
+                            {{ $area[1] }}
+                        </span>
+                    </div>
+                    <h3 class="text-lg font-black text-charcoal-900 leading-relaxed">{{ $area[0] }}</h3>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-3">إدارة البيانات</h3>
-                    <p class="text-gray-600 mb-4">
-                        نوفر حلولاً متقدمة لإدارة وتحليل البيانات بكفاءة عالية.
-                    </p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li>✓ تحليل البيانات المتقدم</li>
-                        <li>✓ إدارة قواعد البيانات</li>
-                        <li>✓ التقارير المخصصة</li>
-                    </ul>
-                </div>
-            </div>
-
-            {{-- Service 2 --}}
-            <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition overflow-hidden">
-                <div class="bg-gradient-to-r from-green-500 to-green-600 h-32 flex items-center justify-center">
-                    <div class="text-6xl">🔐</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-3">الأمان والحماية</h3>
-                    <p class="text-gray-600 mb-4">
-                        نضمن أمان بيانات عملائنا بأحدث تقنيات التشفير.
-                    </p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li>✓ تشفير من الدرجة الأولى</li>
-                        <li>✓ حماية 24/7</li>
-                        <li>✓ نسخ احتياطية آمنة</li>
-                    </ul>
-                </div>
-            </div>
-
-            {{-- Service 3 --}}
-            <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition overflow-hidden">
-                <div class="bg-gradient-to-r from-purple-500 to-purple-600 h-32 flex items-center justify-center">
-                    <div class="text-6xl">🎯</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-3">التخطيط والاستراتيجية</h3>
-                    <p class="text-gray-600 mb-4">
-                        نساعدك في وضع خطط استراتيجية فعالة لتحقيق أهدافك.
-                    </p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li>✓ تطوير الاستراتيجيات</li>
-                        <li>✓ تحليل السوق</li>
-                        <li>✓ تخطيط الموارد</li>
-                    </ul>
-                </div>
-            </div>
-
-            {{-- Service 4 --}}
-            <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition overflow-hidden">
-                <div class="bg-gradient-to-r from-orange-500 to-orange-600 h-32 flex items-center justify-center">
-                    <div class="text-6xl">💼</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-3">الاستشارات</h3>
-                    <p class="text-gray-600 mb-4">
-                        استشاريون متخصصون يساعدونك في حل التحديات الشاملة.
-                    </p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li>✓ استشارات متخصصة</li>
-                        <li>✓ دراسات جدوى</li>
-                        <li>✓ حل المشاكل</li>
-                    </ul>
-                </div>
-            </div>
-
-            {{-- Service 5 --}}
-            <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition overflow-hidden">
-                <div class="bg-gradient-to-r from-red-500 to-red-600 h-32 flex items-center justify-center">
-                    <div class="text-6xl">📱</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-3">التطبيقات الذكية</h3>
-                    <p class="text-gray-600 mb-4">
-                        تطبيقات مخصصة توفر أداءً عالياً وسهولة في الاستخدام.
-                    </p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li>✓ تطبيقات ويب</li>
-                        <li>✓ تطبيقات موبايل</li>
-                        <li>✓ واجهات مستخدم متقدمة</li>
-                    </ul>
-                </div>
-            </div>
-
-            {{-- Service 6 --}}
-            <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition overflow-hidden">
-                <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 h-32 flex items-center justify-center">
-                    <div class="text-6xl">📚</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-3">التدريب والتطوير</h3>
-                    <p class="text-gray-600 mb-4">
-                        برامج تدريبية شاملة لتطوير مهارات فريقك.
-                    </p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li>✓ برامج تدريبية</li>
-                        <li>✓ ورش عمل</li>
-                        <li>✓ شهادات معتمدة</li>
-                    </ul>
-                </div>
-            </div>
+            @endforeach
         </div>
 
-        {{-- Why Choose Us --}}
-        <div class="bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-lg p-12">
-            <h2 class="text-3xl font-bold text-center mb-12">لماذا تختار خدماتنا؟</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="flex items-start">
-                    <div class="bg-gold-600 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 mt-1">
-                        ✓
-                    </div>
-                    <div class="mr-4">
-                        <h4 class="font-bold mb-2">خبرة عميقة</h4>
-                        <p class="text-gray-300">سنوات من الخبرة في تقديم الخدمات الموثوقة</p>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <div class="bg-gold-600 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 mt-1">
-                        ✓
-                    </div>
-                    <div class="mr-4">
-                        <h4 class="font-bold mb-2">فريق محترف</h4>
-                        <p class="text-gray-300">متخصصون مؤهلون لتقديم أفضل الخدمات</p>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <div class="bg-gold-600 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 mt-1">
-                        ✓
-                    </div>
-                    <div class="mr-4">
-                        <h4 class="font-bold mb-2">أسعار تنافسية</h4>
-                        <p class="text-gray-300">أفضل قيمة مقابل الخدمات المقدمة</p>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <div class="bg-gold-600 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 mt-1">
-                        ✓
-                    </div>
-                    <div class="mr-4">
-                        <h4 class="font-bold mb-2">دعم مستمر</h4>
-                        <p class="text-gray-300">دعم 24/7 لضمان رضاك التام</p>
-                    </div>
+        {{-- Objectives Section --}}
+        <div class="bg-charcoal-900 text-white rounded-[3rem] p-12 lg:p-20 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-12 opacity-5">
+                <svg class="w-64 h-64 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <div class="relative">
+                <h2 class="text-3xl lg:text-4xl font-black mb-12 text-gold-500">أهداف الجمعية</h2>
+                <div class="grid md:grid-cols-2 gap-x-16 gap-y-8">
+                    @php
+                        $objectives = [
+                            'تفعيل دور ومشاركة رائدات الأعمال في القطاع الخاص والمساهمة في المحافظة على استدامة وإستمرارية أعمالهن.',
+                            'تقديم الإستشارات اللازمة لتذليل الصعوبات التي تواجه الرائدات وتساهم في تطوير أعمالهن واستدامتها سواء من خلال الخبراء أو المستشارين أو الجهات المتعاونة.',
+                            'نشر وتعزيز ثقافة ريادة الأعمال والإبتكار لدى المرأة في بيئة العمل التنافسية من خلال الوسائل والأساليب المختلفة لتعزيز هذه الثقافة والترويج للأفكار الإبداعية والممارسات الناجحة.',
+                            'توقيع اتفاقيات التعاون والتفاهم مع المؤسسات الحكومية وغير الحكومية داخل وخارج الدولة لتقديم الدعم لرائدات الأعمال وتسهيل نفاذ منتجاتهم وخدماتهم إلى الأسواق المحلية والخارجية وذلك بعد موافقة الوزارة.',
+                            'توفير البرامج الداعمة لتمكين المرأة من خلال تطوير مهاراتها وقدراتها كالتدريب والتأهيل في مجال ريادة الأعمال وإدارة المشاريع الخاصة بهن.',
+                            'المساهمة في زيادة مشاركة المواطنات في وظائف سوق العمل في القطاع الخاص.',
+                            'اتاحة فرص ربط رائدات الأعمال مع الأسواق وبيئات الأعمال من خلال إقامة المعارض والمؤتمرات والمشاركة بها داخلياً وخارجياً وتبادل الوفود الدولية من رجال ورائدات الأعمال وذلك بعد موافقة الوزارة.',
+                            'تعزيز التعاون والترابط بين سيدات ورائدات الأعمال لتطوير فرص بناء العلاقات التجارية والمهنية المشتركة.',
+                            'انشاء المنصات الإلكترونية التي تعمل على الترويج والتعريف بالمشاريع والأفكار الإستثمارية التي تقيمها رائدات الأعمال.',
+                        ];
+                    @endphp
+                    @foreach ($objectives as $objective)
+                        <div class="flex items-start gap-4">
+                            <span class="w-2 h-2 rounded-full bg-gold-500 mt-3 shrink-0"></span>
+                            <p class="text-lg text-gold-50/80 leading-relaxed">{{ $objective }}</p>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
 
         {{-- CTA Section --}}
-        <div class="mt-16 text-center">
-            <h2 class="text-3xl font-bold mb-4">هل أنت مهتم بإحدى خدماتنا؟</h2>
-            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
-                تواصل معنا الآن لمناقشة احتياجاتك والحصول على عرض مخصص.
+        <div class="mt-24 text-center">
+            <h2 class="text-3xl font-black text-charcoal-900 mb-6">هل تبحثين عن دعم لمشروعك؟</h2>
+            <p class="text-xl text-charcoal-600 mb-10 max-w-2xl mx-auto">
+                نحن هنا لنضع خبراتنا ومواردنا بين يديك. تواصلي معنا اليوم لمناقشة كيف يمكننا مساعدتك في تحقيق أهدافك.
             </p>
-            <a href="{{ route('contact') }}" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition">
-                تواصل معنا
-            </a>
+            <div class="flex flex-wrap justify-center gap-4">
+                <x-ui.button href="{{ route('contact') }}" color="gold" size="lg"
+                    class="rounded-full px-12 shadow-lg">تواصل معنا</x-ui.button>
+                <x-ui.button href="{{ route('register') }}" color="white" size="lg"
+                    class="rounded-full px-12 border-2 border-charcoal-900 text-charcoal-900 hover:bg-charcoal-900 hover:text-white transition-all">انضمي
+                    إلينا</x-ui.button>
+            </div>
         </div>
     </div>
 </x-layout.app>
