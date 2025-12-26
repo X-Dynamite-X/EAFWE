@@ -25,8 +25,11 @@ class RoleController extends Controller
             ->where('name', '!=', 'super_admin')
             ->paginate(15);
 
+        $permissions = Permission::orderBy('name')->get();
+
         return view('pages.dashboard.roles', [
             'roles' => $roles,
+            'permissions' => $permissions,
         ]);
     }
 
@@ -67,7 +70,8 @@ class RoleController extends Controller
         ]);
 
         if (!empty($validated['permissions'])) {
-            $role->syncPermissions($validated['permissions']);
+            $permissions = Permission::whereIn('id', $validated['permissions'])->get();
+            $role->syncPermissions($permissions);
         }
 
         return redirect()
@@ -121,7 +125,8 @@ class RoleController extends Controller
         ]);
 
         if (!empty($validated['permissions'])) {
-            $role->syncPermissions($validated['permissions']);
+            $permissions = Permission::whereIn('id', $validated['permissions'])->get();
+            $role->syncPermissions($permissions);
         }
 
         return redirect()
@@ -132,7 +137,7 @@ class RoleController extends Controller
     /**
      * حذف الدور
      */
-    public function destroy(Role $role): RedirectResponse
+    public function destroy(Role $role)
     {
         $this->authorize('manage roles');
 
@@ -144,9 +149,9 @@ class RoleController extends Controller
         }
 
         $role->delete();
-
-        return redirect()
-            ->route('roles.index')
-            ->with('success', 'تم حذف الدور بنجاح');
+        return response()->json([
+            'success' => true,
+            'message' => 'تم حذف الدور بنجاح',
+        ]);
     }
 }

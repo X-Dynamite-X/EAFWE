@@ -122,7 +122,7 @@ class UserController extends Controller
     /**
      * حذف المستخدم
      */
-    public function destroy(User $user): RedirectResponse
+    public function destroy(User $user)
     {
         $this->authorize('delete users');
 
@@ -134,9 +134,9 @@ class UserController extends Controller
         }
 
         $user->delete();
-
-        return redirect()
-            ->route('users.index')
-            ->with('success', 'تم حذف المستخدم بنجاح');
+        return response()->json([
+            'success' => true,
+            'message' => 'User deleted successfully',
+        ]);
     }
 }

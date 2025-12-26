@@ -16,8 +16,9 @@
                 $statuses = ['pending' => 'قيد الانتظار', 'approved' => 'موافق عليها', 'rejected' => 'مرفوضة'];
             @endphp
 
-            @foreach($statuses as $key => $label)
-                <button class="px-4 py-2 border-b-2 {{ request('status') === $key ? 'border-gold-600 text-gold-600' : 'border-transparent text-gray-600' }} transition">
+            @foreach ($statuses as $key => $label)
+                <button
+                    class="px-4 py-2 border-b-2 {{ request('status') === $key ? 'border-gold-600 text-gold-600' : 'border-transparent text-gray-600' }} transition">
                     {{ $label }}
                 </button>
             @endforeach
@@ -46,7 +47,7 @@
                             <td class="px-6 py-3">{{ $membership->membership_type }}</td>
                             <td class="px-6 py-3">{{ $membership->created_at->format('Y-m-d') }}</td>
                             <td class="px-6 py-3">
-                                @if($membership->status === 'pending')
+                                @if ($membership->status === 'pending')
                                     <x-ui.badge color="yellow">قيد الانتظار</x-ui.badge>
                                 @elseif($membership->status === 'approved')
                                     <x-ui.badge color="green">موافق</x-ui.badge>
@@ -56,11 +57,13 @@
                             </td>
                             <td class="px-6 py-3">
                                 <div class="flex gap-2">
-                                    <x-ui.button href="{{ route('memberships.show', $membership) }}" color="gray" size="sm">
+                                    <x-ui.button href="{{ route('memberships.show', $membership) }}" color="gray"
+                                        size="sm">
                                         عرض
                                     </x-ui.button>
-                                    @if($membership->status === 'pending')
-                                        <x-ui.button onclick="approveMembership({{ $membership->id }})" color="green" size="sm">
+                                    @if ($membership->status === 'pending')
+                                        <x-ui.button onclick="approveMembership({{ $membership->id }})" color="green"
+                                            size="sm">
                                             موافقة
                                         </x-ui.button>
                                     @endif
@@ -78,20 +81,27 @@
             </table>
         </div>
     </x-ui.card>
+
+    {{-- Pagination --}}
+    @if (isset($memberships) && method_exists($memberships, 'links'))
+        <div class="mt-6">
+            {{ $memberships->links() }}
+        </div>
+    @endif
 </x-layout.dashboard>
 
 @push('scripts')
-<script src="{{ mix('resources/js/pages/membership.js') }}"></script>
-<script>
-    function approveMembership(membershipId) {
-        if (confirm('هل تريد الموافقة على هذا الطلب؟')) {
-            fetch(`/memberships/${membershipId}/approve`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                }
-            }).then(r => r.ok ? location.reload() : alert('خطأ'));
+    @vite(['resources/js/pages/membership.js'])
+    <script>
+        function approveMembership(membershipId) {
+            if (confirm('هل تريد الموافقة على هذا الطلب؟')) {
+                fetch(`/memberships/${membershipId}/approve`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    }
+                }).then(r => r.ok ? location.reload() : alert('خطأ'));
+            }
         }
-    }
-</script>
+    </script>
 @endpush

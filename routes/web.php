@@ -133,6 +133,14 @@ Route::middleware('auth')->group(function () {
         Route::delete('roles/{role}', [RoleController::class, 'destroy'])
             ->middleware('permission:manage roles')
             ->name('roles.destroy');
+
+        Route::get('permissions', [App\Http\Controllers\PermissionController::class, 'index'])
+            ->middleware('permission:manage roles')
+            ->name('permissions.index');
+
+        Route::post('permissions/{permission}/roles', [App\Http\Controllers\PermissionController::class, 'updateRoles'])
+            ->middleware('permission:manage roles')
+            ->name('permissions.update-roles');
     });
 
     /*
@@ -198,3 +206,4 @@ Route::middleware('auth')->group(function () {
     Route::patch('settings', [SettingsController::class, 'update'])
         ->name('settings.update');
 });
+

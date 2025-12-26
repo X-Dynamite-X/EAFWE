@@ -7,6 +7,10 @@ import { ModalComponent } from '../components/modal.js';
 import { FormComponent } from '../components/form.js';
 import { TableComponent } from '../components/table.js';
 
+// Export modal functions globally
+window.openModal = (modalId) => ModalComponent.open(modalId);
+window.closeModal = (modalId) => ModalComponent.close(modalId);
+
 export const DashboardPage = {
     init() {
         this.setupEventListeners();

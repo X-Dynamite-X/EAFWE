@@ -16,7 +16,7 @@
     'title' => null,
 ])
 
-<div id="{{ $id }}" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center modal"
+<div id="{{ $id }}" class="fixed inset-0 z-50   bg-opacity-50 hidden flex items-center justify-center modal"
     onclick="if(event.target.id === this.id) closeModal('{{ $id }}')">
 
     <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4" onclick="event.stopPropagation()">
