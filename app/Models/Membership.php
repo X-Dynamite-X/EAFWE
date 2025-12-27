@@ -32,6 +32,7 @@ class Membership extends Model
         'status',
         'approved_by',
         'approval_date',
+        'rejection_reason',
     ];
 
     protected $casts = [

@@ -6,6 +6,7 @@ use App\Models\Membership;
 use App\Enums\ServerCountry;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -101,18 +102,23 @@ class MembershipController extends Controller
     /**
      * الموافقة على طلب العضوية
      */
-    public function approve(Request $request, Membership $membership): RedirectResponse
+    public function approve(Request $request, Membership $membership): RedirectResponse|JsonResponse
     {
         $this->authorize('approve memberships');
 
         // منع الموافقة على طلب موافق عليه مسبقاً
         if (!$membership->isPending()) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'هذا الطلب تمت معالجته بالفعل'
+                ], 422);
+            }
             return redirect()
                 ->back()
                 ->with('error', 'هذا الطلب تمت معالجته بالفعل');
         }
 
-        DB::transaction(function () use ($request, $membership) {
+        DB::transaction(function () use ($membership) {
             $membership->update([
                 'status' => 'approved',
                 'approved_by' => auth()->id(),
@@ -123,6 +129,13 @@ class MembershipController extends Controller
             $membership->user->assignRole('member');
         });
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'تم الموافقة على الطلب بنجاح',
+                'membership' => $membership
+            ]);
+        }
+
         return redirect()
             ->back()
             ->with('success', 'تم الموافقة على الطلب بنجاح');
@@ -131,12 +144,17 @@ class MembershipController extends Controller
     /**
      * رفض طلب العضوية
      */
-    public function reject(Request $request, Membership $membership): RedirectResponse
+    public function reject(Request $request, Membership $membership): RedirectResponse|JsonResponse
     {
-        $this->authorize('approve memberships');
+        $this->authorize('reject memberships');
 
         // منع رفض طلب معالج مسبقاً
         if (!$membership->isPending()) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'هذا الطلب تمت معالجته بالفعل'
+                ], 422);
+            }
             return redirect()
                 ->back()
                 ->with('error', 'هذا الطلب تمت معالجته بالفعل');
@@ -148,9 +166,17 @@ class MembershipController extends Controller
 
         $membership->update([
             'status' => 'rejected',
+            'rejection_reason' => $validated['rejection_reason'],
             'approved_by' => auth()->id(),
             'approval_date' => now(),
         ]);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'تم رفض الطلب بنجاح',
+                'membership' => $membership
+            ]);
+        }
 
         return redirect()
             ->back()
@@ -160,18 +186,29 @@ class MembershipController extends Controller
     /**
      * حذف طلب العضوية
      */
-    public function destroy(Membership $membership): RedirectResponse
+    public function destroy(Request $request, Membership $membership): RedirectResponse|JsonResponse
     {
         $this->authorize('delete memberships');
 
         // السماح بحذف الطلب فقط إذا كان معلقاً والمالك هو صاحب الطلب أو admin
         if (!$membership->isPending() && !auth()->user()->hasRole('admin')) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'لا يمكن حذف هذا الطلب'
+                ], 422);
+            }
             return redirect()
                 ->back()
                 ->with('error', 'لا يمكن حذف هذا الطلب');
         }
 
         $membership->delete();
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'تم حذف الطلب بنجاح'
+            ]);
+        }
 
         return redirect()
             ->back()

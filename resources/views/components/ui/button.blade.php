@@ -27,7 +27,9 @@
     $colorClasses = match($color) {
         'gold' => 'bg-gold-600 text-white hover:bg-gold-700 focus:ring-gold-500',
         'black' => 'bg-black text-white hover:bg-gray-900 focus:ring-black',
+        'red' => 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
         'gray' => 'bg-gray-300 text-gray-900 hover:bg-gray-400 focus:ring-gray-500',
+        'green' => 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500',
         default => 'bg-gold-600 text-white hover:bg-gold-700 focus:ring-gold-500',
     };
 

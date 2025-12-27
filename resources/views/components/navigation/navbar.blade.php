@@ -17,11 +17,11 @@
                         class="text-charcoal-800 font-medium hover:text-gold-500 transition-colors  py-2 border-b-2 {{ request()->routeIs('about') ? 'border-gold-500 text-gold-500' : 'border-transparent' }}">عن
                         الجمعية</a>
                     <a href="{{ route('services') }}"
-                        class="text-charcoal-800 font-medium hover:text-gold-500 transition-colors  py-2 border-b-2 {{ request()->routeIs('services') ? 'border-gold-500 text-gold-500' : 'border-transparent' }}">مجالات
+                        class="text-charcoal-800 font-medium hover:text-gold-500 transition-colors mx-6 py-2 border-b-2 {{ request()->routeIs('services') ? 'border-gold-500 text-gold-500' : 'border-transparent' }}">مجالات
                         العمل</a>
                     <a href="{{ route('contact') }}"
                         class="text-charcoal-800 font-medium hover:text-gold-500 transition-colors px-2 py-2 border-b-2 {{ request()->routeIs('contact') ? 'border-gold-500 text-gold-500' : 'border-transparent' }}">تواصل
-                        معنا</a2
+                        معنا</a>
                 </div>
 
                 {{-- Desktop Auth Buttons --}}

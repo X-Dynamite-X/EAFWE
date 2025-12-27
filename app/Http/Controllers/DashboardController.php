@@ -7,6 +7,7 @@ use App\Models\Membership;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 /**
  * Dashboard Controller
@@ -24,7 +25,7 @@ class DashboardController extends Controller
         $activeUsers = User::where('is_active', true)->count();
         $pendingMemberships = Membership::where('status', 'pending')->count();
         $approvedMemberships = Membership::where('status', 'approved')->count();
-
+        $totalRoles = Role::count();
         // آخر المستخدمين
         $recentUsers = User::orderBy('created_at', 'desc')
             ->take(5)
@@ -41,6 +42,7 @@ class DashboardController extends Controller
             'activeUsers' => $activeUsers,
             'pendingMemberships' => $pendingMemberships,
             'approvedMemberships' => $approvedMemberships,
+            'totalRoles' => $totalRoles,
             'recentUsers' => $recentUsers,
             'recentMemberships' => $recentMemberships,
         ]);
