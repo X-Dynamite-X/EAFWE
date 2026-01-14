@@ -1,10 +1,21 @@
 {{-- Sidebar Component --}}
 
-<aside class="w-72 bg-charcoal-950 text-white shadow-2xl overflow-y-auto border-l border-gold-900/10">
-    <div class="p-8">
-        {{-- Logo --}}
-        <h2 class="text-xl font-black text-gold-500 mb-10 tracking-tight">جمعية الإمارات <br> <span
-                class="text-sm font-normal text-gold-300">لرائدات الأعمال</span></h2>
+<aside id="sidebar"
+    class="fixed inset-y-0 right-0 z-50 w-72 bg-charcoal-950 text-white shadow-2xl transition-transform duration-300 transform lg:translate-x-0 lg:static lg:inset-0"
+    :class="sidebarOpen ? 'translate-x-0' : 'translate-x-full'">
+    <div class="p-8 h-full flex flex-col overflow-y-auto">
+        <div class="flex items-center justify-between mb-10 lg:block">
+            {{-- Logo --}}
+            <h2 class="text-xl font-black text-gold-500 tracking-tight">جمعية الإمارات <br> <span
+                    class="text-sm font-normal text-gold-300">لرائدات الأعمال</span></h2>
+
+            <button @click="sidebarOpen = false" class="lg:hidden text-gold-400 p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </div>
 
         {{-- Navigation Menu --}}
         <nav class="space-y-2">
@@ -48,6 +59,56 @@
                             '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"></path></svg>',
                         'color' => 'text-blue-400',
                         'permission' => 'view reports',
+                    ],
+                    // Member Services
+                    [
+                        'label' => 'خدمات التمكين',
+                        'route' => 'dashboard.services.training',
+                        'icon' =>
+                            '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>',
+                        'color' => 'text-gold-400',
+                    ],
+                    [
+                        'label' => 'ريادة الأعمال',
+                        'route' => 'dashboard.services.entrepreneurship',
+                        'icon' =>
+                            '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>',
+                        'color' => 'text-gold-400',
+                    ],
+                    [
+                        'label' => 'فرص المشاركة',
+                        'route' => 'dashboard.participation.opportunities',
+                        'icon' =>
+                            '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>',
+                        'color' => 'text-gold-400',
+                    ],
+                    [
+                        'label' => 'مركز الملفات',
+                        'route' => 'dashboard.files',
+                        'icon' =>
+                            '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>',
+                        'color' => 'text-gold-400',
+                    ],
+                    [
+                        'label' => 'التسويق والإعلام',
+                        'route' => 'dashboard.marketing',
+                        'icon' =>
+                            '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.167H3.382a.75.75 0 01-.73-.833L3.13 9.027a.75.75 0 01.73-.667h1.123l2.147-6.167a1.76 1.76 0 013.417.592zM17.273 16.293a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 111.414-1.414l1.414 1.414a1 1 0 010 1.414zM15.859 9.121a1 1 0 010 1.414L14.445 11.95a1 1 0 11-1.414-1.414l1.414-1.414a1 1 0 011.414 0z"></path></svg>',
+                        'color' => 'text-gold-400',
+                    ],
+                    [
+                        'label' => 'التواصل الداخلي',
+                        'route' => 'dashboard.communication',
+                        'icon' =>
+                            '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>',
+                        'color' => 'text-gold-400',
+                    ],
+                    [
+                        'label' => 'بوابة الفرص',
+                        'route' => 'dashboard.portal.opportunities',
+                        'icon' =>
+                            '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>',
+                        'color' => 'text-gold-400',
                     ],
                 ];
             @endphp
@@ -100,5 +161,6 @@
                 </button>
             </form>
         </nav>
+    {{-- </div> --}}
     </div>
 </aside>

@@ -35,11 +35,12 @@
                             color="gray" size="sm" class="flex-1">
                             تعديل
                         </x-ui.button>
-                        <x-ui.button onclick="openDeleteModal({{ $role->id }})" color="red" size="sm" class="flex-1">
+                        <x-ui.button onclick="openDeleteModal({{ $role->id }})" color="red" size="sm"
+                            class="flex-1">
                             حذف
                         </x-ui.button>
                     </div>
-                @endcan
+                @endrole
             </x-ui.card>
         @empty
             <div class="col-span-full">
@@ -91,14 +92,11 @@
         <form id="deleteForm" method="POST">
             @csrf
             @method('DELETE')
-            <div class="flex gap-2">
-            <p class="text-gray-700">هل أنت متأكد من رغبتك في حذف هذا  دور لا يمكن التراجع عن هذا الإجراء.</p>
-
-                <x-slot:footer>
-                <x-ui.button type="submit" onclick="deleteRole()" color="red" class="flex-1">حذف</x-ui.button>
+            <div class="flex gap-2 mt-4">
+                <x-ui.button type="button" onclick="confirmDeleteRole()" color="red"
+                    class="flex-1">حذف</x-ui.button>
                 <x-ui.button type="button" onclick="closeModal('deleteModal')" color="gray"
                     class="flex-1">إلغاء</x-ui.button>
-                </x-slot:footer>
             </div>
 
 
@@ -109,10 +107,12 @@
     @push('scripts')
         <script>
             let roleId = null;
+
             function openDeleteModal(id) {
                 roleId = id;
                 openModal('deleteModal');
             }
+
             function openCreateModal() {
                 // Reset Form
                 document.getElementById('roleForm').action = "{{ route('roles.store') }}";
@@ -153,9 +153,8 @@
 
             let isDeleting = false;
 
-            function deleteRole(roleId) {
-                if (isDeleting) return;
-                if (!confirm('هل أنت متأكد من حذف هذا الدور؟')) return;
+            function confirmDeleteRole() {
+                if (isDeleting || !roleId) return;
 
                 isDeleting = true;
 
@@ -167,11 +166,10 @@
                     },
                     success: function(response) {
                         location.reload();
-                        // Or remove row if we had a table structure, but this is grid cards. Reload is safer for roles.
                     },
                     error: function(xhr) {
                         isDeleting = false;
-                        alert(' حدث خطأ أثناء الحذف');
+                        alert('حدث خطأ أثناء الحذف');
                     }
                 });
             }

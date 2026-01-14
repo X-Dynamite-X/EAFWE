@@ -26,7 +26,7 @@
                                 class="rounded-full px-10 shadow-xl shadow-gold-500/20 w-full sm:w-auto">
                                 انضمي إلينا
                             </x-ui.button>
-                            <x-ui.button href="{{ route('about') }}" color="white" size="lg"
+                            <x-ui.button href="{{ route('about.index') }}" color="white" size="lg"
                                 class="rounded-full px-10 bg-transparent! border-2! border-white! hover:bg-white! hover:text-charcoal-900! w-full sm:w-auto">
                                 تعرفي علينا
                             </x-ui.button>
@@ -71,7 +71,7 @@
                     وإثراء مواهبهم وتدريبهم ومتابعتهم لتعزيز قدراتهم ليصبحوا قادرين على خوض غمار العمل التجاري.
                 </p>
                 <div class="mt-10">
-                    <a href="{{ route('about') }}"
+                    <a href="{{ route('about.index') }}"
                         class="text-gold-600 font-black hover:text-gold-700 transition-all group flex items-center justify-center gap-2 text-lg">
                         اقرأ المزيد
                         <span class="group-hover:translate-x-1 transition-transform">←</span>

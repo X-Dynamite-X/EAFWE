@@ -1,33 +1,39 @@
 {{-- Dashboard Top Navbar --}}
 
 <nav class="bg-charcoal-900 shadow-lg border-b border-gold-900/20">
-    <div class="px-6 py-4 flex justify-between items-center">
-        {{-- Page Title --}}
-        <h1 class="text-2xl font-black text-gold-500">{{ $title ?? 'لوحة التحكم' }}</h1>
+    {{-- Left Side: Toggle & Title --}}
+    <div class="flex items-center gap-4">
+        <button @click="sidebarOpen = !sidebarOpen"
+            class="lg:hidden text-gold-500 p-2 hover:bg-gold-500/10 rounded-lg transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        <h1 class="text-xl md:text-2xl font-black text-gold-500 truncate">{{ $title ?? 'لوحة التحكم' }}</h1>
+    </div>
 
-        {{-- Right Side: User Menu --}}
-        <div class="flex items-center space-x-6 gap-4">
-            {{-- Notifications --}}
-            <button class="relative text-gold-400 hover:text-gold-200 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                    </path>
-                </svg>
-                <span class="absolute top-0 right-0 h-2 w-2 bg-gold-500 rounded-full"></span>
-            </button>
+    {{-- Right Side: User Menu --}}
+    <div class="flex items-center space-x-6 gap-4">
+        {{-- Notifications --}}
+        <button class="relative text-gold-400 hover:text-gold-200 transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                </path>
+            </svg>
+            <span class="absolute top-0 right-0 h-2 w-2 bg-gold-500 rounded-full"></span>
+        </button>
 
-            {{-- User Dropdown --}}
-            <div class="flex items-center space-x-3 gap-3">
-                <div class="text-right">
-                    <p class="font-black text-white">{{ Auth::user()->name }}</p>
-                    <p class="text-sm text-gold-400">{{ Auth::user()->roles->first()->name ?? 'مستخدم' }}</p>
-                </div>
-                <button
-                    class="w-10 h-10 bg-gold-500 text-charcoal-900 rounded-full flex items-center justify-center font-black hover:bg-gold-400 transition">
-                    {{ substr(Auth::user()->name, 0, 1) }}
-                </button>
+        {{-- User Dropdown --}}
+        <div class="flex items-center space-x-3 gap-3">
+            <div class="text-right">
+                <p class="font-black text-white">{{ Auth::user()->name }}</p>
+                <p class="text-sm text-gold-400">{{ Auth::user()->roles->first()->name ?? 'مستخدم' }}</p>
             </div>
+            <button
+                class="w-10 h-10 bg-gold-500 text-charcoal-900 rounded-full flex items-center justify-center font-black hover:bg-gold-400 transition">
+                {{ substr(Auth::user()->name, 0, 1) }}
+            </button>
         </div>
     </div>
 </nav>

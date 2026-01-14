@@ -17,21 +17,29 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-white text-charcoal-900 antialiased">
+<body class="bg-white text-charcoal-900 antialiased" x-data="{ sidebarOpen: false }">
 
-    <div class="flex h-screen">
+    <div class="flex h-screen overflow-hidden">
         {{-- Sidebar --}}
         <x-navigation.sidebar />
 
         {{-- Main Content --}}
-        <div class="flex flex-col flex-1">
+        <div class="flex flex-col flex-1 min-w-0 overflow-hidden">
             {{-- Top Navbar --}}
-            <x-navigation.navbar-dashboard />
+            <x-navigation.navbar-dashboard :title="$title ?? ''" />
 
             {{-- Content Area --}}
-            <main class="flex-1 overflow-auto p-6">
+            <main class="flex-1 overflow-auto p-6 bg-gray-50/30">
                 {{ $slot }}
             </main>
+        </div>
+
+        {{-- Mobile Overlay --}}
+        <div x-show="sidebarOpen" @click="sidebarOpen = false"
+            x-transition:enter="transition opacity ease-linear duration-300" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="transition opacity ease-linear duration-300"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+            class="fixed inset-0 bg-charcoal-900/50 z-40 lg:hidden">
         </div>
     </div>
 

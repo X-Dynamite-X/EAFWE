@@ -13,11 +13,11 @@
                 <div class="hidden md:flex space-x-10 space-x-reverse">
                     <a href="{{ route('home') }}"
                         class="text-charcoal-800 font-medium hover:text-gold-500 transition-colors  py-2 border-b-2 {{ request()->routeIs('home') ? 'border-gold-500 text-gold-500' : 'border-transparent' }}">الرئيسية</a>
-                    <a href="{{ route('about') }}"
-                        class="text-charcoal-800 font-medium hover:text-gold-500 transition-colors  py-2 border-b-2 {{ request()->routeIs('about') ? 'border-gold-500 text-gold-500' : 'border-transparent' }}">عن
+                    <a href="{{ route('about.index') }}"
+                        class="text-charcoal-800 font-medium hover:text-gold-500 transition-colors  py-2 border-b-2 {{ request()->routeIs('about.*') ? 'border-gold-500 text-gold-500' : 'border-transparent' }}">عن
                         الجمعية</a>
-                    <a href="{{ route('services') }}"
-                        class="text-charcoal-800 font-medium hover:text-gold-500 transition-colors mx-6 py-2 border-b-2 {{ request()->routeIs('services') ? 'border-gold-500 text-gold-500' : 'border-transparent' }}">مجالات
+                    <a href="{{ route('programs.index') }}"
+                        class="text-charcoal-800 font-medium hover:text-gold-500 transition-colors mx-6 py-2 border-b-2 {{ request()->routeIs('programs.*') ? 'border-gold-500 text-gold-500' : 'border-transparent' }}">مجالات
                         العمل</a>
                     <a href="{{ route('contact') }}"
                         class="text-charcoal-800 font-medium hover:text-gold-500 transition-colors px-2 py-2 border-b-2 {{ request()->routeIs('contact') ? 'border-gold-500 text-gold-500' : 'border-transparent' }}">تواصل
@@ -66,7 +66,7 @@
     <div x-show="open" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-[-10px]" x-transition:enter-end="opacity-100 translate-y-0"
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
-        x-transition:leave-end="opacity-0 translate-y-[-10px]" class="fixed inset-0 z-[60] md:hidden bg-white"
+        x-transition:leave-end="opacity-0 translate-y-[-10px]" class="fixed inset-0 z-60 md:hidden bg-white"
         @keydown.escape.window="open = false" style="display: none;">
 
         <div class="flex flex-col h-full">
@@ -87,11 +87,11 @@
                 <nav class="flex flex-col space-y-8">
                     <a href="{{ route('home') }}" @click="open = false"
                         class="text-3xl font-black transition-all duration-300 {{ request()->routeIs('home') ? 'text-gold-500 pr-4 border-r-4 border-gold-500' : 'text-charcoal-800 hover:text-gold-500 pr-0 border-r-0 border-transparent' }}">الرئيسية</a>
-                    <a href="{{ route('about') }}" @click="open = false"
-                        class="text-3xl font-black transition-all duration-300 {{ request()->routeIs('about') ? 'text-gold-500 pr-4 border-r-4 border-gold-500' : 'text-charcoal-800 hover:text-gold-500 pr-0 border-r-0 border-transparent' }}">عن
+                    <a href="{{ route('about.index') }}" @click="open = false"
+                        class="text-3xl font-black transition-all duration-300 {{ request()->routeIs('about.*') ? 'text-gold-500 pr-4 border-r-4 border-gold-500' : 'text-charcoal-800 hover:text-gold-500 pr-0 border-r-0 border-transparent' }}">عن
                         الجمعية</a>
-                    <a href="{{ route('services') }}" @click="open = false"
-                        class="text-3xl font-black transition-all duration-300 {{ request()->routeIs('services') ? 'text-gold-500 pr-4 border-r-4 border-gold-500' : 'text-charcoal-800 hover:text-gold-500 pr-0 border-r-0 border-transparent' }}">مجالات
+                    <a href="{{ route('programs.index') }}" @click="open = false"
+                        class="text-3xl font-black transition-all duration-300 {{ request()->routeIs('programs.*') ? 'text-gold-500 pr-4 border-r-4 border-gold-500' : 'text-charcoal-800 hover:text-gold-500 pr-0 border-r-0 border-transparent' }}">مجالات
                         العمل</a>
                     <a href="{{ route('contact') }}" @click="open = false"
                         class="text-3xl font-black transition-all duration-300 {{ request()->routeIs('contact') ? 'text-gold-500 pr-4 border-r-4 border-gold-500' : 'text-charcoal-800 hover:text-gold-500 pr-0 border-r-0 border-transparent' }}">تواصل

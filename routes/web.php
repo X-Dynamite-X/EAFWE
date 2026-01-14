@@ -1,18 +1,22 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\MembershipController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\MemberServiceController;
+use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,17 +28,37 @@ Route::get('/', function () {
     return view('pages.public.home');
 })->name('home');
 
-Route::get('about', function () {
-    return view('pages.public.about');
-})->name('about');
-
-Route::get('services', function () {
-    return view('pages.public.services');
-})->name('services');
-
 Route::get('contact', function () {
     return view('pages.public.contact');
 })->name('contact');
+
+Route::prefix('about')->name('about.')->group(function () {
+    Route::get('/', function () {
+        return view('pages.public.about');
+    })->name('index');
+    Route::get('board', [PublicController::class, 'board'])->name('board');
+    Route::get('history', [PublicController::class, 'history'])->name('history');
+});
+
+Route::get('programs', [PublicController::class, 'programs'])->name('programs.index');
+Route::get('events', [EventController::class, 'index'])->name('events.index');
+
+Route::prefix('news')->name('news.')->group(function () {
+    Route::get('/', [NewsController::class, 'index'])->name('index');
+    Route::get('{slug}', [NewsController::class, 'show'])->name('show');
+});
+
+Route::prefix('media')->name('media.')->group(function () {
+    Route::get('press', [NewsController::class, 'press'])->name('press');
+    Route::get('coverage', [NewsController::class, 'coverage'])->name('coverage');
+});
+
+Route::prefix('gallery')->name('gallery.')->group(function () {
+    Route::get('photos', [PublicController::class, 'photos'])->name('photos');
+    Route::get('videos', [PublicController::class, 'videos'])->name('videos');
+});
+
+Route::get('faq', [PublicController::class, 'faq'])->name('faq');
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +96,27 @@ Route::post('logout', [LogoutController::class, 'logout'])
 Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Member Services
+    Route::prefix('dashboard/services')->name('dashboard.services.')->group(function () {
+        Route::get('training', [MemberServiceController::class, 'training'])->name('training');
+        Route::get('entrepreneurship', [MemberServiceController::class, 'entrepreneurship'])->name('entrepreneurship');
+    });
+
+    Route::prefix('dashboard/participation')->name('dashboard.participation.')->group(function () {
+        Route::get('opportunities', [MemberServiceController::class, 'participationOpportunities'])->name('opportunities');
+    });
+
+    Route::name('dashboard.')->group(function () {
+        Route::get('dashboard/marketing', [MemberServiceController::class, 'marketing'])->name('marketing');
+        Route::get('dashboard/files', [MemberServiceController::class, 'files'])->name('files');
+        Route::get('dashboard/communication', [MemberServiceController::class, 'communication'])->name('communication');
+
+        Route::prefix('dashboard/portal')->name('portal.')->group(function () {
+            Route::get('opportunities', [MemberServiceController::class, 'portalOpportunities'])->name('opportunities');
+            Route::get('volunteering', [MemberServiceController::class, 'volunteering'])->name('volunteering');
+        });
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -206,4 +251,3 @@ Route::middleware('auth')->group(function () {
     Route::patch('settings', [SettingsController::class, 'update'])
         ->name('settings.update');
 });
-

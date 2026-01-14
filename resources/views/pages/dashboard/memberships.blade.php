@@ -73,33 +73,36 @@
                                     {{-- Approve Button --}}
                                     @can('approve memberships')
                                         @if ($membership->status === 'pending')
-                                            <button type="button" data-action="approve" data-id="{{ $membership->id }}"
-                                                data-name="{{ $membership->user->name ?? 'N/A' }}"
-                                                class="inline-flex items-center justify-center font-semibold rounded-lg transition duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 px-3 py-2 text-sm bg-green-600 text-white hover:bg-green-700 focus:ring-green-500">
+                                            <x-ui.button type="button" data-action="approve"
+                                                data-id="{{ $membership->id }}"
+                                                data-name="{{ $membership->user->name ?? 'N/A' }}" color="green"
+                                                size="sm">
                                                 موافقة
-                                            </button>
+                                            </x-ui.button>
                                         @endif
                                     @endcan
 
                                     {{-- Reject Button --}}
                                     @can('approve memberships')
                                         @if ($membership->status === 'pending')
-                                            <button type="button" data-action="reject" data-id="{{ $membership->id }}"
-                                                data-name="{{ $membership->user->name ?? 'N/A' }}"
-                                                class="inline-flex items-center justify-center font-semibold rounded-lg transition duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 px-3 py-2 text-sm bg-red-600 text-white hover:bg-red-700 focus:ring-red-500">
+                                            <x-ui.button type="button" data-action="reject"
+                                                data-id="{{ $membership->id }}"
+                                                data-name="{{ $membership->user->name ?? 'N/A' }}" color="red"
+                                                size="sm">
                                                 رفض
-                                            </button>
+                                            </x-ui.button>
                                         @endif
                                     @endcan
 
                                     {{-- Delete Button --}}
                                     @can('delete memberships')
                                         @if ($membership->status === 'pending' || auth()->user()->hasRole('admin'))
-                                            <button type="button" data-action="delete" data-id="{{ $membership->id }}"
-                                                data-name="{{ $membership->user->name ?? 'N/A' }}"
-                                                class="inline-flex items-center justify-center font-semibold rounded-lg transition duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 px-3 py-2 text-sm bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500">
+                                            <x-ui.button type="button" data-action="delete"
+                                                data-id="{{ $membership->id }}"
+                                                data-name="{{ $membership->user->name ?? 'N/A' }}" color="gray"
+                                                size="sm">
                                                 حذف
-                                            </button>
+                                            </x-ui.button>
                                         @endif
                                     @endcan
                                 </div>

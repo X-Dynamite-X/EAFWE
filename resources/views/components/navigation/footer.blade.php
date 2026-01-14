@@ -24,8 +24,10 @@
                 <h3 class="text-white font-bold mb-6">روابط سريعة</h3>
                 <ul class="space-y-4 text-sm">
                     <li><a href="{{ route('home') }}" class="hover:text-gold-400 transition-colors">الرئيسية</a></li>
-                    <li><a href="{{ route('about') }}" class="hover:text-gold-400 transition-colors">عن الجمعية</a></li>
-                    <li><a href="{{ route('services') }}" class="hover:text-gold-400 transition-colors">مجالات العمل</a>
+                    <li><a href="{{ route('about.index') }}" class="hover:text-gold-400 transition-colors">عن
+                            الجمعية</a></li>
+                    <li><a href="{{ route('programs.index') }}" class="hover:text-gold-400 transition-colors">مجالات
+                            العمل</a>
                     </li>
                     <li><a href="{{ route('contact') }}" class="hover:text-gold-400 transition-colors">تواصل معنا</a>
                     </li>
