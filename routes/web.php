@@ -5,16 +5,23 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EntrepreneurshipProgramController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\MemberServiceController;
+use App\Http\Controllers\MarketingResourceController;
+use App\Http\Controllers\MemberFileController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ParticipationOpportunityController;
+use App\Http\Controllers\PortalOpportunityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\TrainingProgramController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -96,28 +103,176 @@ Route::post('logout', [LogoutController::class, 'logout'])
 Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Training Programs - مع صلاحيات الإدارة
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::prefix('training')->name('training.')->group(function () {
+            Route::get('', action: [TrainingProgramController::class, 'index'])->name('index');
+            Route::get('manage', [TrainingProgramController::class, 'manage'])
+                ->middleware('permission:manage training programs')
+                ->name('manage');
+            Route::get('create', [TrainingProgramController::class, 'create'])
+                ->middleware('permission:manage training programs')
+                ->name('create');
+            Route::post('', [TrainingProgramController::class, 'store'])
+                ->middleware('permission:manage training programs')
+                ->name('store');
+            Route::get('{program}', [TrainingProgramController::class, 'show'])->name('show');
+            Route::get('{program}/edit', [TrainingProgramController::class, 'edit'])
+                ->middleware('permission:manage training programs')
+                ->name('edit');
+            Route::patch('{program}', [TrainingProgramController::class, 'update'])
+                ->middleware('permission:manage training programs')
+                ->name('update');
+            Route::delete('{program}', [TrainingProgramController::class, 'destroy'])
+                ->middleware('permission:manage training programs')
+                ->name('destroy');
+        });
 
-    // Member Services
-    Route::prefix('dashboard/services')->name('dashboard.services.')->group(function () {
-        Route::get('training', [MemberServiceController::class, 'training'])->name('training');
-        Route::get('entrepreneurship', [MemberServiceController::class, 'entrepreneurship'])->name('entrepreneurship');
-    });
+        // Entrepreneurship Programs
+        Route::prefix('entrepreneurship')->name('entrepreneurship.')->group(function () {
+            Route::get('', [EntrepreneurshipProgramController::class, 'index'])->name('index');
+            Route::get('manage', [EntrepreneurshipProgramController::class, 'manage'])
+                ->middleware('permission:manage entrepreneurship programs')
+                ->name('manage');
+            Route::get('create', [EntrepreneurshipProgramController::class, 'create'])
+                ->middleware('permission:manage entrepreneurship programs')
+                ->name('create');
+            Route::post('', [EntrepreneurshipProgramController::class, 'store'])
+                ->middleware('permission:manage entrepreneurship programs')
+                ->name('store');
+            Route::get('{program}', [EntrepreneurshipProgramController::class, 'show'])->name('show');
+            Route::get('{program}/edit', [EntrepreneurshipProgramController::class, 'edit'])
+                ->middleware('permission:manage entrepreneurship programs')
+                ->name('edit');
+            Route::patch('{program}', [EntrepreneurshipProgramController::class, 'update'])
+                ->middleware('permission:manage entrepreneurship programs')
+                ->name('update');
+            Route::delete('{program}', [EntrepreneurshipProgramController::class, 'destroy'])
+                ->middleware('permission:manage entrepreneurship programs')
+                ->name('destroy');
+        });
 
-    Route::prefix('dashboard/participation')->name('dashboard.participation.')->group(function () {
-        Route::get('opportunities', [MemberServiceController::class, 'participationOpportunities'])->name('opportunities');
-    });
+        // Participation Opportunities
+        Route::prefix('participation')->name('participation.')->group(function () {
+            Route::get('opportunities', [ParticipationOpportunityController::class, 'index'])->name('opportunities');
+            Route::get('manage', [ParticipationOpportunityController::class, 'manage'])
+                ->middleware('permission:manage participation opportunities')
+                ->name('manage');
+            Route::get('create', [ParticipationOpportunityController::class, 'create'])
+                ->middleware('permission:manage participation opportunities')
+                ->name('create');
+            Route::post('', [ParticipationOpportunityController::class, 'store'])
+                ->middleware('permission:manage participation opportunities')
+                ->name('store');
+            Route::get('{opportunity}', [ParticipationOpportunityController::class, 'show'])->name('show');
+            Route::get('{opportunity}/edit', [ParticipationOpportunityController::class, 'edit'])
+                ->middleware('permission:manage participation opportunities')
+                ->name('edit');
+            Route::patch('{opportunity}', [ParticipationOpportunityController::class, 'update'])
+                ->middleware('permission:manage participation opportunities')
+                ->name('update');
+            Route::delete('{opportunity}', [ParticipationOpportunityController::class, 'destroy'])
+                ->middleware('permission:manage participation opportunities')
+                ->name('destroy');
+        });
 
-    Route::name('dashboard.')->group(function () {
-        Route::get('dashboard/marketing', [MemberServiceController::class, 'marketing'])->name('marketing');
-        Route::get('dashboard/files', [MemberServiceController::class, 'files'])->name('files');
-        Route::get('dashboard/communication', [MemberServiceController::class, 'communication'])->name('communication');
+        // Marketing Resources
+        Route::prefix('marketing')->name('marketing.')->group(function () {
+            Route::get('', [MarketingResourceController::class, 'index'])->name('index');
+            Route::get('manage', [MarketingResourceController::class, 'manage'])
+                ->middleware('permission:manage marketing resources')
+                ->name('manage');
+            Route::get('create', [MarketingResourceController::class, 'create'])
+                ->middleware('permission:manage marketing resources')
+                ->name('create');
+            Route::post('', [MarketingResourceController::class, 'store'])
+                ->middleware('permission:manage marketing resources')
+                ->name('store');
+            Route::get('{resource}', [MarketingResourceController::class, 'show'])->name('show');
+            Route::get('{resource}/edit', [MarketingResourceController::class, 'edit'])
+                ->middleware('permission:manage marketing resources')
+                ->name('edit');
+            Route::patch('{resource}', [MarketingResourceController::class, 'update'])
+                ->middleware('permission:manage marketing resources')
+                ->name('update');
+            Route::delete('{resource}', [MarketingResourceController::class, 'destroy'])
+                ->middleware('permission:manage marketing resources')
+                ->name('destroy');
+        });
 
-        Route::prefix('dashboard/portal')->name('portal.')->group(function () {
-            Route::get('opportunities', [MemberServiceController::class, 'portalOpportunities'])->name('opportunities');
-            Route::get('volunteering', [MemberServiceController::class, 'volunteering'])->name('volunteering');
+        // Member Files
+        Route::prefix('files')->name('files.')->group(function () {
+            Route::get('', [MemberFileController::class, 'index'])->name('index');
+            Route::get('manage', [MemberFileController::class, 'manage'])
+                ->middleware('permission:manage member files')
+                ->name('manage');
+            Route::get('create', [MemberFileController::class, 'create'])
+                ->middleware('permission:manage member files')
+                ->name('create');
+            Route::post('', [MemberFileController::class, 'store'])
+                ->middleware('permission:manage member files')
+                ->name('store');
+            Route::get('{file}', [MemberFileController::class, 'show'])->name('show');
+            Route::get('{file}/edit', [MemberFileController::class, 'edit'])
+                ->middleware('permission:manage member files')
+                ->name('edit');
+            Route::patch('{file}', [MemberFileController::class, 'update'])
+                ->middleware('permission:manage member files')
+                ->name('update');
+            Route::delete('{file}', [MemberFileController::class, 'destroy'])
+                ->middleware('permission:manage member files')
+                ->name('destroy');
+        });
+
+        // Communications
+        Route::prefix('communication')->name('communication.')->group(function () {
+            Route::get('', [CommunicationController::class, 'index'])->name('index');
+            Route::get('manage', [CommunicationController::class, 'manage'])
+                ->middleware('permission:manage communications')
+                ->name('manage');
+            Route::get('create', [CommunicationController::class, 'create'])
+                ->middleware('permission:manage communications')
+                ->name('create');
+            Route::post('', [CommunicationController::class, 'store'])
+                ->middleware('permission:manage communications')
+                ->name('store');
+            Route::get('{communication}', [CommunicationController::class, 'show'])->name('show');
+            Route::get('{communication}/edit', [CommunicationController::class, 'edit'])
+                ->middleware('permission:manage communications')
+                ->name('edit');
+            Route::patch('{communication}', [CommunicationController::class, 'update'])
+                ->middleware('permission:manage communications')
+                ->name('update');
+            Route::delete('{communication}', [CommunicationController::class, 'destroy'])
+                ->middleware('permission:manage communications')
+                ->name('destroy');
+        });
+
+        // Portal Opportunities
+        Route::prefix('portal')->name('portal-opportunities.')->group(function () {
+            Route::get('opportunities', [PortalOpportunityController::class, 'index'])->name('index');
+            Route::get('volunteering', [PortalOpportunityController::class, 'index'])->name('volunteering');
+            Route::get('manage', [PortalOpportunityController::class, 'manage'])
+                ->middleware('permission:manage portal opportunities')
+                ->name('manage');
+            Route::get('create', [PortalOpportunityController::class, 'create'])
+                ->middleware('permission:manage portal opportunities')
+                ->name('create');
+            Route::post('', [PortalOpportunityController::class, 'store'])
+                ->middleware('permission:manage portal opportunities')
+                ->name('store');
+            Route::get('{opportunity}', [PortalOpportunityController::class, 'show'])->name('show');
+            Route::get('{opportunity}/edit', [PortalOpportunityController::class, 'edit'])
+                ->middleware('permission:manage portal opportunities')
+                ->name('edit');
+            Route::patch('{opportunity}', [PortalOpportunityController::class, 'update'])
+                ->middleware('permission:manage portal opportunities')
+                ->name('update');
+            Route::delete('{opportunity}', [PortalOpportunityController::class, 'destroy'])
+                ->middleware('permission:manage portal opportunities')
+                ->name('destroy');
         });
     });
-
     /*
     |--------------------------------------------------------------------------
     | Users Management - صلاحيات محددة
@@ -147,6 +302,15 @@ Route::middleware('auth')->group(function () {
         Route::delete('users/{user}', [UserController::class, 'destroy'])
             ->middleware('permission:delete users')
             ->name('users.destroy');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pages Management - صلاحيات محددة
+    |--------------------------------------------------------------------------
+    */
+    Route::middleware('role:admin|staff')->prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::resource('pages', PageController::class)->except(['show']);
     });
 
     /*

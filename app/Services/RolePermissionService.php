@@ -50,6 +50,27 @@ class RolePermissionService
 
             // صلاحيات الإعدادات
             'manage settings',
+
+            // صلاحيات برامج التدريب
+            'manage training programs',
+
+            // صلاحيات برامج الريادة
+            'manage entrepreneurship programs',
+
+            // صلاحيات فرص المشاركة
+            'manage participation opportunities',
+
+            // صلاحيات موارد التسويق
+            'manage marketing resources',
+
+            // صلاحيات ملفات الأعضاء
+            'manage member files',
+
+            // صلاحيات الاتصالات
+            'manage communications',
+
+            // صلاحيات فرص البوابة
+            'manage portal opportunities',
         ];
 
         foreach ($permissions as $permission) {
@@ -66,6 +87,13 @@ class RolePermissionService
             'approve memberships',
             'reject memberships',
             'view reports',
+            'manage training programs',
+            'manage entrepreneurship programs',
+            'manage participation opportunities',
+            'manage marketing resources',
+            'manage member files',
+            'manage communications',
+            'manage portal opportunities',
         ];
         $staffRole->syncPermissions($staffPermissions);
 

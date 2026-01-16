@@ -43,5 +43,14 @@ class DatabaseSeeder extends Seeder
             ->each(function ($user) {
                 $user->assignRole('member');
             });
+
+        $this->call(PageSeeder::class);
+        $this->call(TrainingProgramSeeder::class);
+        $this->call(EntrepreneurshipProgramSeeder::class);
+        $this->call(ParticipationOpportunitySeeder::class);
+        $this->call(MarketingResourceSeeder::class);
+        $this->call(MemberFileSeeder::class);
+        $this->call(CommunicationSeeder::class);
+        $this->call(PortalOpportunitySeeder::class);
     }
 }
