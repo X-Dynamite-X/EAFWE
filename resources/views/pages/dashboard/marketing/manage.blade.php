@@ -102,9 +102,3 @@
 
     @include('components.delete-modal')
 </x-layout.dashboard>
-        <p class="mt-2">لا توجد موارد حالياً. <a href="{{ route('dashboard.marketing.create') }}" class="text-blue-600 hover:text-blue-900">أضف مورداً جديداً</a></p>
-    </x-ui.alert>
-    @endif
-
-    @include('components.delete-modal')
-</x-layout.dashboard>

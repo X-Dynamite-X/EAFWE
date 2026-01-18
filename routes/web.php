@@ -17,12 +17,14 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ParticipationOpportunityController;
 use App\Http\Controllers\PortalOpportunityController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MemberCardController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TrainingProgramController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +32,9 @@ use Illuminate\Support\Facades\Route;
 | Public Routes
 |--------------------------------------------------------------------------
 */
+
+// Language Switcher
+Route::get('lang/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
 
 Route::get('/', function () {
     return view('pages.public.home');
@@ -66,6 +71,17 @@ Route::prefix('gallery')->name('gallery.')->group(function () {
 });
 
 Route::get('faq', [PublicController::class, 'faq'])->name('faq');
+
+/*
+|--------------------------------------------------------------------------
+| Member Card Verification (Public)
+|--------------------------------------------------------------------------
+*/
+Route::get('verify/membership/{cardToken}', [MemberCardController::class, 'verify'])
+    ->name('member-card.verify');
+
+Route::get('api/membership/{cardToken}', [MemberCardController::class, 'getData'])
+    ->name('member-card.api');
 
 /*
 |--------------------------------------------------------------------------
@@ -403,6 +419,26 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('profile', [ProfileController::class, 'update'])
         ->name('profile.update');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Member Card Management
+    |--------------------------------------------------------------------------
+    */
+    Route::get('member-profile', [MemberCardController::class, 'profile'])
+        ->name('member.profile');
+
+    Route::get('member-card/{membership}', [MemberCardController::class, 'showCard'])
+        ->name('member-card.show');
+
+    Route::get('member-card/{membership}/download', [MemberCardController::class, 'downloadCard'])
+        ->name('member-card.download');
+
+    Route::post('member-card/{membership}/reissue', [MemberCardController::class, 'reissueCard'])
+        ->name('member-card.reissue');
+
+    Route::get('member-card/{membership}/data', [MemberCardController::class, 'getData'])
+        ->name('member-card.data');
 
     /*
     |--------------------------------------------------------------------------

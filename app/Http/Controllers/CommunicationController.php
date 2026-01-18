@@ -21,7 +21,7 @@ class CommunicationController extends Controller
     {
         $communications = Communication::orderByRaw('is_pinned DESC')
             ->orderBy('order')
-            ->get();
+            ->paginate(15);
 
         return view('pages.dashboard.communication.manage', compact('communications'));
     }

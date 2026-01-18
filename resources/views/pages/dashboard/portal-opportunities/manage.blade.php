@@ -1,12 +1,25 @@
 <x-layout.dashboard title="إدارة فرص البوابة">
-    <div class="flex justify-between items-center mb-6">
-        <div>
-            <h1 class="text-3xl font-bold text-gray-900">إدارة فرص البوابة</h1>
-            <p class="text-gray-600 mt-1">أضف وعدل وحذف فرص التمويل والشراكات</p>
+    <div class="mb-8">
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg shadow-sm p-6 border border-cyan-100">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 bg-cyan-100 rounded-lg">
+                            <i class="fas fa-briefcase text-cyan-600 text-xl"></i>
+                        </div>
+                        <h1 class="text-2xl md:text-3xl font-bold text-gray-900">إدارة فرص البوابة</h1>
+                    </div>
+                    <p class="text-gray-600 text-sm md:text-base mt-1 ml-0 md:ml-12">أضف وعدل وحذف فرص التمويل والشراكات والتطوير الأعمال</p>
+                </div>
+                <div class="flex-shrink-0">
+                    <a href="{{ route('dashboard.portal-opportunities.create') }}" class="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors whitespace-nowrap">
+                        <i class="fas fa-plus"></i>
+                        <span>فرصة جديدة</span>
+                    </a>
+                </div>
+            </div>
         </div>
-        <x-ui.button href="{{ route('dashboard.portal-opportunities.create') }}" color="primary">
-            <i class="fas fa-plus"></i> فرصة جديدة
-        </x-ui.button>
     </div>
 
     @if(session('success'))
@@ -105,8 +118,7 @@
     @endif
 
     @include('components.delete-modal')
-</x-layout.dashboard>
-    @endif
+
 </div>
 </x-layout.dashboard>
 

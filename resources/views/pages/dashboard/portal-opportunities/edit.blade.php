@@ -1,8 +1,16 @@
 <x-layout.dashboard title="تعديل الفرصة">
     <div class="max-w-2xl mx-auto">
-        <div class="mb-6">
-            <h1 class="text-3xl font-bold text-gray-900">تعديل الفرصة</h1>
-            <p class="text-gray-600 mt-1">قم بتحديث معلومات الفرصة أدناه</p>
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg shadow-sm p-6 border border-cyan-100 mb-6">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-cyan-100 rounded-lg">
+                    <i class="fas fa-edit text-cyan-600 text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900">تعديل الفرصة</h1>
+                    <p class="text-gray-600 text-sm md:text-base mt-1">قم بتحديث معلومات الفرصة والتفاصيل أدناه</p>
+                </div>
+            </div>
         </div>
 
         @if($errors->any())

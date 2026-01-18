@@ -97,4 +97,4 @@
 
     @include('components.delete-modal')
 </x-layout.dashboard>
-</x-layout.dashboard>
+

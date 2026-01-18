@@ -96,13 +96,13 @@ class PortalOpportunityController extends Controller
 
         $opportunity->update($data);
 
-        return redirect()->route('dashboard.portal.opportunities.manage')->with('success', 'تم تحديث الفرصة بنجاح');
+        return redirect()->route('dashboard.portal-opportunities.manage')->with('success', 'تم تحديث الفرصة بنجاح');
     }
 
     public function destroy(PortalOpportunity $opportunity)
     {
         $opportunity->delete();
 
-        return redirect()->route('portal-opportunities.manage')->with('success', 'Portal opportunity deleted successfully.');
+        return redirect()->route('dashboard.portal-opportunities.manage')->with('success', 'تم حذف الفرصة بنجاح');
     }
 }

@@ -13,10 +13,10 @@ class MarketingResourceSeeder extends Seeder
     public function run(): void
     {
         MarketingResource::create([
-            'title' => 'Social Media Marketing Guide',
+            'title' => ['en' => 'Social Media Marketing Guide', 'ar' => 'دليل التسويق عبر وسائل التواصل الاجتماعي'],
             'slug' => 'social-media-marketing-guide',
-            'description' => 'Complete guide to effective social media marketing',
-            'content' => '<p>This guide covers:</p><ul><li>Platform selection</li><li>Content strategy</li><li>Engagement tactics</li><li>Analytics measurement</li></ul>',
+            'description' => ['en' => 'Complete guide to effective social media marketing', 'ar' => 'دليل كامل للتسويق الفعال عبر وسائل التواصل الاجتماعي'],
+            'content' => ['en' => '<p>This guide covers:</p><ul><li>Platform selection</li><li>Content strategy</li><li>Engagement tactics</li><li>Analytics measurement</li></ul>', 'ar' => '<p>يغطي هذا الدليل:</p><ul><li>اختيار المنصة</li><li>استراتيجية المحتوى</li><li>تكتيكات المشاركة</li><li>قياس التحليلات</li></ul>'],
             'image_url' => 'https://via.placeholder.com/400x300?text=Social+Media+Guide',
             'resource_type' => 'guide',
             'file_url' => 'https://example.com/downloads/social-media-guide.pdf',
@@ -25,10 +25,10 @@ class MarketingResourceSeeder extends Seeder
         ]);
 
         MarketingResource::create([
-            'title' => 'Email Campaign Template',
+            'title' => ['en' => 'Email Campaign Template', 'ar' => 'قالب حملة البريد الإلكتروني'],
             'slug' => 'email-campaign-template',
-            'description' => 'Professional email template for marketing campaigns',
-            'content' => '<p>Templates included for:</p><ul><li>Welcome emails</li><li>Promotional campaigns</li><li>Newsletter designs</li><li>Follow-up sequences</li></ul>',
+            'description' => ['en' => 'Professional email template for marketing campaigns', 'ar' => 'قالب بريد إلكتروني احترافي للحملات التسويقية'],
+            'content' => ['en' => '<p>Templates included for:</p><ul><li>Welcome emails</li><li>Promotional campaigns</li><li>Newsletter designs</li><li>Follow-up sequences</li></ul>', 'ar' => '<p>القوالب المضمنة لـ:</p><ul><li>رسائل الترحيب</li><li>الحملات الترويجية</li><li>تصاميم النشرات الإخبارية</li><li>سلاسل المتابعة</li></ul>'],
             'image_url' => 'https://via.placeholder.com/400x300?text=Email+Template',
             'resource_type' => 'template',
             'file_url' => 'https://example.com/downloads/email-template.html',
@@ -37,10 +37,10 @@ class MarketingResourceSeeder extends Seeder
         ]);
 
         MarketingResource::create([
-            'title' => 'Success Case Study',
+            'title' => ['en' => 'Success Case Study', 'ar' => 'دراسة حالة ناجحة'],
             'slug' => 'success-case-study',
-            'description' => 'Real-world examples of successful marketing campaigns',
-            'content' => '<p>Learn from our success stories:</p><ul><li>Campaign analysis</li><li>Results achieved</li><li>Lessons learned</li><li>Best practices</li></ul>',
+            'description' => ['en' => 'Real-world examples of successful marketing campaigns', 'ar' => 'أمثلة واقعية لحملات تسويقية ناجحة'],
+            'content' => ['en' => '<p>Learn from our success stories:</p><ul><li>Campaign analysis</li><li>Results achieved</li><li>Lessons learned</li><li>Best practices</li></ul>', 'ar' => '<p>تعلم من قصص نجاحنا:</p><ul><li>تحليل الحملة</li><li>النتائج المحققة</li><li>الدروس المستفادة</li><li>أفضل الممارسات</li></ul>'],
             'image_url' => 'https://via.placeholder.com/400x300?text=Case+Study',
             'resource_type' => 'case-study',
             'file_url' => 'https://example.com/downloads/case-study.pdf',

@@ -1,11 +1,5 @@
-{{--
-    Dashboard Layout
-    لوحة التحكم
-    يشمل: Sidebar + Top Navbar + Content
---}}
-
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" x-data="{ sidebarOpen: false }">
 
 <head>
     <meta charset="UTF-8">
@@ -13,7 +7,7 @@
     <title>{{ $title ?? 'لوحة التحكم' }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- Vite CSS --}}
+    {{-- Vite CSS & JS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 

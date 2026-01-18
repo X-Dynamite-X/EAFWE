@@ -13,27 +13,27 @@
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div class="order-2 md:order-1">
                     <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
-                        جمعية الإمارات <br>
-                        <span class="text-gold-500">لرائدات الأعمال</span>
+                        {{ __('website.home.hero.title_prefix') }} <br>
+                        <span class="text-gold-500">{{ __('website.home.hero.title_suffix') }}</span>
                     </h1>
                     <p class="text-xl lg:text-2xl text-gold-100/90 mb-10 font-bold border-r-4 border-gold-500 pr-4">
-                        رائدات يصنعن حلم المستقبل
+                        {{ __('website.home.hero.subtitle') }}
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4">
                         @guest
                             <x-ui.button href="{{ route('register') }}" color="gold" size="lg"
                                 class="rounded-full px-10 shadow-xl shadow-gold-500/20 w-full sm:w-auto">
-                                انضمي إلينا
+                                {{ __('website.home.hero.join_us') }}
                             </x-ui.button>
                             <x-ui.button href="{{ route('about.index') }}" color="white" size="lg"
                                 class="rounded-full px-10 bg-transparent! border-2! border-white! hover:bg-white! hover:text-charcoal-900! w-full sm:w-auto">
-                                تعرفي علينا
+                                {{ __('website.home.hero.learn_more') }}
                             </x-ui.button>
                         @else
                             <x-ui.button href="{{ route('dashboard') }}" color="gold" size="lg"
                                 class="rounded-full px-10 shadow-xl shadow-gold-500/20">
-                                لوحة التحكم
+                                {{ __('website.home.hero.dashboard') }}
                             </x-ui.button>
                         @endguest
                     </div>
@@ -57,23 +57,21 @@
     </section>
 
     {{-- Introduction Section --}}
-    <section class="py-24 bg-white relative">
+    <section class="py-24 bg-white dark:bg-charcoal-900 relative">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <span
-                class="inline-block px-4 py-1 bg-gold-50 text-gold-600 text-sm font-bold rounded-full mb-6 italic tracking-wider uppercase">مقدمة</span>
-            <h2 class="text-3xl lg:text-4xl font-black text-charcoal-900 mb-10">من نحن؟</h2>
-            <div class="bg-gold-50/30 p-8 lg:p-12 rounded-3xl border border-gold-100">
-                <p class="text-lg lg:text-xl text-charcoal-800 leading-loose text-justify">
-                    جمعية غير ربحية ذات نفع عام تهدف إلى نشر وتعزيز ثقافة ريادة الأعمال لدى المرأة الإماراتية للارتقاء
-                    بدورها الفاعل كشريك استراتيجي في صناعة اقتصاد مستدام. تتيح الجمعية فرصاً جديدة لتحقيق الازدهار
-                    والنمو ولتطوير أفكار ومفاهيم جديدة لصياغة اقتصاد معرفي متطور غير مبني على النفط، و تعزيز روح
-                    المبادرة الاستثمارية وتأهيلهم وتمكينهم وتهيئة بيئة ريادية داعمة ومحفزة ومساعدة في اكتشاف ميولهم
-                    وإثراء مواهبهم وتدريبهم ومتابعتهم لتعزيز قدراتهم ليصبحوا قادرين على خوض غمار العمل التجاري.
+                class="inline-block px-4 py-1 bg-gold-50 dark:bg-gold-900/20 text-gold-600 font-bold rounded-full mb-6 italic tracking-wider uppercase">{{ __('website.home.intro.label') }}</span>
+            <h2 class="text-3xl lg:text-4xl font-black text-charcoal-900  mb-10">
+                {{ __('website.home.intro.title') }}</h2>
+            <div
+                class="bg-gold-50/30 dark:bg-white/5 p-8 lg:p-12 rounded-3xl border border-gold-100 dark:border-white/10">
+                <p class="text-lg lg:text-xl text-charcoal-800 dark:text-gray-200 leading-loose text-justify">
+                    {{ __('website.home.intro.desc') }}
                 </p>
                 <div class="mt-10">
                     <a href="{{ route('about.index') }}"
                         class="text-gold-600 font-black hover:text-gold-700 transition-all group flex items-center justify-center gap-2 text-lg">
-                        اقرأ المزيد
+                        {{ __('website.home.intro.read_more') }}
                         <span class="group-hover:translate-x-1 transition-transform">←</span>
                     </a>
                 </div>
@@ -82,7 +80,7 @@
     </section>
 
     {{-- Vision/Mission Cards --}}
-    <section class="py-24 bg-gold-50/20 relative">
+    <section class="py-24 bg-gold-50/20 dark:bg-charcoal-800 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
                 {{-- Vision Card --}}
@@ -97,16 +95,15 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-3xl font-black mb-6 relative">الرؤية</h3>
+                    <h3 class="text-3xl font-black mb-6 relative">{{ __('website.home.vision.title') }}</h3>
                     <p class="text-xl leading-relaxed opacity-95 relative">
-                        تعزيز ثقافة ريادة الأعمال لدى المرأة الإماراتية للارتقاء بدورها الفاعل كشريك استراتيجي في صناعة
-                        اقتصاد مستدام.
+                        {{ __('website.home.vision.desc') }}
                     </p>
                 </div>
 
                 {{-- Mission Card --}}
                 <div
-                    class="bg-charcoal-900 text-white p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden group border border-white/5">
+                    class="bg-charcoal-900 dark:bg-charcoal-950 text-white p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden group border border-white/5">
                     <div class="absolute top-0 right-0 p-8 transform group-hover:scale-110 transition-transform">
                         <svg class="w-16 h-16 text-green-400 opacity-40" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
@@ -114,10 +111,10 @@
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-3xl font-black mb-6 relative text-gold-500">الرسالة</h3>
+                    <h3 class="text-3xl font-black mb-6 relative text-gold-500">{{ __('website.home.mission.title') }}
+                    </h3>
                     <p class="text-xl leading-relaxed opacity-95 relative">
-                        تمكين المرأة في سوق العمل، وخلق جيل من رائدات الأعمال برؤى جديدة وأفكار مبتكرة تسهم بكفاءة عالية
-                        في تحقيق أهداف التنمية المستدامة.
+                        {{ __('website.home.mission.desc') }}
                     </p>
                 </div>
             </div>
@@ -127,26 +124,25 @@
     {{-- CTA Section --}}
     <section class="py-32 relative">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="bg-white p-12 lg:p-20 rounded-[3rem] shadow-xl border border-gold-100 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-32 h-32 bg-gold-50 rounded-br-full -ml-8 -mt-8 opacity-50"></div>
-                <h2 class="text-4xl font-black text-charcoal-900 mb-6">انضمي إلينا اليوم</h2>
-                <p class="text-xl text-charcoal-700 mb-10 leading-relaxed">
-                    كوني جزءاً من مستقبل ريادة الأعمال في دولة الإمارات العربية المتحدة. نحن هنا لتمكينك ودعمك في كل
-                    خطوة.
+            <div
+                class="bg-white dark:bg-charcoal-900 p-12 lg:p-20 rounded-[3rem] shadow-xl border border-gold-100 dark:border-white/10 relative overflow-hidden">
+                <div
+                    class="absolute top-0 left-0 w-32 h-32 bg-gold-50 dark:bg-gold-900/20 rounded-br-full -ml-8 -mt-8 opacity-50">
+                </div>
+                <h2 class="text-4xl font-black text-charcoal-900  mb-6">
+                    {{ __('website.home.cta.title') }}</h2>
+                <p class="text-xl text-charcoal-700 dark:text-gray-300 mb-10 leading-relaxed">
+                    {{ __('website.home.cta.desc') }}
                 </p>
                 <div class="flex flex-wrap gap-4 justify-center">
                     @guest
                         <x-ui.button href="{{ route('register') }}" color="gold" size="lg"
-                            class="rounded-full px-12 shadow-lg">سجلي الآن</x-ui.button>
+                            class="rounded-full px-12 shadow-lg">{{ __('website.home.cta.register') }}</x-ui.button>
                         <x-ui.button href="{{ route('contact') }}" color="white" size="lg"
-                            class="rounded-full px-12 border-gold-500! text-gold-600! hover:bg-gold-500! hover:text-white! transition-all">تواصل
-                            معنا</x-ui.button>
+                            class="rounded-full px-12 border-gold-500! text-gold-600! hover:bg-gold-500! hover:text-white! transition-all">{{ __('website.home.cta.contact') }}</x-ui.button>
                     @else
                         <x-ui.button href="{{ route('dashboard') }}" color="gold" size="lg"
-                            class="rounded-full px-12">الانتقال للمنصة</x-ui.button>
+                            class="rounded-full px-12">{{ __('website.home.cta.platform') }}</x-ui.button>
                     @endguest
                 </div>
-            </div>
-        </div>
-    </section>
 </x-layout.app>

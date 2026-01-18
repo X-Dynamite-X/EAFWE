@@ -1,8 +1,16 @@
 <x-layout.dashboard title="إضافة فرصة جديدة">
     <div class="max-w-2xl mx-auto">
-        <div class="mb-6">
-            <h1 class="text-3xl font-bold text-gray-900">إضافة فرصة جديدة</h1>
-            <p class="text-gray-600 mt-1">ملأ النموذج أدناه لإنشاء فرصة جديدة</p>
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg shadow-sm p-6 border border-cyan-100 mb-6">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-cyan-100 rounded-lg">
+                    <i class="fas fa-plus-circle text-cyan-600 text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900">إضافة فرصة جديدة</h1>
+                    <p class="text-gray-600 text-sm md:text-base mt-1">ملأ النموذج أدناه لإنشاء فرصة تمويل أو شراكة جديدة</p>
+                </div>
+            </div>
         </div>
 
         @if($errors->any())
@@ -96,7 +104,7 @@
 
                 <div class="flex gap-3 mt-6 pt-6 border-t border-gray-200">
                     <x-ui.button type="submit" color="primary"><i class="fas fa-save"></i> حفظ</x-ui.button>
-                    <x-ui.button href="{{ route('dashboard.portal-opportunities.manage') }}" color="gray"><i class="fas fa-times"></i> إلغاء</x-ui.button>
+                    <x-ui.button href="{{ route('portal-opportunities.manage') }}" color="gray"><i class="fas fa-times"></i> إلغاء</x-ui.button>
                 </div>
             </form>
         </x-ui.card>

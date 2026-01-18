@@ -5,15 +5,15 @@
             <p class="text-gray-600 mt-1">ملأ النموذج أدناه لإنشاء مورد تسويقي جديد</p>
         </div>
 
-        @if($errors->any())
-        <x-ui.alert type="danger" class="mb-6">
-            <strong>خطأ في البيانات:</strong>
-            <ul class="mt-2 space-y-1">
-                @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </x-ui.alert>
+        @if ($errors->any())
+            <x-ui.alert type="danger" class="mb-6">
+                <strong>خطأ في البيانات:</strong>
+                <ul class="mt-2 space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </x-ui.alert>
         @endif
 
         <x-ui.card>

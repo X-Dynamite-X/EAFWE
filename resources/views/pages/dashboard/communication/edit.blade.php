@@ -155,25 +155,3 @@
         </x-ui.card>
     </div>
 </x-layout.dashboard>
-                                   value="{{ old('order', $communication->order) }}"
-                                   min="0">
-                            @error('order')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="d-flex gap-2 mt-4">
-                            <button type="submit" class="btn btn-success btn-lg flex-grow-1">
-                                <i class="fas fa-save"></i> تحديث
-                            </button>
-                            <a href="{{ route('dashboard.communication.manage') }}" class="btn btn-secondary btn-lg">
-                                <i class="fas fa-times"></i> إلغاء
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
