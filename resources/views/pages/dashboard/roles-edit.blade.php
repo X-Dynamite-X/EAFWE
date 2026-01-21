@@ -1,8 +1,8 @@
 {{-- Edit Role Page --}}
 
-<x-layout.dashboard title="تعديل الدور">
+<x-layout.dashboard title="{{ __('common.actions.edit') }} الدور">
     <div class="max-w-2xl mx-auto">
-        <x-ui.card title="تعديل الدور">
+        <x-ui.card title="{{ __('common.actions.edit') }} الدور">
             <form action="{{ route('roles.update', $role) }}" method="POST">
                 @csrf
                 @method('PATCH')
@@ -17,7 +17,7 @@
 
                 <x-ui.textarea
                     name="description"
-                    label="الوصف"
+                    label="{{ __('common.general.description') }}"
                     rows="3"
                     placeholder="وصف الدور..."
                     value="{{ old('description', $role->description ?? '') }}"
@@ -39,10 +39,10 @@
 
                 <div class="flex gap-4 mt-6">
                     <x-ui.button type="submit" color="gold" class="flex-1 text-center">
-                        حفظ التغييرات
+                        {{ __('common.actions.save') }} التغييرات
                     </x-ui.button>
                     <x-ui.button href="{{ route('roles.index') }}" color="gray" class="flex-1 text-center">
-                        إلغاء
+                        {{ __('common.actions.cancel') }}
                     </x-ui.button>
                 </div>
             </form>

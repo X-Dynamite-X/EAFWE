@@ -25,6 +25,8 @@ return [
         'default_role' => 'User',
         'notifications' => 'Notifications',
         'role_user' => 'User',
+        'welcome' => 'Welcome,',
+        'logout' => 'Logout',
     ],
     'index' => [
         'title' => 'Dashboard',

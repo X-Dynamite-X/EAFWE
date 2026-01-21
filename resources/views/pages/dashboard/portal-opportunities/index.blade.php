@@ -1,12 +1,12 @@
-<x-layout.dashboard title="فرص البوابة">
+<x-layout.dashboard title="{{ __('modules.portal.title') }}">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">فرص البوابة والتمويل</h1>
-            <p class="text-gray-600 mt-1">اكتشف فرص الأعمال والتمويل والشراكات المتاحة</p>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.portal.title') }} وال{{ __('modules.portal.opportunity_types.funding') }}</h1>
+            <p class="text-gray-600 mt-1">اكتشف فرص الأعمال وال{{ __('modules.portal.opportunity_types.funding') }} والشراكات المتاحة</p>
         </div>
         @can('manage portal opportunities')
         <x-ui.button href="{{ route('dashboard.portal-opportunities.manage') }}" color="primary">
-            <i class="fas fa-cog"></i> إدارة الفرص
+            <i class="fas fa-cog"></i> {{ __('modules.portal.manage') }}
         </x-ui.button>
         @endcan
     </div>
@@ -35,13 +35,13 @@
                     <x-ui.badge :color="$opportunity->status == 'active' ? 'green' : ($opportunity->status == 'closed' ? 'red' : 'yellow')">
                         @switch($opportunity->status)
                             @case('active')
-                                نشط
+                                {{ __('common.status.active') }}
                             @break
                             @case('closed')
-                                مغلق
+                                {{ __('modules.portal.statuses.closed') }}
                             @break
                             @case('upcoming')
-                                قريباً
+                                {{ __('modules.portal.statuses.upcoming') }}
                             @break
                         @endswitch
                     </x-ui.badge>
@@ -53,13 +53,13 @@
                     <x-ui.badge color="blue">
                         @switch($opportunity->opportunity_type)
                             @case('business')
-                                عمل تجاري
+                                {{ __('modules.entrepreneurship.types.business') }}
                             @break
                             @case('partnership')
-                                شراكة
+                                {{ __('modules.participation.types.partner') }}
                             @break
                             @case('funding')
-                                تمويل
+                                {{ __('modules.portal.opportunity_types.funding') }}
                             @break
                         @endswitch
                     </x-ui.badge>
@@ -68,7 +68,7 @@
 
             <div class="mt-auto pt-4 border-t border-gray-200">
                 <a href="{{ route('dashboard.portal-opportunities.show', $opportunity) }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium gap-1">
-                    عرض التفاصيل
+                    {{ __('common.actions.view') }} {{ __('common.general.details') }}
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
@@ -83,7 +83,7 @@
             <i class="fas fa-info-circle text-4xl text-blue-400"></i>
         </div>
         <p class="text-gray-700 font-medium">لا توجد فرص متاحة حالياً</p>
-        <p class="text-gray-500 text-sm mt-1">سيتم إضافة فرص جديدة قريباً</p>
+        <p class="text-gray-500 text-sm mt-1">سيتم {{ __('common.actions.add') }} فرص جديدة {{ __('modules.portal.statuses.upcoming') }}</p>
     </x-ui.alert>
     @endif
 </x-layout.dashboard>

@@ -14,7 +14,7 @@
 
     <div class="max-w-7xl mx-auto px-6 py-24">
         <x-ui.section-header title="الهيكل التنظيمي"
-            description="نخبة من الكفاءات الوطنية التي تسعى لتحقيق رؤية الجمعية وتمكين المرأة في عالم الأعمال." />
+            description="نخبة {{ __('common.time.from') }} الكفاءات الوطنية التي تسعى لتحقيق رؤية الجمعية وتمكين المرأة في عالم الأعمال." />
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
             @php
@@ -37,7 +37,7 @@
                         'desc' => 'تتولى إدارة الشؤون الإدارية والتنسيق بين اللجان المختلفة.',
                         'image' => 'https://via.placeholder.com/400x500?text=Member+1',
                     ],
-                    // يمكن إضافة المزيد من الأعضاء هنا
+                    // يمكن {{ __('common.actions.add') }} المزيد {{ __('common.time.from') }} الأعضاء هنا
                 ];
             @endphp
 

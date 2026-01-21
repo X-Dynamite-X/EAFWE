@@ -1,3 +1,6 @@
+@props([
+    'show_sidebar' => true,
+])
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" x-data="{ sidebarOpen: false }">
 
@@ -15,7 +18,10 @@
 
     <div class="flex h-screen overflow-hidden">
         {{-- Sidebar --}}
+        @if ($show_sidebar == true)
         <x-navigation.sidebar />
+        @endif
+
 
         {{-- Main Content --}}
         <div class="flex flex-col flex-1 min-w-0 overflow-hidden">

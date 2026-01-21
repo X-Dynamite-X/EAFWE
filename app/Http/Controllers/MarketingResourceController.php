@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MarketingResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MarketingResourceController extends Controller
 {
@@ -31,10 +32,13 @@ class MarketingResourceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
             'slug' => 'required|string|unique:marketing_resources,slug',
-            'description' => 'required|string',
-            'content' => 'required|string',
+            'description_en' => 'required|string',
+            'description_ar' => 'required|string',
+            'content_en' => 'required|string',
+            'content_ar' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:5120',
             'resource_type' => 'required|string|in:guide,template,case-study',
             'file' => 'nullable|file|max:10240',
@@ -74,10 +78,13 @@ class MarketingResourceController extends Controller
     public function update(Request $request, MarketingResource $resource)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
             'slug' => 'required|string|unique:marketing_resources,slug,' . $resource->id,
-            'description' => 'required|string',
-            'content' => 'required|string',
+            'description_en' => 'required|string',
+            'description_ar' => 'required|string',
+            'content_en' => 'required|string',
+            'content_ar' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:5120',
             'resource_type' => 'required|string|in:guide,template,case-study',
             'file' => 'nullable|file|max:10240',

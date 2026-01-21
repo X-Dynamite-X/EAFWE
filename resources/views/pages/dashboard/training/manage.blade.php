@@ -1,8 +1,8 @@
-<x-layout.dashboard title="إدارة برامج التدريب">
+<x-layout.dashboard title="إدارة {{ __('modules.training.title') }}">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">إدارة برامج التدريب</h1>
-            <p class="text-gray-600 mt-1">أضف وعدل وحذف برامج التدريب بسهولة</p>
+            <h1 class="text-3xl font-bold text-gray-900">إدارة {{ __('modules.training.title') }}</h1>
+            <p class="text-gray-600 mt-1">أضف وعدل و{{ __('common.actions.delete') }} {{ __('modules.training.title') }} بسهولة</p>
         </div>
         <x-ui.button href="{{ route('dashboard.training.create') }}" color="primary">
             <i class="fas fa-plus"></i> برنامج جديد
@@ -36,11 +36,11 @@
                     </span>
                     @if($program->is_active)
                         <span class="inline-block px-3 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full">
-                            <i class="fas fa-check-circle text-xs"></i> نشط
+                            <i class="fas fa-check-circle text-xs"></i> {{ __('common.status.active') }}
                         </span>
                     @else
                         <span class="inline-block px-3 py-1 bg-red-100 text-red-800 text-xs font-semibold rounded-full">
-                            <i class="fas fa-times-circle text-xs"></i> معطل
+                            <i class="fas fa-times-circle text-xs"></i> {{ __('common.status.disabled') }}
                         </span>
                     @endif
                 </div>
@@ -55,13 +55,13 @@
                     <x-ui.badge color="blue" size="sm">
                         @switch($program->category)
                             @case('training')
-                                <i class="fas fa-book"></i> تدريب
+                                <i class="fas fa-book"></i> {{ __('modules.training.categories.training') }}
                             @break
                             @case('workshop')
-                                <i class="fas fa-tools"></i> ورشة عمل
+                                <i class="fas fa-tools"></i> {{ __('modules.training.categories.workshop') }}
                             @break
                             @case('seminar')
-                                <i class="fas fa-presentation"></i> ندوة
+                                <i class="fas fa-presentation"></i> {{ __('modules.training.categories.seminar') }}
                             @break
                         @endswitch
                     </x-ui.badge>
@@ -78,13 +78,13 @@
             <!-- الإجراءات -->
             <div class="mt-auto pt-4 border-t border-gray-200 flex gap-2">
                 <a href="{{ route('dashboard.training.show', $program) }}" class="flex-1 text-center px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition text-sm">
-                    <i class="fas fa-eye"></i> عرض
+                    <i class="fas fa-eye"></i> {{ __('common.actions.view') }}
                 </a>
                 <a href="{{ route('dashboard.training.edit', $program) }}" class="flex-1 text-center px-3 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium rounded-lg transition text-sm">
-                    <i class="fas fa-edit"></i> تعديل
+                    <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
                 </a>
                 <button type="button" onclick="openDeleteModal('{{ $program->id }}', '{{ $program->title }}', '{{ route('dashboard.training.destroy', $program) }}')" class="flex-1 text-center px-3 py-2 bg-red-100 hover:bg-red-200 text-red-700 font-medium rounded-lg transition text-sm">
-                    <i class="fas fa-trash"></i> حذف
+                    <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
                 </button>
             </div>
         </x-ui.card>
@@ -95,9 +95,9 @@
         <div class="text-center py-12">
             <i class="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
             <p class="text-gray-600 text-lg font-medium">لا توجد برامج حالياً</p>
-            <p class="text-gray-500 text-sm mt-2 mb-6">ابدأ بإنشاء برنامج تدريبي جديد الآن</p>
+            <p class="text-gray-500 text-sm mt-2 mb-6">ابدأ ب{{ __('common.actions.create') }} برنامج {{ __('modules.training.categories.training') }}ي جديد الآن</p>
             <x-ui.button href="{{ route('dashboard.training.create') }}" color="primary">
-                <i class="fas fa-plus"></i> إضافة برنامج جديد
+                <i class="fas fa-plus"></i> {{ __('common.actions.add') }} برنامج جديد
             </x-ui.button>
         </div>
     </x-ui.card>

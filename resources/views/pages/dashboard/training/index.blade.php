@@ -1,8 +1,8 @@
-<x-layout.dashboard title="برامج التدريب">
+<x-layout.dashboard title="{{ __('modules.training.title') }}">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">برامج التدريب</h1>
-            <p class="text-gray-600 mt-1">اكتشف برامج التدريب المتاحة وطور مهاراتك</p>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.training.title') }}</h1>
+            <p class="text-gray-600 mt-1">اكتشف {{ __('modules.training.title') }} المتاحة وطور مهاراتك</p>
         </div>
         @can('manage training programs')
         <x-ui.button href="{{ route('dashboard.training.manage') }}" color="primary">
@@ -37,13 +37,13 @@
                     <x-ui.badge color="blue">
                         @switch($program->category)
                             @case('training')
-                                تدريب
+                                {{ __('modules.training.categories.training') }}
                             @break
                             @case('workshop')
-                                ورشة عمل
+                                {{ __('modules.training.categories.workshop') }}
                             @break
                             @case('seminar')
-                                ندوة
+                                {{ __('modules.training.categories.seminar') }}
                             @break
                             @default
                                 {{ $program->category }}
@@ -52,7 +52,7 @@
                 </div>
 
                 <x-ui.button href="{{ route('dashboard.training.show', $program) }}" color="primary" size="sm" class="mt-4 w-full text-center">
-                    عرض التفاصيل <i class="fas fa-arrow-left text-xs"></i>
+                    {{ __('common.actions.view') }} {{ __('common.general.details') }} <i class="fas fa-arrow-left text-xs"></i>
                 </x-ui.button>
             </div>
         </x-ui.card>
@@ -62,7 +62,7 @@
     <x-ui.card>
         <div class="text-center py-12">
             <i class="fas fa-graduation-cap text-6xl text-gray-300 mb-4"></i>
-            <p class="text-gray-600 text-lg">لا توجد برامج تدريبية متاحة حالياً</p>
+            <p class="text-gray-600 text-lg">لا توجد برامج {{ __('modules.training.categories.training') }}ية متاحة حالياً</p>
             <p class="text-gray-500 text-sm mt-2">تفضل بزيارتنا لاحقاً!</p>
         </div>
     </x-ui.card>

@@ -1,7 +1,7 @@
-<x-layout.dashboard title="برامج ريادة الأعمال">
+<x-layout.dashboard title="{{ __('modules.entrepreneurship.title') }}">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">برامج الريادة والعمل الحر</h1>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.entrepreneurship.index') }}</h1>
             <p class="text-gray-600 mt-1">استكشف برامج تطوير الأعمال والريادة</p>
         </div>
         @can('manage entrepreneurship programs')
@@ -37,13 +37,13 @@
                     <x-ui.badge color="yellow">
                         @switch($program->type)
                             @case('business')
-                                عمل تجاري
+                                {{ __('modules.entrepreneurship.types.business') }}
                             @break
                             @case('startup')
-                                شركة ناشئة
+                                {{ __('modules.entrepreneurship.types.startup') }}
                             @break
                             @case('mentorship')
-                                إرشاد وتوجيه
+                                {{ __('modules.entrepreneurship.types.mentorship') }}
                             @break
                         @endswitch
                     </x-ui.badge>

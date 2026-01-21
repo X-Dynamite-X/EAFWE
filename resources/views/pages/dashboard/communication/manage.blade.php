@@ -2,7 +2,7 @@
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-3xl font-bold text-gray-900">إدارة الاتصالات</h1>
-            <p class="text-gray-600 mt-1">إضافة وتعديل وحذف الاتصالات</p>
+            <p class="text-gray-600 mt-1">{{ __('common.actions.add') }} و{{ __('common.actions.edit') }} و{{ __('common.actions.delete') }} الاتصالات</p>
         </div>
         @can('create communications')
         <x-ui.button href="{{ route('dashboard.communication.create') }}" color="primary">
@@ -42,15 +42,15 @@
                                     إعلان
                                 @break
                                 @case('newsletter')
-                                    نشرة
+                                    {{ __('modules.communication.types.newsletter') }}
                                 @break
                                 @case('notification')
-                                    إشعار
+                                    {{ __('modules.communication.types.notification') }}
                                 @break
                             @endswitch
                         </x-ui.badge>
                         <x-ui.badge color="{{ $communication->is_active ? 'green' : 'red' }}">
-                            {{ $communication->is_active ? 'نشط' : 'معطل' }}
+                            {{ $communication->is_active ? __('common.status.active') : __('common.status.disabled') }}
                         </x-ui.badge>
                     </div>
                     <p class="text-sm text-gray-600 mb-2">{{ Str::limit($communication->message, 100) }}</p>
@@ -63,13 +63,13 @@
                 <div class="flex gap-2 flex-wrap md:flex-nowrap">
                     @can('update communications')
                     <x-ui.button href="{{ route('dashboard.communication.edit', $communication) }}" color="primary" size="sm">
-                        <i class="fas fa-edit"></i> تعديل
+                        <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
                     </x-ui.button>
                     @endcan
 
                     @can('delete communications')
                     <button type="button" onclick="openDeleteModal('{{ $communication->id }}', '{{ $communication->title }}', '{{ route('dashboard.communication.destroy', $communication) }}')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded text-sm transition-colors">
-                        <i class="fas fa-trash"></i> حذف
+                        <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
                     </button>
                     @endcan
                 </div>
@@ -88,7 +88,7 @@
             <p class="text-gray-600">لا توجد اتصالات</p>
             @can('create communications')
             <x-ui.button href="{{ route('dashboard.communication.create') }}" color="primary" class="mt-4">
-                <i class="fas fa-plus"></i> إضافة أول اتصال
+                <i class="fas fa-plus"></i> {{ __('common.actions.add') }} أول اتصال
             </x-ui.button>
             @endcan
         </div>

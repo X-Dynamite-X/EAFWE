@@ -1,8 +1,8 @@
 {{-- Permissions Management Page --}}
 
-<x-layout.dashboard title="إدارة الصلاحيات">
+<x-layout.dashboard title="{{ __('dashboard.sidebar.roles') }}">
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold">الصلاحيات</h2>
+        <h2 class="text-2xl font-bold">{{ __('dashboard.sidebar.roles') }}</h2>
     </div>
 
     {{-- Permissions Table --}}
@@ -54,12 +54,12 @@
     </div>
 
     {{-- Manage Roles Modal --}}
-    <x-ui.modal id="manageRolesModal" title="إدارة الأدوار">
+    <x-ui.modal id="manageRolesModal" title="{{ __('dashboard.sidebar.roles') }}">
         <form id="manageRolesForm" method="POST">
             @csrf
 
-            <p class="mb-4 text-gray-600">حدد الأدوار التي يجب أن تمتلك صلاحية: <span id="permissionName"
-                    class="font-bold text-gray-800"></span></p>
+            <p class="mb-4 text-gray-600">حدد الأدوار التي يجب أن تمتلك صلاحية: <span
+                    id="permissionName" class="font-bold text-gray-800"></span></p>
 
             <div class="mb-6 space-y-2 max-h-60 overflow-y-auto border p-4 rounded-lg">
                 @foreach ($roles as $role)
@@ -72,9 +72,10 @@
             </div>
 
             <div class="flex gap-3">
-                <x-ui.button type="submit" color="gold" class="flex-1">حفظ التغييرات</x-ui.button>
+                <x-ui.button type="submit" color="gold" class="flex-1">{{ __('common.actions.save') }}
+                    التغييرات</x-ui.button>
                 <x-ui.button type="button" onclick="closeModal('manageRolesModal')" color="gray"
-                    class="flex-1">إلغاء</x-ui.button>
+                    class="flex-1">{{ __('common.actions.cancel') }}</x-ui.button>
             </div>
         </form>
     </x-ui.modal>

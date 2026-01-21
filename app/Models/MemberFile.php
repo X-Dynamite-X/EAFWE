@@ -10,9 +10,11 @@ class MemberFile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'title_en',
+        'title_ar',
         'slug',
-        'description',
+        'description_en',
+        'description_ar',
         'file_type',
         'file_url',
         'file_size',
@@ -25,4 +27,14 @@ class MemberFile extends Model
         'is_active' => 'boolean',
         'order' => 'integer',
     ];
+
+    public function getTitleAttribute()
+    {
+        return $this->{'title_' . app()->getLocale()};
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->{'description_' . app()->getLocale()};
+    }
 }

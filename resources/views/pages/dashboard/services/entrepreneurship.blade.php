@@ -1,7 +1,7 @@
 <x-layout.dashboard title="خدمات ريادة الأعمال">
     <div class="mb-8">
         <h1 class="text-3xl font-black text-charcoal-900 mb-2">خدمات ريادة الأعمال</h1>
-        <p class="text-charcoal-600">دعم وتمكين مشاريعك الريادية من خلال الإرشاد والتوجيه وعرض الفرص.</p>
+        <p class="text-charcoal-600">دعم وتمكين مشاريعك الريادية {{ __('common.time.from') }} خلال الإرشاد والتوجيه و{{ __('common.actions.view') }} الفرص.</p>
     </div>
 
     <div class="grid lg:grid-cols-3 gap-6">
@@ -10,10 +10,10 @@
             <x-ui.card title="مشروعي الريادي">
                 <div class="text-center py-12 border-2 border-dashed border-gold-100 rounded-4xl">
                     <div class="text-5xl mb-6">🏗️</div>
-                    <h3 class="text-xl font-black text-charcoal-900 mb-2">لم تقومي بإضافة مشروعك بعد</h3>
-                    <p class="text-charcoal-600 mb-8 max-w-sm mx-auto">أضيفي بيانات مشروعك ليتم عرضه داخل منصة الجمعية
-                        والاستفادة من فرص الترويج والتعاون.</p>
-                    <x-ui.button>إضافة مشروع جديد</x-ui.button>
+                    <h3 class="text-xl font-black text-charcoal-900 mb-2">لم تقومي ب{{ __('common.actions.add') }} مشروعك بعد</h3>
+                    <p class="text-charcoal-600 mb-8 max-w-sm mx-auto">أضيفي بيانات مشروعك ليتم {{ __('common.actions.view') . 'ه' داخل {{ __('common.time.from') . 'صة' الجمعية
+                        ولالاستفادة {{ __('common.time.from') }} فرص الترويج والتعاون.</p>
+                    <x-ui.button>{{ __('common.actions.add') }} مشروع جديد</x-ui.button>
                 </div>
             </x-ui.card>
 
@@ -24,7 +24,7 @@
                             [
                                 'mentor' => 'د. نورة الشامسي',
                                 'specialty' => 'استشارات مالية وقانونية',
-                                'date' => 'قريباً',
+                                'date' => __('modules.portal.statuses.upcoming'),
                                 'status' => 'متاح',
                             ],
                             [
@@ -64,16 +64,16 @@
             <x-ui.card title="فرص التعاون والشراكات">
                 <div class="space-y-4">
                     <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
-                        <p class="text-sm font-black text-blue-900 mb-1">طلب توريد منتجات</p>
-                        <p class="text-xs text-blue-700 leading-relaxed">تبحث إحدى الجهات الحكومية عن موردين للمصنوعات
+                        <p class="text-sm font-black text-blue-900 mb-1">طلب توريد {{ __('common.time.from') . 'تجات'</p>
+                        <p class="text-xs text-blue-700 leading-relaxed">ت{{ __('common.actions.search') }} إحدى الجهات الحكومية عن موردين للمصنوعات
                             اليدوية التراثية.</p>
-                        <a href="#" class="text-xs font-black text-blue-900 mt-2 inline-block">التفاصيل ←</a>
+                        <a href="#" class="text-xs font-black text-blue-900 mt-2 inline-block">{{ __('common.general.details') }} ←</a>
                     </div>
                     <div class="p-4 rounded-xl bg-purple-50 border border-purple-100">
-                        <p class="text-sm font-black text-purple-900 mb-1">شراكة لوجستية</p>
+                        <p class="text-sm font-black text-purple-900 mb-1">{{ __('modules.participation.types.partner') }} لوجستية</p>
                         <p class="text-xs text-purple-700 leading-relaxed">فرصة للعضوات في قطاع التجارة الإلكترونية
                             للحصول على خصومات شحن حصرية.</p>
-                        <a href="#" class="text-xs font-black text-purple-900 mt-2 inline-block">التفاصيل ←</a>
+                        <a href="#" class="text-xs font-black text-purple-900 mt-2 inline-block">{{ __('common.general.details') }} ←</a>
                     </div>
                 </div>
             </x-ui.card>
@@ -81,7 +81,7 @@
             <x-ui.card title="استشارة سريعة">
                 <form class="space-y-4">
                     <x-ui.textarea label="اكتبي سؤالك هنا" placeholder="كيف يمكنني..." rows="3" />
-                    <x-ui.button size="sm" class="w-full">إرسال الطلب</x-ui.button>
+                    <x-ui.button size="sm" class="w-full">{{ __('common.actions.submit') }} الطلب</x-ui.button>
                 </form>
             </x-ui.card>
         </div>

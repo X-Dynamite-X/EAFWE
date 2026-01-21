@@ -1,18 +1,18 @@
 {{-- Users Management Page --}}
 
-<x-layout.dashboard title="إدارة المستخدمين">
+<x-layout.dashboard title="{{ __('dashboard.sidebar.users') }}">
     {{-- Header --}}
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold">المستخدمون</h2>
+        <h2 class="text-2xl font-bold">{{ __('dashboard.sidebar.users') }}</h2>
         <x-ui.button href="{{ route('users.create') }}" color="gold">
-            إضافة مستخدم
+            {{ __('common.actions.add') }} مستخدم
         </x-ui.button>
     </div>
 
     {{-- Search and Filter --}}
     <x-ui.card class="mb-6">
         <div class="grid md:grid-cols-2 gap-4">
-            <x-ui.input name="search" id="userSearch" placeholder="ابحث عن مستخدم..." />
+            <x-ui.input name="search" id="userSearch" placeholder="ا{{ __('common.actions.search') }} عن مستخدم..." />
             <x-ui.select name="role" :options="['admin' => 'مدير', 'staff' => 'موظف', 'member' => 'عضو']" placeholder="اختر الدور" />
         </div>
     </x-ui.card>
@@ -25,7 +25,7 @@
                     <tr>
                         <th class="text-right px-6 py-3 font-semibold">الاسم</th>
                         <th class="text-right px-6 py-3 font-semibold">البريد</th>
-                        <th class="text-right px-6 py-3 font-semibold">الهاتف</th>
+                        <th class="text-right px-6 py-3 font-semibold">{{ __('common.general.phone') }}</th>
                         <th class="text-right px-6 py-3 font-semibold">الدور</th>
                         <th class="text-right px-6 py-3 font-semibold">الحالة</th>
                         <th class="text-right px-6 py-3 font-semibold">الإجراءات</th>
@@ -44,19 +44,19 @@
                             </td>
                             <td class="px-6 py-3">
                                 @if ($user->is_active)
-                                    <x-ui.badge color="green">نشط</x-ui.badge>
+                                    <x-ui.badge color="green">{{ __('common.status.active') }}</x-ui.badge>
                                 @else
-                                    <x-ui.badge color="red">معطل</x-ui.badge>
+                                    <x-ui.badge color="red">{{ __('common.status.disabled') }}</x-ui.badge>
                                 @endif
                             </td>
                             <td class="px-6 py-3">
                                 <div class="flex gap-2">
                                     <x-ui.button href="{{ route('users.edit', $user) }}" color="gray" size="sm">
-                                        تعديل
+                                        {{ __('common.actions.edit') }}
                                     </x-ui.button>
                                     <x-ui.button color="red" size="sm"
                                         onclick="deleteUser({{ $user->id }})">
-                                        حذف
+                                        {{ __('common.actions.delete') }}
                                     </x-ui.button>
                                 </div>
                             </td>
@@ -80,12 +80,12 @@
         </div>
     @endif
     {{-- Delete Confirmation Modal --}}
-    <x-ui.modal id="deleteUserModal" title="تأكيد الحذف">
-        <p class="text-gray-700">هل أنت متأكد من رغبتك في حذف هذا المستخدم؟ لا يمكن التراجع عن هذا الإجراء.</p>
+    <x-ui.modal id="deleteUserModal" title="{{ __('common.actions.confirm') }} ال{{ __('common.actions.delete') }}">
+        <p class="text-gray-700">هل أنت متأكد {{ __('common.time.from') }} رغبتك في {{ __('common.actions.delete') }} هذا المستخدم؟ لا يمكن التراجع عن هذا الإجراء.</p>
 
         <x-slot:footer>
-            <x-ui.button onclick="confirmDeleteUser(event)" color="red">حذف نهائي</x-ui.button>
-            <x-ui.button onclick="closeModal('deleteUserModal')" color="gray">إلغاء</x-ui.button>
+            <x-ui.button onclick="confirmDeleteUser(event)" color="red">{{ __('common.actions.delete') }} نهائي</x-ui.button>
+            <x-ui.button onclick="closeModal('deleteUserModal')" color="gray">{{ __('common.actions.cancel') }}</x-ui.button>
         </x-slot:footer>
     </x-ui.modal>
 
@@ -120,15 +120,15 @@
                         // إخفاء المودال
                         closeModal('deleteUserModal');
 
-                        // حذف الصف من الجدول
+                        // {{ __('common.actions.delete') }} الصف {{ __('common.time.from') }} الجدول
                         $(`#user-row-${userToDeleteId}`).fadeOut(300, function() {
                             $(this).remove();
                         });
 
-                        // عرض رسالة نجاح
+                        // {{ __('common.actions.view') }} رسالة {{ __('common.general.success') }}
                         window.dispatchEvent(new CustomEvent('notify', {
                             detail: {
-                                message: 'تم حذف المستخدم بنجاح',
+                                message: 'تم {{ __('common.actions.delete') }} المستخدم ب{{ __('common.general.success') }}',
                                 type: 'success'
                             }
                         }));
@@ -139,7 +139,7 @@
                     },
                     error: function(xhr) {
                         isDeleting = false;
-                        let errorMessage = 'حدث خطأ أثناء الحذف';
+                        let errorMessage = 'حدث {{ __('common.general.error') }} أثناء ال{{ __('common.actions.delete') }}';
                         if (xhr.responseJSON && xhr.responseJSON.error) {
                             errorMessage = xhr.responseJSON.error;
                         }

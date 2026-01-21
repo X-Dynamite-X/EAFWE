@@ -1,6 +1,6 @@
 {{-- Reports Page --}}
 
-<x-layout.dashboard title="التقارير" subtitle="عرض تفصيلي للبيانات والإحصائيات">
+<x-layout.dashboard title="التقارير" subtitle="{{ __('common.actions.view') }} تفصيلي للبيانات والإحصائيات">
     <div class="grid grid-cols-4 gap-6 mb-8">
         {{-- Total Users Card --}}
         <div class="bg-white rounded-lg shadow p-6">
@@ -39,7 +39,7 @@
         <div class="bg-white rounded-lg shadow p-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-gray-600 text-sm">الطلبات الموافق عليها</p>
+                    <p class="text-gray-600 text-sm">الطلبات المعتمدة</p>
                     <p class="text-3xl font-bold text-gray-900 mt-2">{{ $approvedMemberships }}</p>
                 </div>
                 <div class="text-4xl text-red-600">✅</div>
@@ -51,16 +51,19 @@
     <div class="bg-white rounded-lg shadow mb-8">
         <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
             <h3 class="text-lg font-semibold text-gray-900">آخر المستخدمين</h3>
-            <a href="{{ route('users.index') }}" class="text-gold-600 hover:text-gold-700 text-sm">عرض الكل</a>
+            <a href="{{ route('users.index') }}"
+                class="text-gold-600 hover:text-gold-700 text-sm">{{ __('common.actions.view') }} الكل</a>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>
                         <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">الاسم</th>
-                        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">البريد الإلكتروني</th>
+                        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">
+                            {{ __('common.general.email') }}</th>
                         <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">الحالة</th>
-                        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">التاريخ</th>
+                        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">
+                            {{ __('common.time.date') }}</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -69,15 +72,17 @@
                             <td class="px-6 py-4 text-sm text-gray-900">{{ $user->name }}</td>
                             <td class="px-6 py-4 text-sm text-gray-600">{{ $user->email }}</td>
                             <td class="px-6 py-4 text-sm">
-                                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    {{ $user->is_active ? 'نشط' : 'معطل' }}
+                                <span
+                                    class="inline-block px-3 py-1 rounded-full text-xs font-semibold {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    {{ $user->is_active ? __('common.status.active') : __('common.status.disabled') }}
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-600">{{ $user->created_at->format('Y-m-d') }}</td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-6 py-4 text-center text-gray-500">لا توجد بيانات</td>
+                            <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+                                لا توجد بيانات</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -89,7 +94,8 @@
     <div class="bg-white rounded-lg shadow">
         <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
             <h3 class="text-lg font-semibold text-gray-900">آخر طلبات العضوية</h3>
-            <a href="{{ route('memberships.index') }}" class="text-gold-600 hover:text-gold-700 text-sm">عرض الكل</a>
+            <a href="{{ route('memberships.index') }}"
+                class="text-gold-600 hover:text-gold-700 text-sm">{{ __('common.actions.view') }} الكل</a>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full">
@@ -98,7 +104,8 @@
                         <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">المستخدم</th>
                         <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">نوع العضوية</th>
                         <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">الحالة</th>
-                        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">التاريخ</th>
+                        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">
+                            {{ __('common.time.date') }}</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -107,19 +114,22 @@
                             <td class="px-6 py-4 text-sm text-gray-900">{{ $membership->user->name }}</td>
                             <td class="px-6 py-4 text-sm text-gray-600">{{ $membership->membership_type }}</td>
                             <td class="px-6 py-4 text-sm">
-                                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold
-                                    @if($membership->status === 'pending') bg-yellow-100 text-yellow-800
+                                <span
+                                    class="inline-block px-3 py-1 rounded-full text-xs font-semibold
+                                    @if ($membership->status === 'pending') bg-yellow-100 text-yellow-800
                                     @elseif($membership->status === 'approved') bg-green-100 text-green-800
                                     @else bg-red-100 text-red-800 @endif
                                 ">
                                     {{ ucfirst($membership->status) }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">{{ $membership->created_at->format('Y-m-d') }}</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">{{ $membership->created_at->format('Y-m-d') }}
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-6 py-4 text-center text-gray-500">لا توجد بيانات</td>
+                            <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+                                لا توجد بيانات</td>
                         </tr>
                     @endforelse
                 </tbody>

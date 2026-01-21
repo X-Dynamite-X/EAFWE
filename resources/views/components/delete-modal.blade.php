@@ -1,5 +1,5 @@
 <!-- Delete Confirmation Modal -->
-<div id="deleteModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+<div id="deleteModal" class="hidden fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-opacity-50">
     <div class="bg-white rounded-lg shadow-lg max-w-md w-full mx-4">
         <div class="p-6">
             <div class="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 rounded-full mb-4">

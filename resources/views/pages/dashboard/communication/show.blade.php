@@ -1,4 +1,4 @@
-<x-layout.dashboard title="عرض الاتصال">
+<x-layout.dashboard title="{{ __('common.actions.view') }} الاتصال">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2">
             <x-ui.card>
@@ -13,10 +13,10 @@
                     @can('manage communications')
                     <div class="flex gap-2">
                         <x-ui.button href="{{ route('dashboard.communication.edit', $communication) }}" color="primary" size="sm">
-                            <i class="fas fa-edit"></i> تعديل
+                            <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
                         </x-ui.button>
                         <button type="button" onclick="openDeleteModal('{{ $communication->id }}', '{{ $communication->title }}', '{{ route('dashboard.communication.destroy', $communication) }}')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded text-sm transition-colors">
-                            <i class="fas fa-trash"></i> حذف
+                            <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
                         </button>
                     </div>
                     @endcan
@@ -29,10 +29,10 @@
                                 إعلان
                             @break
                             @case('newsletter')
-                                نشرة
+                                {{ __('modules.communication.types.newsletter') }}
                             @break
                             @case('notification')
-                                إشعار
+                                {{ __('modules.communication.types.notification') }}
                             @break
                         @endswitch
                     </x-ui.badge>
@@ -42,7 +42,7 @@
                     </x-ui.badge>
                     @endif
                     <x-ui.badge color="{{ $communication->is_active ? 'green' : 'red' }}">
-                        {{ $communication->is_active ? 'نشط' : 'معطل' }}
+                        {{ $communication->is_active  ? __('common.status.active') : __('common.status.disabled') }}
                     </x-ui.badge>
                 </div>
 
@@ -53,16 +53,16 @@
                 <div class="mt-6 pt-6 border-t border-gray-200">
                     <p class="text-xs text-gray-500">
                         <i class="fas fa-clock"></i>
-                        تم الإنشاء: {{ $communication->created_at->format('d/m/Y H:i') }}
+                        تم ال{{ __('common.actions.create') }}: {{ $communication->created_at->format('d/m/Y H:i') }}
                         @if($communication->updated_at != $communication->created_at)
-                        | تم التحديث: {{ $communication->updated_at->format('d/m/Y H:i') }}
+                        | {{ __('common.time.updated_at') }}: {{ $communication->updated_at->format('d/m/Y H:i') }}
                         @endif
                     </p>
                 </div>
             </x-ui.card>
 
             <x-ui.button href="{{ route('dashboard.communication.index') }}" color="gray" class="mt-4">
-                <i class="fas fa-arrow-right"></i> العودة
+                <i class="fas fa-arrow-right"></i> {{ __('common.actions.back') }}
             </x-ui.button>
         </div>
 
@@ -72,17 +72,17 @@
 
                 <dl class="space-y-4">
                     <div>
-                        <dt class="text-sm font-medium text-gray-600">النوع</dt>
+                        <dt class="text-sm font-medium text-gray-600">{{ __('common.general.type') }}</dt>
                         <dd class="text-gray-900 mt-1">
                             @switch($communication->type)
                                 @case('announcement')
                                     <x-ui.badge color="blue">إعلان</x-ui.badge>
                                 @break
                                 @case('newsletter')
-                                    <x-ui.badge color="cyan">نشرة</x-ui.badge>
+                                    <x-ui.badge color="cyan">{{ __('modules.communication.types.newsletter') }}</x-ui.badge>
                                 @break
                                 @case('notification')
-                                    <x-ui.badge color="green">إشعار</x-ui.badge>
+                                    <x-ui.badge color="green">{{ __('modules.communication.types.notification') }}</x-ui.badge>
                                 @break
                             @endswitch
                         </dd>
@@ -92,7 +92,7 @@
                         <dt class="text-sm font-medium text-gray-600">الحالة</dt>
                         <dd class="text-gray-900 mt-1">
                             <x-ui.badge color="{{ $communication->is_active ? 'green' : 'red' }}">
-                                {{ $communication->is_active ? 'نشط' : 'معطل' }}
+                                {{ $communication->is_active  ? __('common.status.active') : __('common.status.disabled') }}
                             </x-ui.badge>
                         </dd>
                     </div>
@@ -100,7 +100,7 @@
                     <div>
                         <dt class="text-sm font-medium text-gray-600">مثبت</dt>
                         <dd class="text-gray-900 mt-1">
-                            {{ $communication->is_pinned ? 'نعم' : 'لا' }}
+                            {{ $communication->is_pinned  ? __('common.general.yes') : __('common.general.no') }}
                         </dd>
                     </div>
 
@@ -112,7 +112,7 @@
                     </div>
 
                     <div>
-                        <dt class="text-sm font-medium text-gray-600">الترتيب</dt>
+                        <dt class="text-sm font-medium text-gray-600">{{ __('common.general.order') }}</dt>
                         <dd class="text-gray-900 mt-1">{{ $communication->order }}</dd>
                     </div>
 

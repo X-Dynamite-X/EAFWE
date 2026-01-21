@@ -13,9 +13,11 @@ class MemberFileSeeder extends Seeder
     public function run(): void
     {
         MemberFile::create([
-            'title' => 'Member Handbook',
+            'title_ar' => 'دليل الأعضاء',
+            'title_en' => 'Member Handbook',
             'slug' => 'member-handbook',
-            'description' => 'Complete guide for members with policies and procedures',
+            'description_ar' => 'دليل شامل للأعضاء يتضمن السياسات والإجراءات',
+            'description_en' => 'Complete guide for members with policies and procedures',
             'file_type' => 'pdf',
             'file_url' => 'https://example.com/files/member-handbook.pdf',
             'file_size' => '2.5MB',
@@ -25,9 +27,11 @@ class MemberFileSeeder extends Seeder
         ]);
 
         MemberFile::create([
-            'title' => 'Financial Management Guide',
+            'title_ar' => 'دليل الإدارة المالية',
+            'title_en' => 'Financial Management Guide',
             'slug' => 'financial-management-guide',
-            'description' => 'Template and guidance for financial management',
+            'description_ar' => 'نموذج وإرشادات للإدارة المالية',
+            'description_en' => 'Template and guidance for financial management',
             'file_type' => 'document',
             'file_url' => 'https://example.com/files/financial-guide.docx',
             'file_size' => '1.2MB',
@@ -37,9 +41,11 @@ class MemberFileSeeder extends Seeder
         ]);
 
         MemberFile::create([
-            'title' => 'Business Planning Template',
+            'title_ar' => 'نموذج التخطيط للأعمال',
+            'title_en' => 'Business Planning Template',
             'slug' => 'business-planning-template',
-            'description' => 'Ready-to-use template for business planning',
+            'description_ar' => 'نموذج جاهز للاستخدام للتخطيط للأعمال',
+            'description_en' => 'Ready-to-use template for business planning',
             'file_type' => 'template',
             'file_url' => 'https://example.com/files/business-plan-template.xlsx',
             'file_size' => '0.8MB',
@@ -49,9 +55,11 @@ class MemberFileSeeder extends Seeder
         ]);
 
         MemberFile::create([
-            'title' => 'Marketing Checklist',
+            'title_ar' => 'قائمة التحقق التسويقية',
+            'title_en' => 'Marketing Checklist',
             'slug' => 'marketing-checklist',
-            'description' => 'Comprehensive marketing checklist for businesses',
+            'description_ar' => 'قائمة تحقق تسويقية شاملة للأعمال',
+            'description_en' => 'Comprehensive marketing checklist for businesses',
             'file_type' => 'document',
             'file_url' => 'https://example.com/files/marketing-checklist.pdf',
             'file_size' => '0.5MB',

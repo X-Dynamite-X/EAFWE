@@ -1,4 +1,4 @@
-<x-layout.dashboard title="عرض الملف">
+<x-layout.dashboard title="{{ __('common.actions.view') }} {{ __('common.general.file') }}">
 
 @php
 if (!function_exists('formatBytes')) {
@@ -17,15 +17,15 @@ if (!function_exists('formatBytes')) {
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-3xl font-bold text-gray-900">{{ $file->title }}</h1>
-            <p class="text-gray-600 mt-1">عرض تفاصيل الملف</p>
+            <p class="text-gray-600 mt-1">{{ __('common.actions.view') }} تفاصيل {{ __('common.general.file') }}</p>
         </div>
         @can('manage member files')
         <div class="flex gap-2">
             <x-ui.button href="{{ route('dashboard.files.edit', $file) }}" color="primary" size="sm">
-                <i class="fas fa-edit"></i> تعديل
+                <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
             </x-ui.button>
             <button type="button" onclick="openDeleteModal('{{ $file->id }}', '{{ $file->title }}', '{{ route('dashboard.files.destroy', $file) }}')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded text-sm transition-colors">
-                <i class="fas fa-trash"></i> حذف
+                <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
             </button>
         </div>
         @endcan
@@ -39,16 +39,16 @@ if (!function_exists('formatBytes')) {
                         <x-ui.badge color="green">
                             @switch($file->file_type)
                                 @case('document')
-                                    وثيقة
+                                    {{ __('modules.files.file_types.document') }}
                                     @break
                                 @case('pdf')
-                                    PDF
+                                    {{ __('modules.files.file_types.pdf') }}
                                     @break
                                 @case('guide')
-                                    دليل
+                                    {{ __('modules.marketing.resource_types.guide') }}
                                     @break
                                 @case('template')
-                                    نموذج
+                                    {{ __('modules.marketing.resource_types.template') }}
                                     @break
                             @endswitch
                         </x-ui.badge>
@@ -76,13 +76,13 @@ if (!function_exists('formatBytes')) {
                         <div class="flex items-center gap-3 p-4 bg-blue-50 rounded-lg">
                             <i class="fas fa-file text-blue-600 text-xl"></i>
                             <div>
-                                <p class="text-sm text-gray-600">الملف المرفوع</p>
+                                <p class="text-sm text-gray-600">{{ __('common.general.file') }} المرفوع</p>
                                 <p class="text-sm font-medium text-gray-900">{{ basename($file->file_url) }}</p>
                             </div>
                         </div>
                         @endif
                         <a href="{{ $file->file_url }}" target="_blank" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition">
-                            <i class="fas fa-download"></i> تحميل الملف
+                            <i class="fas fa-download"></i> {{ __('common.actions.download') }} {{ __('common.general.file') }}
                         </a>
                     </div>
                     @endif
@@ -90,40 +90,40 @@ if (!function_exists('formatBytes')) {
 
                 <div class="border-t border-gray-200 pt-4 text-sm text-gray-600">
                     <i class="fas fa-clock"></i>
-                    تم الإنشاء: {{ $file->created_at->format('d/m/Y H:i') }}
+                    تم ال{{ __('common.actions.create') }}: {{ $file->created_at->format('d/m/Y H:i') }}
                     @if($file->updated_at != $file->created_at)
-                    | تم التحديث: {{ $file->updated_at->format('d/m/Y H:i') }}
+                    | {{ __('common.time.updated_at') }}: {{ $file->updated_at->format('d/m/Y H:i') }}
                     @endif
                 </div>
             </x-ui.card>
 
             <div class="mt-6">
                 <x-ui.button href="{{ route('dashboard.files.index') }}" color="gray">
-                    <i class="fas fa-arrow-right"></i> العودة
+                    <i class="fas fa-arrow-right"></i> {{ __('common.actions.back') }}
                 </x-ui.button>
             </div>
         </div>
 
         <div class="lg:col-span-1">
             <x-ui.card>
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">معلومات الملف</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">معلومات {{ __('common.general.file') }}</h3>
 
                 <dl class="space-y-4">
                     <div>
-                        <dt class="text-sm font-medium text-gray-600">النوع</dt>
+                        <dt class="text-sm font-medium text-gray-600">{{ __('common.general.type') }}</dt>
                         <dd class="text-gray-900 mt-1">
                             @switch($file->file_type)
                                 @case('document')
-                                    وثيقة
+                                    {{ __('modules.files.file_types.document') }}
                                     @break
                                 @case('pdf')
-                                    PDF
+                                    {{ __('modules.files.file_types.pdf') }}
                                     @break
                                 @case('guide')
-                                    دليل
+                                    {{ __('modules.marketing.resource_types.guide') }}
                                     @break
                                 @case('template')
-                                    نموذج
+                                    {{ __('modules.marketing.resource_types.template') }}
                                     @break
                             @endswitch
                         </dd>
@@ -140,7 +140,7 @@ if (!function_exists('formatBytes')) {
                         <dt class="text-sm font-medium text-gray-600">الحالة</dt>
                         <dd class="text-gray-900 mt-1">
                             <x-ui.badge :color="$file->is_active ? 'green' : 'red'">
-                                {{ $file->is_active ? 'نشط' : 'معطل' }}
+                                {{ $file->is_active  ? __('common.status.active') : __('common.status.disabled') }}
                             </x-ui.badge>
                         </dd>
                     </div>
@@ -151,7 +151,7 @@ if (!function_exists('formatBytes')) {
                     </div>
 
                     <div class="border-t border-gray-200 pt-4">
-                        <dt class="text-sm font-medium text-gray-600">الترتيب</dt>
+                        <dt class="text-sm font-medium text-gray-600">{{ __('common.general.order') }}</dt>
                         <dd class="text-gray-900 mt-1">{{ $file->order }}</dd>
                     </div>
                 </dl>

@@ -25,6 +25,8 @@ return [
         'default_role' => 'مستخدم',
         'notifications' => 'الإشعارات',
         'role_user' => 'مستخدم',
+        'welcome' => 'مرحباً،',
+        'logout' => 'تسجيل الخروج',
     ],
     'index' => [
         'title' => 'لوحة التحكم',

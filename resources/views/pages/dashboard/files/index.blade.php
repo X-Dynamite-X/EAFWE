@@ -11,15 +11,15 @@ if (!function_exists('formatBytes')) {
 }
 @endphp
 
-<x-layout.dashboard title="ملفات الأعضاء">
+<x-layout.dashboard title="{{ __('modules.files.title') }}">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">ملفات الأعضاء</h1>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.files.title') }}</h1>
             <p class="text-gray-600 mt-1">حمّل الأدلة والنماذج المتاحة للأعضاء</p>
         </div>
         @can('manage member files')
         <x-ui.button href="{{ route('dashboard.files.manage') }}" color="primary">
-            <i class="fas fa-cog"></i> إدارة الملفات
+            <i class="fas fa-cog"></i> إدارة {{ __('common.general.file') }}ات
         </x-ui.button>
         @endcan
     </div>
@@ -45,16 +45,16 @@ if (!function_exists('formatBytes')) {
                     <x-ui.badge color="green">
                         @switch($file->file_type)
                             @case('document')
-                                وثيقة
+                                {{ __('modules.files.file_types.document') }}
                             @break
                             @case('pdf')
-                                PDF
+                                {{ __('modules.files.file_types.pdf') }}
                             @break
                             @case('guide')
-                                دليل
+                                {{ __('modules.marketing.resource_types.guide') }}
                             @break
                             @case('template')
-                                نموذج
+                                {{ __('modules.marketing.resource_types.template') }}
                             @break
                         @endswitch
                     </x-ui.badge>
@@ -69,7 +69,7 @@ if (!function_exists('formatBytes')) {
 
             <div class="mt-auto pt-4 border-t border-gray-200">
                 <a href="{{ route('dashboard.files.show', $file) }}" class="inline-flex items-center text-green-600 hover:text-green-800 text-sm font-medium gap-1 w-full justify-center py-2 bg-green-50 rounded-lg hover:bg-green-100 transition">
-                    <i class="fas fa-download"></i> تحميل
+                    <i class="fas fa-download"></i> {{ __('common.actions.download') }}
                 </a>
             </div>
         </x-ui.card>

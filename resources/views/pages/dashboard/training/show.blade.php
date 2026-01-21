@@ -1,4 +1,4 @@
-<x-layout.dashboard title="عرض برنامج التدريب">
+<x-layout.dashboard title="{{ __('common.actions.view') }} برنامج ال{{ __('modules.training.categories.training') }}">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2">
             <x-ui.card>
@@ -7,10 +7,10 @@
                     @can('manage training programs')
                     <div class="flex gap-2">
                         <x-ui.button href="{{ route('dashboard.training.edit', $program) }}" color="primary" size="sm">
-                            <i class="fas fa-edit"></i> تعديل
+                            <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
                         </x-ui.button>
                         <button type="button" onclick="openDeleteModal('{{ $program->id }}', '{{ $program->title }}', '{{ route('dashboard.training.destroy', $program) }}')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded text-sm transition-colors">
-                            <i class="fas fa-trash"></i> حذف
+                            <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
                         </button>
                     </div>
                     @endcan
@@ -26,13 +26,13 @@
                     <x-ui.badge color="cyan">
                         @switch($program->category)
                             @case('training')
-                                تدريب
+                                {{ __('modules.training.categories.training') }}
                             @break
                             @case('workshop')
-                                ورشة عمل
+                                {{ __('modules.training.categories.workshop') }}
                             @break
                             @case('seminar')
-                                ندوة
+                                {{ __('modules.training.categories.seminar') }}
                             @break
                         @endswitch
                     </x-ui.badge>
@@ -47,16 +47,16 @@
                 <div class="mt-6 pt-6 border-t border-gray-200">
                     <p class="text-xs text-gray-500">
                         <i class="fas fa-clock"></i>
-                        تم الإنشاء: {{ $program->created_at->format('d/m/Y H:i') }}
+                        تم ال{{ __('common.actions.create') }}: {{ $program->created_at->format('d/m/Y H:i') }}
                         @if($program->updated_at != $program->created_at)
-                        | تم التحديث: {{ $program->updated_at->format('d/m/Y H:i') }}
+                        | {{ __('common.time.updated_at') }}: {{ $program->updated_at->format('d/m/Y H:i') }}
                         @endif
                     </p>
                 </div>
             </x-ui.card>
 
             <x-ui.button href="{{ route('dashboard.training.index') }}" color="gray" class="mt-4">
-                <i class="fas fa-arrow-right"></i> العودة
+                <i class="fas fa-arrow-right"></i> {{ __('common.actions.back') }}
             </x-ui.button>
         </div>
 
@@ -66,18 +66,18 @@
 
                 <dl class="space-y-4">
                     <div>
-                        <dt class="text-sm font-medium text-gray-600">الفئة</dt>
+                        <dt class="text-sm font-medium text-gray-600">{{ __('common.general.category') }}</dt>
                         <dd class="text-gray-900 mt-1">
                             <x-ui.badge color="blue">
                                 @switch($program->category)
                                     @case('training')
-                                        تدريب
+                                        {{ __('modules.training.categories.training') }}
                                     @break
                                     @case('workshop')
-                                        ورشة عمل
+                                        {{ __('modules.training.categories.workshop') }}
                                     @break
                                     @case('seminar')
-                                        ندوة
+                                        {{ __('modules.training.categories.seminar') }}
                                     @break
                                 @endswitch
                             </x-ui.badge>
@@ -88,7 +88,7 @@
                         <dt class="text-sm font-medium text-gray-600">الحالة</dt>
                         <dd class="text-gray-900 mt-1">
                             <x-ui.badge color="{{ $program->is_active ? 'green' : 'red' }}">
-                                {{ $program->is_active ? 'نشط' : 'معطل' }}
+                                {{ $program->is_active  ? __('common.status.active') : __('common.status.disabled') }}
                             </x-ui.badge>
                         </dd>
                     </div>
@@ -99,7 +99,7 @@
                     </div>
 
                     <div>
-                        <dt class="text-sm font-medium text-gray-600">الترتيب</dt>
+                        <dt class="text-sm font-medium text-gray-600">{{ __('common.general.order') }}</dt>
                         <dd class="text-gray-900 mt-1">{{ $program->order }}</dd>
                     </div>
                 </dl>

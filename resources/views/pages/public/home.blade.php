@@ -57,15 +57,15 @@
     </section>
 
     {{-- Introduction Section --}}
-    <section class="py-24 bg-white dark:bg-charcoal-900 relative">
+    <section class="py-24 bg-white relative">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <span
-                class="inline-block px-4 py-1 bg-gold-50 dark:bg-gold-900/20 text-gold-600 font-bold rounded-full mb-6 italic tracking-wider uppercase">{{ __('website.home.intro.label') }}</span>
+                class="inline-block px-4 py-1 bg-gold-50  text-gold-600 font-bold rounded-full mb-6 italic tracking-wider uppercase">{{ __('website.home.intro.label') }}</span>
             <h2 class="text-3xl lg:text-4xl font-black text-charcoal-900  mb-10">
                 {{ __('website.home.intro.title') }}</h2>
             <div
-                class="bg-gold-50/30 dark:bg-white/5 p-8 lg:p-12 rounded-3xl border border-gold-100 dark:border-white/10">
-                <p class="text-lg lg:text-xl text-charcoal-800 dark:text-gray-200 leading-loose text-justify">
+                class="bg-gold-50/30  p-8 lg:p-12 rounded-3xl border border-gold-100 ">
+                <p class="text-lg lg:text-xl text-charcoal-800  leading-loose text-justify">
                     {{ __('website.home.intro.desc') }}
                 </p>
                 <div class="mt-10">
@@ -80,7 +80,7 @@
     </section>
 
     {{-- Vision/Mission Cards --}}
-    <section class="py-24 bg-gold-50/20 dark:bg-charcoal-800 relative">
+    <section class="py-24 bg-gold-50/20  relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
                 {{-- Vision Card --}}
@@ -103,7 +103,7 @@
 
                 {{-- Mission Card --}}
                 <div
-                    class="bg-charcoal-900 dark:bg-charcoal-950 text-white p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden group border border-white/5">
+                    class="bg-charcoal-900  text-white p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden group border border-white/5">
                     <div class="absolute top-0 right-0 p-8 transform group-hover:scale-110 transition-transform">
                         <svg class="w-16 h-16 text-green-400 opacity-40" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
@@ -125,13 +125,13 @@
     <section class="py-32 relative">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <div
-                class="bg-white dark:bg-charcoal-900 p-12 lg:p-20 rounded-[3rem] shadow-xl border border-gold-100 dark:border-white/10 relative overflow-hidden">
+                class="bg-white  p-12 lg:p-20 rounded-[3rem] shadow-xl border border-gold-100  relative overflow-hidden">
                 <div
-                    class="absolute top-0 left-0 w-32 h-32 bg-gold-50 dark:bg-gold-900/20 rounded-br-full -ml-8 -mt-8 opacity-50">
+                    class="absolute top-0 left-0 w-32 h-32 bg-gold-50  rounded-br-full -ml-8 -mt-8 opacity-50">
                 </div>
                 <h2 class="text-4xl font-black text-charcoal-900  mb-6">
                     {{ __('website.home.cta.title') }}</h2>
-                <p class="text-xl text-charcoal-700 dark:text-gray-300 mb-10 leading-relaxed">
+                <p class="text-xl text-charcoal-700  mb-10 leading-relaxed">
                     {{ __('website.home.cta.desc') }}
                 </p>
                 <div class="flex flex-wrap gap-4 justify-center">
@@ -139,10 +139,10 @@
                         <x-ui.button href="{{ route('register') }}" color="gold" size="lg"
                             class="rounded-full px-12 shadow-lg">{{ __('website.home.cta.register') }}</x-ui.button>
                         <x-ui.button href="{{ route('contact') }}" color="white" size="lg"
-                            class="rounded-full px-12 border-gold-500! text-gold-600! hover:bg-gold-500! hover:text-white! transition-all">{{ __('website.home.cta.contact') }}</x-ui.button>
+                            class="rounded-full px-12 shadow-lg">{{ __('website.home.cta.contact') }}</x-ui.button>
                     @else
                         <x-ui.button href="{{ route('dashboard') }}" color="gold" size="lg"
-                            class="rounded-full px-12">{{ __('website.home.cta.platform') }}</x-ui.button>
+                            class="rounded-full px-12 shadow-lg">{{ __('website.home.cta.platform') }}</x-ui.button>
                     @endguest
                 </div>
 </x-layout.app>

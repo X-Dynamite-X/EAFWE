@@ -64,7 +64,7 @@
                     </x-ui.badge>
                     @if($file->file_size)
                     <span class="inline-flex items-center text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded">
-                        <i class="fas fa-database text-gray-400 ml-1"></i> 
+                        <i class="fas fa-database text-gray-400 ml-1"></i>
                         @php
                             $size = (int)$file->file_size;
                             if ($size >= 1073741824) {

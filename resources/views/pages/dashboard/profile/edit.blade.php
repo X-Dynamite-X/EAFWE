@@ -1,6 +1,6 @@
 {{-- Profile Edit Page --}}
 
-<x-layout.dashboard title="الملف الشخصي" subtitle="تعديل بيانات حسابك">
+<x-layout.dashboard title="{{ __('common.general.file') }} الشخصي" subtitle="{{ __('common.actions.edit') }} بيانات حسابك">
     @if (session('success'))
         <x-alerts.success>{{ session('success') }}</x-alerts.success>
     @endif
@@ -29,10 +29,10 @@
                     <x-ui.input type="text" name="name" label="الاسم الكامل" value="{{ old('name', $user->name) }}"
                         required />
 
-                    <x-ui.input type="email" name="email" label="البريد الإلكتروني"
+                    <x-ui.input type="email" name="email" label="{{ __('common.general.email') }}"
                         value="{{ old('email', $user->email) }}" required />
 
-                    <x-ui.input type="text" name="phone" label="رقم الهاتف" placeholder="+966 50 000 0000"
+                    <x-ui.input type="text" name="phone" label="رقم {{ __('common.general.phone') }}" placeholder="+966 50 000 0000"
                         value="{{ old('phone', $user->phone) }}" />
                 </div>
 
@@ -47,7 +47,7 @@
                                 <p class="font-black text-charcoal-900">عضوية عاملة</p>
                             </div>
                             <span
-                                class="px-3 py-1 bg-green-100 text-green-700 rounded-lg text-[10px] font-black uppercase tracking-wider">نشط
+                                class="px-3 py-1 bg-green-100 text-green-700 rounded-lg text-[10px] font-black uppercase tracking-wider">{{ __('common.status.active') }}
                                 ✅</span>
                         </div>
 
@@ -64,7 +64,7 @@
 
                         <x-ui.button variant="outline" size="sm" class="w-full bg-white">
                             <span class="flex items-center justify-center gap-2">
-                                <span>📥</span> تحميل بطاقة العضوية
+                                <span>📥</span> {{ __('common.actions.download') }} بطاقة العضوية
                             </span>
                         </x-ui.button>
 
@@ -82,10 +82,10 @@
 
     <div class="flex gap-4">
         <x-ui.button type="submit" color="gold" class="flex-1 text-center">
-            حفظ التغييرات
+            {{ __('common.actions.save') }} التغييرات
         </x-ui.button>
         <x-ui.button href="{{ route('dashboard') }}" color="gray" class="flex-1 text-center">
-            إلغاء
+            {{ __('common.actions.cancel') }}
         </x-ui.button>
     </div>
     </form>

@@ -1,23 +1,23 @@
-<x-layout.dashboard title="بوابة التطوع والمبادرات">
+<x-layout.dashboard title="بوابة ال{{ __('modules.participation.types.volunteer') }} والمبادرات">
     <div class="mb-8">
-        <h1 class="text-3xl font-black text-charcoal-900 mb-2">بوابة التطوع والمبادرات</h1>
-        <p class="text-charcoal-600">ساهمي في نجاح مبادرات الجمعية واتركي بصمة إيجابية في المجتمع.</p>
+        <h1 class="text-3xl font-black text-charcoal-900 mb-2">بوابة ال{{ __('modules.participation.types.volunteer') }} والمبادرات</h1>
+        <p class="text-charcoal-600">ساهمي في {{ __('common.general.success') }} مبادرات الجمعية واتركي بصمة إيجابية في المجتمع.</p>
     </div>
 
     <div class="grid lg:grid-cols-3 gap-8">
         {{-- Volunteer Stats --}}
         <div class="lg:col-span-1 space-y-6">
-            <x-ui.card title="ملف التطوع الخاص بي">
+            <x-ui.card title="ملف ال{{ __('modules.participation.types.volunteer') }} الخاص بي">
                 <div class="text-center py-6">
                     <div
                         class="w-24 h-24 bg-gold-500 text-charcoal-900 rounded-full flex items-center justify-center text-3xl font-black mx-auto mb-4">
                         15
                     </div>
-                    <p class="font-black text-charcoal-900">ساعة تطوعية</p>
-                    <p class="text-xs text-charcoal-400">منذ انضمامك للجمعية</p>
+                    <p class="font-black text-charcoal-900">ساعة {{ __('modules.participation.types.volunteer') . 'ية'</p>
+                    <p class="text-xs text-charcoal-400">{{ __('common.time.from') . 'ذ' انضمامك للجمعية</p>
                 </div>
                 <div class="mt-6 p-4 bg-gray-50 rounded-2xl">
-                    <p class="text-xs text-charcoal-600 text-center">أنتِ على بعد 5 ساعات من الحصول على "وسام العطاء"
+                    <p class="text-xs text-charcoal-600 text-center">أنتِ على بعد 5 ساعات {{ __('common.time.from') }} الحصول على "وسام العطاء"
                     </p>
                 </div>
             </x-ui.card>
@@ -25,7 +25,7 @@
 
         {{-- Active Volunteering Initiatives --}}
         <div class="lg:col-span-2 space-y-6">
-            <x-ui.card title="مبادرات حالية للتطوع">
+            <x-ui.card title="مبادرات حالية لل{{ __('modules.participation.types.volunteer') }}">
                 <div class="space-y-4">
                     @php
                         $volunteering = [
@@ -37,7 +37,7 @@
                             ],
                             [
                                 'title' => 'تنظيم ملتقى العيد الوطني',
-                                'role' => 'منسقة فعاليات',
+                                'role' => '{{ __('common.time.from') . 'سقة' فعاليات',
                                 'hours' => 'حسب الحاجة',
                                 'desc' => 'المساهمة في تنظيم فعاليات الجمعية الخاصة باليوم الوطني للدولة.',
                             ],
@@ -56,7 +56,7 @@
                                 <span class="text-xs text-charcoal-400 flex items-center gap-1">
                                     <span>⏱️</span> {{ $item['hours'] }}
                                 </span>
-                                <x-ui.button size="sm">انضمي كمتطوعة</x-ui.button>
+                                <x-ui.button size="sm">انضمي كم{{ __('modules.participation.types.volunteer') . 'ة'</x-ui.button>
                             </div>
                         </div>
                     @endforeach

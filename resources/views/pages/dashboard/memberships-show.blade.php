@@ -10,7 +10,7 @@
                 </div>
 
                 <div>
-                    <p class="text-gray-500 text-sm mb-1">البريد الإلكتروني</p>
+                    <p class="text-gray-500 text-sm mb-1">{{ __('common.general.email') }}</p>
                     <p class="text-lg font-semibold">{{ $membership->user->email }}</p>
                 </div>
 
@@ -28,11 +28,11 @@
                     <p class="text-gray-500 text-sm mb-1">الحالة</p>
                     <div>
                         @if ($membership->isPending())
-                            <x-ui.badge color="yellow">قيد الانتظار</x-ui.badge>
+                            <x-ui.badge color="yellow">{{ __('common.status.pending') }}</x-ui.badge>
                         @elseif($membership->isApproved())
-                            <x-ui.badge color="green">موافق عليها</x-ui.badge>
+                            <x-ui.badge color="green">{{ __('common.status.approved') }}ا</x-ui.badge>
                         @else
-                            <x-ui.badge color="red">مرفوضة</x-ui.badge>
+                            <x-ui.badge color="red">{{ __('common.status.rejected') }}ة</x-ui.badge>
                         @endif
                     </div>
                 </div>
@@ -51,7 +51,7 @@
             @endif
 
             <div class="mb-6">
-                <p class="text-gray-500 text-sm mb-2">الوصف</p>
+                <p class="text-gray-500 text-sm mb-2">{{ __('common.general.description') }}</p>
                 <p class="text-gray-800 whitespace-pre-wrap">{{ $membership->description }}</p>
             </div>
 
@@ -75,7 +75,7 @@
         <div class="mt-6 flex gap-4 flex-wrap">
             {{-- Back Button --}}
             <x-ui.button href="{{ route('memberships.index') }}" color="gray">
-                العودة
+                {{ __('common.actions.back') }}
             </x-ui.button>
 
             {{-- Approve Button (Only for pending and with permission) --}}
@@ -103,12 +103,12 @@
                 @if ($membership->isPending() || auth()->user()->hasRole('admin'))
                     <x-ui.button type="button" data-action="delete" data-id="{{ $membership->id }}"
                         data-name="{{ $membership->user->name }}" color="gray">
-                        حذف الطلب
+                        {{ __('common.actions.delete') }} الطلب
                     </x-ui.button>
                 @endif
             @endcan
         </div>
-        <x-ui.modal id="actionModal" title="تأكيد الإجراء">
+        <x-ui.modal id="actionModal" title="{{ __('common.actions.confirm') }} الإجراء">
             <p id="modalBody" class="text-center text-lg mb-4"></p>
 
             {{-- Rejection Reason Input --}}
@@ -122,11 +122,11 @@
             <div class="flex justify-center gap-4 mt-6">
                 <button type="button" id="confirmButton"
                     class="w-full sm:w-auto px-4 py-2 rounded-lg text-white font-semibold transition">
-                    تأكيد
+                    {{ __('common.actions.confirm') }}
                 </button>
                 <button type="button" onclick="closeModal('actionModal')"
                     class="w-full sm:w-auto px-4 py-2 rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-300 font-semibold transition">
-                    إلغاء
+                    {{ __('common.actions.cancel') }}
                 </button>
             </div>
         </x-ui.modal>

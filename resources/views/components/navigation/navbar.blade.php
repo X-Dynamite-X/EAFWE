@@ -5,14 +5,14 @@
                 <a href="{{ route('home') }}" class="flex items-center group flex-shrink-0">
                     <span
                         class="text-lg md:text-xl lg:text-2xl font-black text-charcoal-900 group-hover:text-gold-500 transition-colors duration-300 leading-tight">
-                        جمعية الإمارات لرائدات الأعمال
+                        {{ __('website.nav.title') }}
                     </span>
                 </a>
 
-                    <div class="hidden lg:flex items-center gap-1 xl:gap-2 flex-1 justify-center">
+                <div class="hidden lg:flex items-center gap-1 xl:gap-2 flex-1 justify-center">
                     <a href="{{ route('home') }}"
                         class="px-4 py-2 text-charcoal-800 font-semibold text-sm hover:text-gold-500 transition-all duration-300 relative group">
-                        الرئيسية
+                        {{ __('website.nav.home') }}
                         <span
                             class="absolute bottom-0 right-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
                         <span
@@ -20,7 +20,7 @@
                     </a>
                     <a href="{{ route('about.index') }}"
                         class="px-4 py-2 text-charcoal-800 font-semibold text-sm hover:text-gold-500 transition-all duration-300 relative group">
-                        عن الجمعية
+                        {{ __('website.nav.about') }}
                         <span
                             class="absolute bottom-0 right-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
                         <span
@@ -28,7 +28,7 @@
                     </a>
                     <a href="{{ route('programs.index') }}"
                         class="px-4 py-2 text-charcoal-800 font-semibold text-sm hover:text-gold-500 transition-all duration-300 relative group">
-                        مجالات العمل
+                        {{ __('website.nav.programs') }}
                         <span
                             class="absolute bottom-0 right-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
                         <span
@@ -36,7 +36,7 @@
                     </a>
                     <a href="{{ route('contact') }}"
                         class="px-4 py-2 text-charcoal-800 font-semibold text-sm hover:text-gold-500 transition-all duration-300 relative group">
-                        تواصل معنا
+                        {{ __('website.nav.contact') }}
                         <span
                             class="absolute bottom-0 right-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300"></span>
                         <span
@@ -50,11 +50,11 @@
                     @auth
                         <span
                             class="text-charcoal-700 dark:text-gray-300 text-xs lg:text-sm font-medium hidden lg:inline-block px-3 py-2">
-                            {{ __('dashboard.nav.welcome') }} {{ Auth::user()->name }}
+                            {{ __('website.nav.welcome') }} {{ Auth::user()->name }}
                         </span>
                         <button onclick="document.getElementById('logout-form').submit();"
                             class="px-4 lg:px-5 py-2 bg-gold-500 text-charcoal-900 font-semibold text-xs lg:text-sm rounded-full hover:bg-gold-600 transition-all duration-300 active:scale-95 shadow-md hover:shadow-lg">
-                            {{ __('dashboard.nav.logout') }}
+                            {{ __('website.nav.logout') }}
                         </button>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                             @csrf
@@ -62,11 +62,11 @@
                     @else
                         <a href="{{ route('login') }}"
                             class="px-4 py-2 text-charcoal-800 font-semibold text-xs lg:text-sm hover:text-gold-500 transition-colors duration-300">
-                            {{ __('website.home.hero.join_us') }}
+                            {{ __('website.nav.login') }}
                         </a>
                         <a href="{{ route('register') }}"
                             class="px-4 lg:px-5 py-2 bg-gold-500 text-charcoal-900 font-semibold text-xs lg:text-sm rounded-full hover:bg-gold-600 transition-all duration-300 active:scale-95 shadow-md hover:shadow-lg">
-                            {{ __('website.home.cta.register') }}
+                            {{ __('website.nav.register') }}
                         </a>
                     @endauth
                 </div>
@@ -95,12 +95,12 @@
         {{-- Backdrop --}}
         <div class="absolute inset-0 bg-black/30" @click="open = false"></div>
 
-        {{-- Sidebar Panel -    }}
+        {{-- Sidebar Panel --}}
         <div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-2xl flex flex-col">
             {{-- Header --}}
             <div
                 class="flex justify-between items-center px-6 py-6 border-b border-gold-100 bg-gradient-to-b from-gold-50/50 to-white">
-                <span class="text-xl font-black text-charcoal-900">القائمة</span>
+                <span class="text-xl font-black text-charcoal-900">{{ __('website.nav.menu') }}</span>
                 <button @click="open = false"
                     class="p-2 text-charcoal-500 hover:text-gold-600 hover:bg-gold-100 rounded-lg transition-all duration-300">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -114,19 +114,19 @@
                 <div class="flex flex-col gap-6">
                     <a href="{{ route('home') }}" @click="open = false"
                         class="text-2xl font-bold transition-all duration-300 pb-3 border-r-4 {{ request()->routeIs('home') ? 'text-gold-500 border-gold-500 pr-4' : 'text-charcoal-800 border-transparent pr-0 hover:text-gold-500' }}">
-                        الرئيسية
+                        {{ __('website.nav.home') }}
                     </a>
                     <a href="{{ route('about.index') }}" @click="open = false"
                         class="text-2xl font-bold transition-all duration-300 pb-3 border-r-4 {{ request()->routeIs('about.*') ? 'text-gold-500 border-gold-500 pr-4' : 'text-charcoal-800 border-transparent pr-0 hover:text-gold-500' }}">
-                        عن الجمعية
+                        {{ __('website.nav.about') }}
                     </a>
                     <a href="{{ route('programs.index') }}" @click="open = false"
                         class="text-2xl font-bold transition-all duration-300 pb-3 border-r-4 {{ request()->routeIs('programs.*') ? 'text-gold-500 border-gold-500 pr-4' : 'text-charcoal-800 border-transparent pr-0 hover:text-gold-500' }}">
-                        مجالات العمل
+                        {{ __('website.nav.programs') }}
                     </a>
                     <a href="{{ route('contact') }}" @click="open = false"
                         class="text-2xl font-bold transition-all duration-300 pb-3 border-r-4 {{ request()->routeIs('contact') ? 'text-gold-500 border-gold-500 pr-4' : 'text-charcoal-800 border-transparent pr-0 hover:text-gold-500' }}">
-                        تواصل معنا
+                        {{ __('website.nav.contact') }}
                     </a>
                 </div>
             </nav>
@@ -136,17 +136,18 @@
                 @auth
                     <div class="space-y-4">
                         <p class="text-charcoal-700 text-center font-semibold">
-                            مرحباً، <br><span class="text-gold-600 font-bold">{{ Auth::user()->name }}</span>
+                            {{ __('dashboard.navbar.welcome') }} <br><span
+                                class="text-gold-600 font-bold">{{ Auth::user()->name }}</span>
                         </p>
                         <a href="{{ route('dashboard') }}" @click="open = false"
                             class="block w-full text-center py-4 px-4 bg-gold-500 text-charcoal-900 font-bold rounded-xl hover:bg-gold-600 transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl">
-                            لوحة التحكم
+                            {{ __('website.nav.dashboard') }}
                         </a>
-                        <form action="{{ route('logout') }}" method="POST">
+                        <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit"
                                 class="w-full text-center py-3 px-4 border-2 border-gold-500 text-gold-600 font-bold rounded-xl hover:bg-gold-50 transition-all duration-300 active:scale-95">
-                                تسجيل الخروج
+                                {{ __('dashboard.navbar.logout') }}
                             </button>
                         </form>
                     </div>
@@ -154,11 +155,11 @@
                     <div class="space-y-4">
                         <a href="{{ route('register') }}" @click="open = false"
                             class="block w-full text-center py-4 px-4 bg-gold-500 text-charcoal-900 font-bold rounded-xl hover:bg-gold-600 transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl">
-                            انضمي إلينا
+                            {{ __('website.nav.register') }}
                         </a>
                         <a href="{{ route('login') }}" @click="open = false"
                             class="block w-full text-center py-3 px-4 border-2 border-gold-500 text-gold-600 font-bold rounded-xl hover:bg-gold-50 transition-all duration-300 active:scale-95">
-                            تسجيل الدخول
+                            {{ __('website.nav.login') }}
                         </a>
                     </div>
                 @endauth

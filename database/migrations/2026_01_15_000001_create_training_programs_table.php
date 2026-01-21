@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('training_programs', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title_en');
+            $table->string('title_ar');
             $table->string('slug')->unique();
-            $table->text('description');
-            $table->text('content')->nullable();
+            $table->text('description_en');
+            $table->text('description_ar');
+            $table->text('content_en')->nullable();
+            $table->text('content_ar')->nullable();
             $table->string('image_url')->nullable();
             $table->string('category')->default('training'); // training, workshop, seminar
             $table->boolean('is_active')->default(true);

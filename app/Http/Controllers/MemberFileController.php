@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MemberFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MemberFileController extends Controller
 {
@@ -31,12 +32,13 @@ class MemberFileController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
             'slug' => 'required|string|unique:member_files,slug',
-            'description' => 'nullable|string',
-            'content' => 'nullable|string',
+            'description_en' => 'nullable|string',
+            'description_ar' => 'nullable|string',
             'file_type' => 'required|string|in:document,pdf,guide,template',
-            'file' => 'nullable|file|max:10240', // 10MB max
+            'file' => 'required|file|max:10240', // 10MB max
             'file_size' => 'nullable|string',
             'category' => 'nullable|string',
             'is_active' => 'boolean',
@@ -71,10 +73,11 @@ class MemberFileController extends Controller
     public function update(Request $request, MemberFile $file)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
             'slug' => 'required|string|unique:member_files,slug,' . $file->id,
-            'description' => 'nullable|string',
-            'content' => 'nullable|string',
+            'description_en' => 'nullable|string',
+            'description_ar' => 'nullable|string',
             'file_type' => 'required|string|in:document,pdf,guide,template',
             'file' => 'nullable|file|max:10240', // 10MB max
             'file_size' => 'nullable|string',

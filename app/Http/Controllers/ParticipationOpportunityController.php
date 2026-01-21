@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ParticipationOpportunity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ParticipationOpportunityController extends Controller
 {
@@ -31,10 +32,13 @@ class ParticipationOpportunityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
             'slug' => 'required|string|unique:participation_opportunities,slug',
-            'description' => 'required|string',
-            'content' => 'required|string',
+            'description_en' => 'required|string',
+            'description_ar' => 'required|string',
+            'content_en' => 'required|string',
+            'content_ar' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:5120',
             'type' => 'required|string|in:volunteer,partner,sponsor',
             'start_date' => 'nullable|date',
@@ -68,10 +72,13 @@ class ParticipationOpportunityController extends Controller
     public function update(Request $request, ParticipationOpportunity $opportunity)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
             'slug' => 'required|string|unique:participation_opportunities,slug,' . $opportunity->id,
-            'description' => 'required|string',
-            'content' => 'required|string',
+            'description_en' => 'required|string',
+            'description_ar' => 'required|string',
+            'content_en' => 'required|string',
+            'content_ar' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:5120',
             'type' => 'required|string|in:volunteer,partner,sponsor',
             'start_date' => 'nullable|date',

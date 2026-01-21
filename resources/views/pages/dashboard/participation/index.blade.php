@@ -1,12 +1,12 @@
-<x-layout.dashboard title="فرص المشاركة">
+<x-layout.dashboard title="{{ __('modules.participation.title') }}">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">فرص المشاركة والتطوع</h1>
-            <p class="text-gray-600 mt-1">انضم إلى مشاريع وفرص تطوعية قيمة</p>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.participation.title') }} وال{{ __('modules.participation.types.volunteer') }}</h1>
+            <p class="text-gray-600 mt-1">انضم {{ __('common.time.to') }} مشاريع وفرص {{ __('modules.participation.types.volunteer') }}ية قيمة</p>
         </div>
         @can('manage participation opportunities')
         <x-ui.button href="{{ route('dashboard.participation.manage') }}" color="primary">
-            <i class="fas fa-cog"></i> إدارة الفرص
+            <i class="fas fa-cog"></i> {{ __('modules.portal.manage') }}
         </x-ui.button>
         @endcan
     </div>
@@ -36,11 +36,11 @@
                 <div class="mt-4 space-y-1">
                     <p class="text-xs text-gray-600">
                         <i class="fas fa-calendar"></i>
-                        من: {{ $opportunity->start_date?->format('d/m/Y') ?? 'N/A' }}
+                        {{ __('common.time.from') }}: {{ $opportunity->start_date?->format('d/m/Y') ?? 'N/A' }}
                     </p>
                     <p class="text-xs text-gray-600">
                         <i class="fas fa-calendar-check"></i>
-                        إلى: {{ $opportunity->end_date?->format('d/m/Y') ?? 'N/A' }}
+                        {{ __('common.time.to') }}: {{ $opportunity->end_date?->format('d/m/Y') ?? 'N/A' }}
                     </p>
                 </div>
 
@@ -48,13 +48,13 @@
                     <x-ui.badge color="cyan">
                         @switch($opportunity->type)
                             @case('volunteer')
-                                تطوع
+                                {{ __('modules.participation.types.volunteer') }}
                             @break
                             @case('partner')
-                                شراكة
+                                {{ __('modules.participation.types.partner') }}
                             @break
                             @case('sponsor')
-                                رعاية
+                                {{ __('modules.participation.types.sponsor') }}
                             @break
                         @endswitch
                     </x-ui.badge>

@@ -34,9 +34,11 @@ class CommunicationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
             'slug' => 'required|string|unique:communications,slug',
-            'message' => 'required|string',
+            'message_en' => 'required|string',
+            'message_ar' => 'required|string',
             'type' => 'required|string|in:announcement,newsletter,notification',
             'published_date' => 'nullable|date',
             'is_active' => 'boolean',
@@ -62,9 +64,11 @@ class CommunicationController extends Controller
     public function update(Request $request, Communication $communication)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
             'slug' => 'required|string|unique:communications,slug,' . $communication->id,
-            'message' => 'required|string',
+            'message_en' => 'required|string',
+            'message_ar' => 'required|string',
             'type' => 'required|string|in:announcement,newsletter,notification',
             'published_date' => 'nullable|date',
             'is_active' => 'boolean',

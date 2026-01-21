@@ -1,11 +1,11 @@
 <x-layout.dashboard title="التواصل الداخلي">
     <div class="mb-8 flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-black text-charcoal-900 mb-2">التواصل الداخلي والإشعارات</h1>
+            <h1 class="text-3xl font-black text-charcoal-900 mb-2">التواصل الداخلي وال{{ __('modules.communication.types.notification') . 'ات'</h1>
             <p class="text-charcoal-600">تابعي رسائل وتنبيهات إدارة الجمعية واللقاءات الخاصة بالعضوات.</p>
         </div>
         <div class="bg-gold-500 text-charcoal-900 px-4 py-2 rounded-xl font-black text-sm">
-            3 إشعارات جديدة
+            3 {{ __('modules.communication.types.notification') . 'ات' جديدة
         </div>
     </div>
 
@@ -18,7 +18,7 @@
                         $notifications = [
                             [
                                 'title' => 'تذكير: لقاء المجلس الدوري للعضوات',
-                                'time' => 'منذ ساعتين',
+                                'time' => '{{ __('common.time.from') . 'ذ' ساعتين',
                                 'content' =>
                                     'نذكركم بحضور اللقاء الدوري يوم الخميس القادم في تمام الساعة 11 صباحاً بمقر الجمعية.',
                                 'unread' => true,
@@ -27,12 +27,12 @@
                                 'title' => 'تحديث في سياسة المعارض الدولية',
                                 'time' => 'يوم أمس',
                                 'content' =>
-                                    'تم رفع سياسة المشاركة الجديدة في مركز الملفات، يرجى الاطلاع عليها قبل تقديم طلبات الترشح.',
+                                    'تم {{ __('common.actions.upload') }} سياسة المشاركة الجديدة في مركز {{ __('common.general.file') . 'ات'، يرجى لالاطلاع عليها قبل تقديم طلبات الترشح.',
                                 'unread' => true,
                             ],
                             [
                                 'title' => 'دعوة خاص: حفل تكريم الرائدات المتميزات',
-                                'time' => 'منذ يومين',
+                                'time' => '{{ __('common.time.from') . 'ذ' يومين',
                                 'content' => 'يسرنا دعوتكم لحفل التكريم السنوي الذي سيقام في فندق أتلانتس دبي.',
                                 'unread' => false,
                             ],
@@ -54,7 +54,7 @@
                             <div class="mt-4 flex gap-4">
                                 <button class="text-xs font-black text-gold-600 hover:text-gold-700 underline">اتخاذ
                                     إجراء</button>
-                                <button class="text-xs font-black text-gray-400 hover:text-gray-600">حذف</button>
+                                <button class="text-xs font-black text-gray-400 hover:text-gray-600">{{ __('common.actions.delete') }}</button>
                             </div>
                         </div>
                     @endforeach
@@ -68,7 +68,7 @@
                 <div class="text-center py-8">
                     <div class="text-4xl mb-4">📧</div>
                     <p class="text-xs text-charcoal-500 mb-6 leading-relaxed">يمكنك استقبال الرسائل الخاصة والرد عليها
-                        مباشرة من خلال هذه المنصة.</p>
+                        مباشرة {{ __('common.time.from') }} خلال هذه ال{{ __('common.time.from') . 'صة'.</p>
                     <x-ui.button size="sm" variant="outline" class="w-full">بدأ محادثة جديدة</x-ui.button>
                 </div>
             </x-ui.card>

@@ -1,6 +1,6 @@
 <x-layout.dashboard title="بوابة الفرص">
     <div class="mb-8">
-        <h1 class="text-3xl font-black text-charcoal-900 mb-2">بوابة الفرص الاستثمارية والتدريبية</h1>
+        <h1 class="text-3xl font-black text-charcoal-900 mb-2">بوابة الفرص لالاستثمارية وال{{ __('modules.training.categories.training') . 'ية'</h1>
         <p class="text-charcoal-600">اكتشفي فرصاً حصرية للعضوات للنمو والتوسع وتطوير المهارات.</p>
     </div>
 
@@ -8,15 +8,15 @@
         @php
             $portal_opportunities = [
                 [
-                    'title' => 'فرصة رعاية مشروع ناشئ',
-                    'cat' => 'رعاية واستثمار',
-                    'desc' => 'تبحث شركة استثمارية عن مشاريع نسائية في قطاع التقنية للرعاية والتمويل.',
+                    'title' => 'فرصة {{ __('modules.participation.types.sponsor') }} مشروع ناشئ',
+                    'cat' => '{{ __('modules.participation.types.sponsor') }} واستثمار',
+                    'desc' => 'ت{{ __('common.actions.search') }} شركة استثمارية عن مشاريع نسائية في قطاع التقنية لل{{ __('modules.participation.types.sponsor') }} وال{{ __('modules.portal.opportunity_types.funding') }}.',
                     'icon' => '💎',
                 ],
                 [
-                    'title' => 'منحة تدريبية: القيادة الرقمية',
-                    'cat' => 'فرص تدريب',
-                    'desc' => 'منحة مقدمة من جامعة عالمية لـ 5 عضوات متميزات.',
+                    'title' => '{{ __('common.time.from') . 'حة' {{ __('modules.training.categories.training') . 'ية': القيادة الرقمية',
+                    'cat' => 'فرص {{ __('modules.training.categories.training') }}',
+                    'desc' => '{{ __('common.time.from') . 'حة' مقدمة {{ __('common.time.from') }} جامعة عالمية لـ 5 عضوات متميزات.',
                     'icon' => '🎓',
                 ],
                 [

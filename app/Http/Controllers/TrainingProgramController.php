@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TrainingProgram;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TrainingProgramController extends Controller
 {
@@ -31,10 +32,13 @@ class TrainingProgramController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
             'slug' => 'required|string|unique:training_programs,slug',
-            'description' => 'required|string',
-            'content' => 'required|string',
+            'description_en' => 'required|string',
+            'description_ar' => 'required|string',
+            'content_en' => 'required|string',
+            'content_ar' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:5120',
             'category' => 'required|string|in:training,workshop,seminar',
             'is_active' => 'boolean',
@@ -66,10 +70,13 @@ class TrainingProgramController extends Controller
     public function update(Request $request, TrainingProgram $program)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
             'slug' => 'required|string|unique:training_programs,slug,' . $program->id,
-            'description' => 'required|string',
-            'content' => 'required|string',
+            'description_en' => 'required|string',
+            'description_ar' => 'required|string',
+            'content_en' => 'required|string',
+            'content_ar' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:5120',
             'category' => 'required|string|in:training,workshop,seminar',
             'is_active' => 'boolean',

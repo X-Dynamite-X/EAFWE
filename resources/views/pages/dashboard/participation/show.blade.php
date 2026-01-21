@@ -1,17 +1,17 @@
-<x-layout.dashboard title="عرض الفرصة المشاركة">
+<x-layout.dashboard title="{{ __('common.actions.view') }} الفرصة المشاركة">
     <div class="max-w-6xl mx-auto">
         <div class="flex justify-between items-center mb-6">
             <div>
                 <h1 class="text-3xl font-bold text-gray-900">{{ $opportunity->title }}</h1>
-                <p class="text-gray-600 mt-1">عرض تفاصيل فرصة المشاركة</p>
+                <p class="text-gray-600 mt-1">{{ __('common.actions.view') }} تفاصيل فرصة المشاركة</p>
             </div>
             @can('manage participation opportunities')
             <div class="flex gap-2">
                 <x-ui.button href="{{ route('dashboard.participation.edit', $opportunity) }}" color="primary" size="sm">
-                    <i class="fas fa-edit"></i> تعديل
+                    <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
                 </x-ui.button>
                 <button type="button" onclick="openDeleteModal('{{ $opportunity->id }}', '{{ $opportunity->title }}', '{{ route('dashboard.participation.destroy', $opportunity) }}')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded text-sm transition-colors">
-                    <i class="fas fa-trash"></i> حذف
+                    <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
                 </button>
             </div>
             @endcan
@@ -28,13 +28,13 @@
                         <x-ui.badge color="blue">
                             @switch($opportunity->type)
                                 @case('volunteer')
-                                    تطوع
+                                    {{ __('modules.participation.types.volunteer') }}
                                     @break
                                 @case('partner')
-                                    شراكة
+                                    {{ __('modules.participation.types.partner') }}
                                     @break
                                 @case('sponsor')
-                                    رعاية
+                                    {{ __('modules.participation.types.sponsor') }}
                                     @break
                             @endswitch
                         </x-ui.badge>
@@ -49,26 +49,26 @@
                     <div class="border-t border-gray-200 pt-4 text-sm text-gray-600">
                         <div class="mb-2">
                             <i class="fas fa-calendar"></i>
-                            من: {{ $opportunity->start_date?->format('d/m/Y') ?? 'غير محدد' }}
+                            {{ __('common.time.from') }}: {{ $opportunity->start_date?->format('d/m/Y') ?? 'غير محدد' }}
                         </div>
                         <div>
                             <i class="fas fa-calendar-check"></i>
-                            إلى: {{ $opportunity->end_date?->format('d/m/Y') ?? 'غير محدد' }}
+                            {{ __('common.time.to') }}: {{ $opportunity->end_date?->format('d/m/Y') ?? 'غير محدد' }}
                         </div>
                     </div>
 
                     <div class="border-t border-gray-200 pt-4 mt-4 text-sm text-gray-600">
                         <i class="fas fa-clock"></i>
-                        تم الإنشاء: {{ $opportunity->created_at->format('d/m/Y H:i') }}
+                        تم ال{{ __('common.actions.create') }}: {{ $opportunity->created_at->format('d/m/Y H:i') }}
                         @if($opportunity->updated_at != $opportunity->created_at)
-                        | تم التحديث: {{ $opportunity->updated_at->format('d/m/Y H:i') }}
+                        | {{ __('common.time.updated_at') }}: {{ $opportunity->updated_at->format('d/m/Y H:i') }}
                         @endif
                     </div>
                 </x-ui.card>
 
                 <div class="mt-6">
                     <x-ui.button href="{{ route('dashboard.participation.opportunities') }}" color="gray">
-                        <i class="fas fa-arrow-right"></i> العودة
+                        <i class="fas fa-arrow-right"></i> {{ __('common.actions.back') }}
                     </x-ui.button>
                 </div>
             </div>
@@ -79,17 +79,17 @@
 
                     <div class="space-y-4">
                         <div>
-                            <p class="text-sm text-gray-600">النوع</p>
+                            <p class="text-sm text-gray-600">{{ __('common.general.type') }}</p>
                             <p class="font-medium text-gray-900">
                                 @switch($opportunity->type)
                                     @case('volunteer')
-                                        تطوع
+                                        {{ __('modules.participation.types.volunteer') }}
                                         @break
                                     @case('partner')
-                                        شراكة
+                                        {{ __('modules.participation.types.partner') }}
                                         @break
                                     @case('sponsor')
-                                        رعاية
+                                        {{ __('modules.participation.types.sponsor') }}
                                         @break
                                 @endswitch
                             </p>
@@ -109,7 +109,7 @@
                             <p class="text-sm text-gray-600">الحالة</p>
                             <p class="font-medium text-gray-900">
                                 <x-ui.badge :color="$opportunity->is_active ? 'green' : 'red'">
-                                    {{ $opportunity->is_active ? 'نشط' : 'معطل' }}
+                                    {{ $opportunity->is_active  ? __('common.status.active') : __('common.status.disabled') }}
                                 </x-ui.badge>
                             </p>
                         </div>
@@ -120,7 +120,7 @@
                         </div>
 
                         <div class="border-t border-gray-200 pt-4">
-                            <p class="text-sm text-gray-600">الترتيب</p>
+                            <p class="text-sm text-gray-600">{{ __('common.general.order') }}</p>
                             <p class="font-medium text-gray-900">{{ $opportunity->order }}</p>
                         </div>
                     </div>

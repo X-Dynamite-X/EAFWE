@@ -1,6 +1,6 @@
 {{-- Create Role Page --}}
 
-<x-layout.dashboard title="إنشاء دور جديد">
+<x-layout.dashboard title="{{ __('common.actions.create') }} دور جديد">
     <div class="max-w-2xl mx-auto">
         <x-ui.card title="بيانات الدور">
             <form action="{{ route('roles.store') }}" method="POST">
@@ -16,7 +16,7 @@
 
                 <x-ui.textarea
                     name="description"
-                    label="الوصف"
+                    label="{{ __('common.general.description') }}"
                     rows="3"
                     placeholder="وصف الدور..."
                     value="{{ old('description') }}"
@@ -37,10 +37,10 @@
 
                 <div class="flex gap-4 mt-6">
                     <x-ui.button type="submit" color="gold" class="flex-1 text-center">
-                        إنشاء الدور
+                        {{ __('common.actions.create') }} الدور
                     </x-ui.button>
                     <x-ui.button href="{{ route('roles.index') }}" color="gray" class="flex-1 text-center">
-                        إلغاء
+                        {{ __('common.actions.cancel') }}
                     </x-ui.button>
                 </div>
             </form>

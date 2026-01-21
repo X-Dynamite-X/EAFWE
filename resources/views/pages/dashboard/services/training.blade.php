@@ -1,21 +1,21 @@
 <x-layout.dashboard title="خدمات التمكين والتطوير">
     <div class="mb-8">
         <h1 class="text-3xl font-black text-charcoal-900 mb-2">خدمات التمكين والتطوير</h1>
-        <p class="text-charcoal-600">هنا يمكنك الوصول إلى كافة البرامج التدريبية والورش الحصرية للعضوات.</p>
+        <p class="text-charcoal-600">هنا يمكنك الوصول {{ __('common.time.to') }} كافة ال{{ __('modules.training.title') . 'ية' والورش الحصرية للعضوات.</p>
     </div>
 
     <div class="grid lg:grid-cols-4 gap-6">
         {{-- Training Schedule --}}
         <div class="lg:col-span-3 space-y-6">
-            <x-ui.card title="الجدول التدريبي الحالي">
+            <x-ui.card title="الجدول ال{{ __('modules.training.categories.training') . 'ي' الحالي">
                 <div class="grid md:grid-cols-2 gap-4">
                     @php
                         $trainings = [
                             [
-                                'title' => 'التخطيط الاستراتيجي للمشاريع الصغيرة',
+                                'title' => 'التخطيط لالاستراتيجي للمشاريع الصغيرة',
                                 'date' => '20 يناير 2026',
                                 'time' => '10:00 ص - 01:00 م',
-                                'type' => 'ورشة عمل حضورية',
+                                'type' => '{{ __('modules.training.categories.workshop') }} حضورية',
                             ],
                             [
                                 'title' => 'التسويق الرقمي وبناء الهوية التجارية',
@@ -51,13 +51,13 @@
                 </div>
             </x-ui.card>
 
-            <x-ui.card title="المواد التدريبية المتاحة">
+            <x-ui.card title="المواد ال{{ __('modules.training.categories.training') . 'ية' المتاحة">
                 <div class="divide-y divide-gray-100">
                     @php
                         $materials = [
-                            ['title' => 'دليل رائدة الأعمال الناجحة (PDF)', 'size' => '2.5 MB'],
-                            ['title' => 'حقيبة تدريبية: إدارة التغيير (ZIP)', 'size' => '15.0 MB'],
-                            ['title' => 'نماذج دراسة الجدوى الاقتصادية (Excel)', 'size' => '180 KB'],
+                            ['title' => '{{ __('modules.marketing.resource_types.guide') }} رائدة الأعمال الناجحة ({{ __('modules.files.file_types.pdf') }})', 'size' => '2.5 MB'],
+                            ['title' => 'حقيبة {{ __('modules.training.categories.training') . 'ية': إدارة التغيير (ZIP)', 'size' => '15.0 MB'],
+                            ['title' => 'نماذج دراسة الجدوى لالاقتصادية (Excel)', 'size' => '180 KB'],
                         ];
                     @endphp
 
@@ -71,7 +71,7 @@
                                     <p class="text-xs text-charcoal-400">{{ $file['size'] }}</p>
                                 </div>
                             </div>
-                            <x-ui.button size="sm" color="gray">تحميل</x-ui.button>
+                            <x-ui.button size="sm" color="gray">{{ __('common.actions.download') }}</x-ui.button>
                         </div>
                     @endforeach
                 </div>
@@ -84,12 +84,12 @@
                 <div class="text-center py-8">
                     <div class="text-4xl mb-4">🏆</div>
                     <p class="text-sm text-charcoal-600 mb-6">لم تصدر لك أي شهادات حتى الآن. أكملي إحدى الدورات
-                        التدريبية للحصول على شهادة مشاركة.</p>
+                        ال{{ __('modules.training.categories.training') . 'ية' للحصول على شهادة مشاركة.</p>
                 </div>
             </x-ui.card>
 
             <x-ui.card title="مساعدة">
-                <p class="text-sm text-charcoal-600 leading-relaxed mb-4">إذا واجهتك أي مشكلة في التسجيل أو تحميل
+                <p class="text-sm text-charcoal-600 leading-relaxed mb-4">إذا واجهتك أي مشكلة في التسجيل أو {{ __('common.actions.download') }}
                     المواد، يسعدنا تواصلك مع قسم الدعم الفني.</p>
                 <x-ui.button size="sm" variant="outline" class="w-full">تواصل معنا</x-ui.button>
             </x-ui.card>

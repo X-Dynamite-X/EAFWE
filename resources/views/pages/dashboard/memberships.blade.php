@@ -2,7 +2,7 @@
 <x-layout.dashboard title="طلبات العضوية">
     {{-- Header --}}
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold">طلبات العضوية</h2>
+        <h2 class="text-2xl font-bold">{{ __('dashboard.sidebar.memberships') }}</h2>
         @can('create memberships')
             <x-ui.button href="{{ route('memberships.create') }}" color="gold">
                 طلب عضوية جديد
@@ -16,9 +16,9 @@
             @php
                 $statuses = [
                     '' => 'الكل',
-                    'pending' => 'قيد الانتظار',
-                    'approved' => 'موافق عليها',
-                    'rejected' => 'مرفوضة',
+                    'pending' => __('common.status.pending'),
+                    'approved' => __('common.status.approved'),
+                    'rejected' => __('common.status.rejected'),
                 ];
             @endphp
 
@@ -40,7 +40,7 @@
                         <th class="text-right px-6 py-3 font-semibold">الاسم</th>
                         <th class="text-right px-6 py-3 font-semibold">البريد</th>
                         <th class="text-right px-6 py-3 font-semibold">نوع العضوية</th>
-                        <th class="text-right px-6 py-3 font-semibold">التاريخ</th>
+                        <th class="text-right px-6 py-3 font-semibold">{{ __('common.time.date') }}</th>
                         <th class="text-right px-6 py-3 font-semibold">الحالة</th>
                         <th class="text-right px-6 py-3 font-semibold">الإجراءات</th>
                     </tr>
@@ -55,11 +55,11 @@
                                 {{ $membership->created_at->format('Y-m-d H:i') }}</td>
                             <td class="px-6 py-3">
                                 @if ($membership->status === 'pending')
-                                    <x-ui.badge color="yellow">قيد الانتظار</x-ui.badge>
+                                    <x-ui.badge color="yellow">{{ __('common.status.pending') }}</x-ui.badge>
                                 @elseif($membership->status === 'approved')
-                                    <x-ui.badge color="green">موافق عليها</x-ui.badge>
+                                    <x-ui.badge color="green">{{ __('common.status.approved') }}</x-ui.badge>
                                 @else
-                                    <x-ui.badge color="red">مرفوضة</x-ui.badge>
+                                    <x-ui.badge color="red">{{ __('common.status.rejected') }}</x-ui.badge>
                                 @endif
                             </td>
                             <td class="px-6 py-3">
@@ -67,7 +67,7 @@
                                     {{-- View Button --}}
                                     <x-ui.button href="{{ route('memberships.show', $membership) }}" color="gray"
                                         size="sm">
-                                        عرض
+                                        {{ __('common.actions.view') }}
                                     </x-ui.button>
 
                                     {{-- Approve Button --}}
@@ -101,7 +101,7 @@
                                                 data-id="{{ $membership->id }}"
                                                 data-name="{{ $membership->user->name ?? 'N/A' }}" color="gray"
                                                 size="sm">
-                                                حذف
+                                                {{ __('common.actions.delete') }}
                                             </x-ui.button>
                                         @endif
                                     @endcan
@@ -128,7 +128,7 @@
     @endif
 
     {{-- Action Confirmation Modal --}}
-    <x-ui.modal id="actionModal" title="تأكيد الإجراء">
+    <x-ui.modal id="actionModal" title="{{ __('common.actions.confirm') }} الإجراء">
         <p id="modalBody" class="text-center text-lg mb-4"></p>
 
         {{-- Rejection Reason Input --}}
@@ -142,11 +142,11 @@
         <div class="flex justify-center gap-4 mt-6">
             <button type="button" id="confirmButton"
                 class="w-full sm:w-auto px-4 py-2 rounded-lg text-white font-semibold transition">
-                تأكيد
+                {{ __('common.actions.confirm') }}
             </button>
             <button type="button" onclick="closeModal('actionModal')"
                 class="w-full sm:w-auto px-4 py-2 rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-300 font-semibold transition">
-                إلغاء
+                {{ __('common.actions.cancel') }}
             </button>
         </div>
     </x-ui.modal>

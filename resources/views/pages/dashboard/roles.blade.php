@@ -1,12 +1,12 @@
 {{-- Roles Management Page --}}
 
-<x-layout.dashboard title="إدارة الأدوار والصلاحيات">
+<x-layout.dashboard title="{{ __('dashboard.sidebar.roles') }}">
     {{-- Header --}}
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold">الأدوار والصلاحيات</h2>
+        <h2 class="text-2xl font-bold">{{ __('dashboard.sidebar.roles') }}</h2>
         @can('create roles')
             <x-ui.button onclick="openCreateModal()" color="gold">
-                إضافة دور جديد
+                {{ __('common.actions.add') }} دور جديد
             </x-ui.button>
         @endcan
     </div>
@@ -33,11 +33,11 @@
                         <x-ui.button
                             onclick="editRole({{ $role->id }}, '{{ $role->name }}', '{{ $role->description ?? '' }}', {{ json_encode($role->permissions->pluck('id')) }})"
                             color="gray" size="sm" class="flex-1">
-                            تعديل
+                            {{ __('common.actions.edit') }}
                         </x-ui.button>
                         <x-ui.button onclick="openDeleteModal({{ $role->id }})" color="red" size="sm"
                             class="flex-1">
-                            حذف
+                            {{ __('common.actions.delete') }}
                         </x-ui.button>
                     </div>
                 @endrole
@@ -59,14 +59,14 @@
     @endif
 
     {{-- Role Modal (Create & Edit) --}}
-    <x-ui.modal id="roleModal" title="إضافة دور جديد">
+    <x-ui.modal id="roleModal" title="{{ __('common.actions.add') }} دور جديد">
         <form id="roleForm" method="POST">
             @csrf
             {{-- Method Spoofing for Edit --}}
             <input type="hidden" name="_method" id="formMethod" value="POST">
 
             <x-ui.input name="name" id="roleName" label="اسم الدور" placeholder="مثال: مدير" required />
-            <x-ui.textarea name="description" id="roleDescription" label="الوصف" rows="3" />
+            <x-ui.textarea name="description" id="roleDescription" label="{{ __('common.general.description') }}" rows="3" />
 
             <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-2">الصلاحيات</label>
@@ -82,21 +82,21 @@
             </div>
 
             <div class="flex gap-2">
-                <x-ui.button type="submit" color="gold" class="flex-1">حفظ</x-ui.button>
+                <x-ui.button type="submit" color="gold" class="flex-1">{{ __('common.actions.save') }}</x-ui.button>
                 <x-ui.button type="button" onclick="closeModal('roleModal')" color="gray"
-                    class="flex-1">إلغاء</x-ui.button>
+                    class="flex-1">{{ __('common.actions.cancel') }}</x-ui.button>
             </div>
         </form>
     </x-ui.modal>
-    <x-ui.modal id="deleteModal" title="حذف دور">
+    <x-ui.modal id="deleteModal" title="{{ __('common.actions.delete') }} دور">
         <form id="deleteForm" method="POST">
             @csrf
             @method('DELETE')
             <div class="flex gap-2 mt-4">
                 <x-ui.button type="button" onclick="confirmDeleteRole()" color="red"
-                    class="flex-1">حذف</x-ui.button>
+                    class="flex-1">{{ __('common.actions.delete') }}</x-ui.button>
                 <x-ui.button type="button" onclick="closeModal('deleteModal')" color="gray"
-                    class="flex-1">إلغاء</x-ui.button>
+                    class="flex-1">{{ __('common.actions.cancel') }}</x-ui.button>
             </div>
 
 
@@ -127,7 +127,7 @@
                 // but for now relying on the default title or updating it via JS if the modal allows)
                 // Assuming simple text update:
                 const modalTitle = document.querySelector('#roleModal h3') || document.querySelector('#roleModal .text-lg');
-                if (modalTitle) modalTitle.innerText = "إضافة دور جديد";
+                if (modalTitle) modalTitle.innerText = "{{ __('common.actions.add') }} دور جديد";
 
                 openModal('roleModal');
             }
@@ -146,7 +146,7 @@
 
                 // Update Title
                 const modalTitle = document.querySelector('#roleModal h3') || document.querySelector('#roleModal .text-lg');
-                if (modalTitle) modalTitle.innerText = "تعديل الدور";
+                if (modalTitle) modalTitle.innerText = "{{ __('common.actions.edit') }} الدور";
 
                 openModal('roleModal');
             }
@@ -169,7 +169,7 @@
                     },
                     error: function(xhr) {
                         isDeleting = false;
-                        alert('حدث خطأ أثناء الحذف');
+                        alert('حدث {{ __('common.general.error') }} أثناء ال{{ __('common.actions.delete') }}');
                     }
                 });
             }

@@ -1,8 +1,8 @@
-<x-layout.dashboard title="إدارة فرص المشاركة">
+<x-layout.dashboard title="إدارة {{ __('modules.participation.title') }}">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">إدارة فرص المشاركة</h1>
-            <p class="text-gray-600 mt-1">أضف وعدل وحذف فرص المشاركة والتطوع</p>
+            <h1 class="text-3xl font-bold text-gray-900">إدارة {{ __('modules.participation.title') }}</h1>
+            <p class="text-gray-600 mt-1">أضف وعدل و{{ __('common.actions.delete') }} {{ __('modules.participation.title') }} وال{{ __('modules.participation.types.volunteer') }}</p>
         </div>
         <x-ui.button href="{{ route('dashboard.participation.create') }}" color="primary">
             <i class="fas fa-plus"></i> فرصة جديدة
@@ -34,11 +34,11 @@
                     </span>
                     @if($opportunity->is_active)
                         <span class="inline-block px-3 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full">
-                            <i class="fas fa-check-circle text-xs"></i> نشط
+                            <i class="fas fa-check-circle text-xs"></i> {{ __('common.status.active') }}
                         </span>
                     @else
                         <span class="inline-block px-3 py-1 bg-red-100 text-red-800 text-xs font-semibold rounded-full">
-                            <i class="fas fa-times-circle text-xs"></i> معطل
+                            <i class="fas fa-times-circle text-xs"></i> {{ __('common.status.disabled') }}
                         </span>
                     @endif
                 </div>
@@ -53,13 +53,13 @@
                     <x-ui.badge color="purple" size="sm">
                         @switch($opportunity->type)
                             @case('volunteer')
-                                <i class="fas fa-hands-helping"></i> تطوع
+                                <i class="fas fa-hands-helping"></i> {{ __('modules.participation.types.volunteer') }}
                             @break
                             @case('partner')
-                                <i class="fas fa-handshake"></i> شراكة
+                                <i class="fas fa-handshake"></i> {{ __('modules.participation.types.partner') }}
                             @break
                             @case('sponsor')
-                                <i class="fas fa-gift"></i> رعاية
+                                <i class="fas fa-gift"></i> {{ __('modules.participation.types.sponsor') }}
                             @break
                         @endswitch
                     </x-ui.badge>
@@ -77,13 +77,13 @@
 
             <div class="mt-auto pt-4 border-t border-gray-200 flex gap-2">
                 <a href="{{ route('dashboard.participation.show', $opportunity) }}" class="flex-1 text-center px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition text-sm">
-                    <i class="fas fa-eye"></i> عرض
+                    <i class="fas fa-eye"></i> {{ __('common.actions.view') }}
                 </a>
                 <a href="{{ route('dashboard.participation.edit', $opportunity) }}" class="flex-1 text-center px-3 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium rounded-lg transition text-sm">
-                    <i class="fas fa-edit"></i> تعديل
+                    <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
                 </a>
                 <button type="button" onclick="openDeleteModal('{{ $opportunity->id }}', '{{ $opportunity->title }}', '{{ route('dashboard.participation.destroy', $opportunity) }}')" class="flex-1 text-center px-3 py-2 bg-red-100 hover:bg-red-200 text-red-700 font-medium rounded-lg transition text-sm">
-                    <i class="fas fa-trash"></i> حذف
+                    <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
                 </button>
             </div>
         </x-ui.card>
@@ -94,9 +94,9 @@
         <div class="text-center py-12">
             <i class="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
             <p class="text-gray-600 text-lg font-medium">لا توجد فرص حالياً</p>
-            <p class="text-gray-500 text-sm mt-2 mb-6">ابدأ بإنشاء فرصة مشاركة جديدة الآن</p>
+            <p class="text-gray-500 text-sm mt-2 mb-6">ابدأ ب{{ __('common.actions.create') }} فرصة مشاركة جديدة الآن</p>
             <x-ui.button href="{{ route('dashboard.participation.create') }}" color="primary">
-                <i class="fas fa-plus"></i> إضافة فرصة جديدة
+                <i class="fas fa-plus"></i> {{ __('common.actions.add') }} فرصة جديدة
             </x-ui.button>
         </div>
     </x-ui.card>

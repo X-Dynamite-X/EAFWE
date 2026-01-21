@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('member_files', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title_en');
+            $table->string('title_ar');
+
             $table->string('slug')->unique();
-            $table->text('description')->nullable();
+            $table->text('description_en')->nullable();
+            $table->text('description_ar')->nullable();
             $table->string('file_type')->default('document'); // document, pdf, guide, template
             $table->string('file_url');
             $table->string('file_size')->nullable(); // in bytes

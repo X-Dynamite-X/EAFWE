@@ -1,4 +1,4 @@
-<x-layout.dashboard title="عرض المورد">
+<x-layout.dashboard title="{{ __('common.actions.view') }} المورد">
     <div class="mb-6">
         <div class="flex justify-between items-center">
             <h1 class="text-3xl font-bold text-gray-900">{{ $resource->title }}</h1>
@@ -6,11 +6,11 @@
                 <div class="flex gap-2">
                     <a href="{{ route('dashboard.marketing.edit', $resource) }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition">
                         <i class="fas fa-edit"></i>
-                        تعديل
+                        {{ __('common.actions.edit') }}
                     </a>
                     <button type="button" onclick="openDeleteModal('{{ $resource->id }}', '{{ $resource->title }}', '{{ route('dashboard.marketing.destroy', $resource) }}')" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition">
                         <i class="fas fa-trash"></i>
-                        حذف
+                        {{ __('common.actions.delete') }}
                     </button>
                 </div>
             @endcan
@@ -29,13 +29,13 @@
                     <x-ui.badge color="blue">
                         @switch($resource->resource_type)
                             @case('guide')
-                                دليل شامل
+                                {{ __('modules.marketing.resource_types.guide') }} شامل
                             @break
                             @case('template')
-                                نموذج جاهز
+                                {{ __('modules.marketing.resource_types.template') }} جاهز
                             @break
                             @case('case-study')
-                                دراسة حالة
+                                {{ __('modules.marketing.resource_types.case-study') }}
                             @break
                         @endswitch
                     </x-ui.badge>
@@ -54,12 +54,12 @@
                         <div class="flex items-center gap-3 p-4 bg-green-50 rounded-lg mb-3">
                             <i class="fas fa-file text-green-600 text-xl"></i>
                             <div>
-                                <p class="text-sm text-gray-600">الملف المرفوع</p>
+                                <p class="text-sm text-gray-600">{{ __('common.general.file') }} المرفوع</p>
                                 <p class="text-sm font-medium text-gray-900">{{ basename($resource->file_url) }}</p>
                             </div>
                         </div>
                         <a href="{{ $resource->file_url }}" target="_blank" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition">
-                            <i class="fas fa-download"></i> تحميل الملف
+                            <i class="fas fa-download"></i> {{ __('common.actions.download') }} {{ __('common.general.file') }}
                         </a>
                     </div>
                 @endif
@@ -70,7 +70,7 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
-                    العودة
+                    {{ __('common.actions.back') }}
                 </a>
             </div>
         </div>
@@ -86,13 +86,13 @@
                         <dd class="mt-1 text-sm text-gray-900">
                             @switch($resource->resource_type)
                                 @case('guide')
-                                    دليل شامل
+                                    {{ __('modules.marketing.resource_types.guide') }} شامل
                                 @break
                                 @case('template')
-                                    نموذج جاهز
+                                    {{ __('modules.marketing.resource_types.template') }} جاهز
                                 @break
                                 @case('case-study')
-                                    دراسة حالة
+                                    {{ __('modules.marketing.resource_types.case-study') }}
                                 @break
                             @endswitch
                         </dd>
@@ -102,7 +102,7 @@
                         <dt class="text-sm font-medium text-gray-700">الحالة</dt>
                         <dd class="mt-1">
                             <x-ui.badge :color="$resource->is_active ? 'green' : 'gray'">
-                                {{ $resource->is_active ? 'نشط' : 'معطل' }}
+                                {{ $resource->is_active  ? __('common.status.active') : __('common.status.disabled') }}
                             </x-ui.badge>
                         </dd>
                     </div>
@@ -113,12 +113,12 @@
                     </div>
 
                     <div class="border-t border-gray-200 pt-4">
-                        <dt class="text-sm font-medium text-gray-700">ترتيب العرض</dt>
+                        <dt class="text-sm font-medium text-gray-700">ترتيب ال{{ __('common.actions.view') }}</dt>
                         <dd class="mt-1 text-sm text-gray-900">{{ $resource->order }}</dd>
                     </div>
 
                     <div class="border-t border-gray-200 pt-4">
-                        <dt class="text-sm font-medium text-gray-700">تاريخ الإنشاء</dt>
+                        <dt class="text-sm font-medium text-gray-700">تاريخ ال{{ __('common.actions.create') }}</dt>
                         <dd class="mt-1 text-xs text-gray-500">{{ $resource->created_at->format('d/m/Y H:i') }}</dd>
                     </div>
 

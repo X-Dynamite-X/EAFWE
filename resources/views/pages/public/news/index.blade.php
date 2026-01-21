@@ -24,7 +24,7 @@
                         'date' => '12 يناير 2026',
                         'category' => 'أخبار رسمية',
                         'desc' =>
-                            'تهدف الاتفاقية إلى تعزيز بيئة الأعمال لرائدات الأعمال في الإمارة وتوفير تسهيلات جديدة.',
+                            'تهدف الاتفاقية {{ __('common.time.to') }} تعزيز بيئة الأعمال لرائدات الأعمال في الإمارة وتوفير تسهيلات جديدة.',
                         'image' => 'https://via.placeholder.com/600x400?text=News+1',
                     ],
                     [
@@ -38,7 +38,7 @@
                         'title' => 'إطلاق مبادرة "رائدات المستقبل" للطالبات الجامعيات',
                         'date' => '28 ديسمبر 2025',
                         'category' => 'مبادرات',
-                        'desc' => 'مبادرة جديدة تهدف إلى تأهيل جيل جديد من رائدات الأعمال منذ المرحلة الجامعية.',
+                        'desc' => 'مبادرة جديدة تهدف {{ __('common.time.to') }} تأهيل جيل جديد {{ __('common.time.from') }} رائدات الأعمال {{ __('common.time.from') }}ذ المرحلة الجامعية.',
                         'image' => 'https://via.placeholder.com/600x400?text=News+3',
                     ],
                 ];
@@ -58,7 +58,7 @@
                         <h3 class="text-xl font-black text-charcoal-900 mb-4 line-clamp-2">{{ $item['title'] }}</h3>
                         <p class="text-charcoal-700 mb-6 line-clamp-3 leading-relaxed">{{ $item['desc'] }}</p>
                         <a href="#" class="text-gold-600 font-black flex items-center gap-2 hover:text-gold-700">
-                            <span>اقرأ المزيد</span>
+                            <span>{{ __('common.actions.read_more') }}</span>
                             <svg class="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

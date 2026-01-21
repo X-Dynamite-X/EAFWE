@@ -1,12 +1,12 @@
-<x-layout.dashboard title="مركز الملفات">
+<x-layout.dashboard title="مركز {{ __('common.general.file') . 'ات'">
     <div class="mb-8 flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-black text-charcoal-900 mb-2">مركز الملفات الخاص بالأعضاء</h1>
-            <p class="text-charcoal-600">تحميل النماذج الرسمية، السياسات، والأدلة الإرشادية الخاصة بالجمعية.</p>
+            <h1 class="text-3xl font-black text-charcoal-900 mb-2">مركز {{ __('common.general.file') . 'ات' الخاص بالأعضاء</h1>
+            <p class="text-charcoal-600">{{ __('common.actions.download') }} النماذج الرسمية، السياسات، والأدلة الإرشادية الخاصة بالجمعية.</p>
         </div>
         <div class="hidden md:block">
             <div class="relative">
-                <input type="text" placeholder="بحث عن ملف..."
+                <input type="text" placeholder="{{ __('common.actions.search') }} عن ملف..."
                     class="pr-10 pl-4 py-2 border rounded-xl focus:ring-2 focus:ring-gold-500 border-gray-200 text-sm">
                 <span class="absolute right-3 top-2.5 text-gray-400">🔍</span>
             </div>
@@ -18,7 +18,7 @@
         <div class="space-y-4">
             @php
                 $categories = [
-                    ['label' => 'جميع الملفات', 'count' => 24, 'active' => true],
+                    ['label' => 'جميع {{ __('common.general.file') . 'ات'', 'count' => 24, 'active' => true],
                     ['label' => 'نماذج رسمية', 'count' => 8, 'active' => false],
                     ['label' => 'سياسات وقوانين', 'count' => 5, 'active' => false],
                     ['label' => 'أدلة إرشادية', 'count' => 7, 'active' => false],
@@ -43,7 +43,7 @@
                             <tr>
                                 <th
                                     class="text-right px-6 py-4 text-xs font-black text-charcoal-500 uppercase tracking-wider">
-                                    اسم الملف</th>
+                                    اسم {{ __('common.general.file') }}</th>
                                 <th
                                     class="text-right px-6 py-4 text-xs font-black text-charcoal-500 uppercase tracking-wider">
                                     التصنيف</th>
@@ -59,22 +59,22 @@
                             @php
                                 $files = [
                                     [
-                                        'name' => 'نموذج طلب رعاية مشروع جديد',
+                                        'name' => '{{ __('modules.marketing.resource_types.template') }} طلب {{ __('modules.participation.types.sponsor') }} مشروع جديد',
                                         'cat' => 'نماذج رسمية',
                                         'size' => '450 KB',
-                                        'type' => 'PDF',
+                                        'type' => __('modules.files.file_types.pdf'),
                                     ],
                                     [
                                         'name' => 'سياسة العضوية المحدثة 2026',
                                         'cat' => 'سياسات وقوانين',
                                         'size' => '1.2 MB',
-                                        'type' => 'PDF',
+                                        'type' => __('modules.files.file_types.pdf'),
                                     ],
                                     [
-                                        'name' => 'دليل الخدمات الإلكترونية للعضوات',
+                                        'name' => '{{ __('modules.marketing.resource_types.guide') }} الخدمات الإلكترونية للعضوات',
                                         'cat' => 'أدلة إرشادية',
                                         'size' => '3.8 MB',
-                                        'type' => 'PDF',
+                                        'type' => __('modules.files.file_types.pdf'),
                                     ],
                                     [
                                         'name' => 'استمارة المشاركة في المعارض الدولية',
@@ -86,7 +86,7 @@
                                         'name' => 'التقرير السنوي لإنجازات رائدات الأعمال',
                                         'cat' => 'تقارير داخلية',
                                         'size' => '5.5 MB',
-                                        'type' => 'PDF',
+                                        'type' => __('modules.files.file_types.pdf'),
                                     ],
                                 ];
                             @endphp
@@ -94,7 +94,7 @@
                                 <tr class="hover:bg-gray-50 transition-colors group">
                                     <td class="px-6 py-4">
                                         <div class="flex items-center gap-3">
-                                            <span class="text-2xl">{{ $file['type'] == 'PDF' ? '📕' : '📘' }}</span>
+                                            <span class="text-2xl">{{ $file['type'] == __('modules.files.file_types.pdf') ? '📕' : '📘' }}</span>
                                             <span class="font-bold text-charcoal-900">{{ $file['name'] }}</span>
                                         </div>
                                     </td>
@@ -105,7 +105,7 @@
                                     <td class="px-6 py-4 text-sm text-charcoal-500">{{ $file['size'] }}</td>
                                     <td class="px-6 py-4 text-left">
                                         <button
-                                            class="text-gold-500 hover:text-gold-600 font-bold transition-colors">تحميل</button>
+                                            class="text-gold-500 hover:text-gold-600 font-bold transition-colors">{{ __('common.actions.download') }}</button>
                                     </td>
                                 </tr>
                             @endforeach

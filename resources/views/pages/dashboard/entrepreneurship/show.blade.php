@@ -1,17 +1,17 @@
-<x-layout.dashboard title="عرض البرنامج">
+<x-layout.dashboard title="{{ __('common.actions.view') }} البرنامج">
     <div class="max-w-6xl mx-auto">
         <div class="flex justify-between items-center mb-6">
             <div>
                 <h1 class="text-3xl font-bold text-gray-900">{{ $program->title }}</h1>
-                <p class="text-gray-600 mt-1">عرض تفاصيل برنامج الريادة</p>
+                <p class="text-gray-600 mt-1">{{ __('common.actions.view') }} تفاصيل برنامج الريادة</p>
             </div>
             @can('manage entrepreneurship programs')
             <div class="flex gap-2">
                 <x-ui.button href="{{ route('dashboard.entrepreneurship.edit', $program) }}" color="primary" size="sm">
-                    <i class="fas fa-edit"></i> تعديل
+                    <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
                 </x-ui.button>
                 <button type="button" onclick="openDeleteModal('{{ $program->id }}', '{{ $program->title }}', '{{ route('dashboard.entrepreneurship.destroy', $program) }}')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded text-sm transition-colors">
-                    <i class="fas fa-trash"></i> حذف
+                    <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
                 </button>
             </div>
             @endcan
@@ -30,13 +30,13 @@
                         <x-ui.badge color="yellow">
                             @switch($program->type)
                                 @case('business')
-                                    عمل تجاري
+                                    {{ __('modules.entrepreneurship.types.business') }}
                                     @break
                                 @case('startup')
-                                    شركة ناشئة
+                                    {{ __('modules.entrepreneurship.types.startup') }}
                                     @break
                                 @case('mentorship')
-                                    إرشاد وتوجيه
+                                    {{ __('modules.entrepreneurship.types.mentorship') }}
                                     @break
                             @endswitch
                         </x-ui.badge>
@@ -50,16 +50,16 @@
 
                     <div class="border-t border-gray-200 pt-4 text-sm text-gray-600">
                         <i class="fas fa-clock"></i>
-                        تم الإنشاء: {{ $program->created_at->format('d/m/Y H:i') }}
+                        تم ال{{ __('common.actions.create') }}: {{ $program->created_at->format('d/m/Y H:i') }}
                         @if($program->updated_at != $program->created_at)
-                        | تم التحديث: {{ $program->updated_at->format('d/m/Y H:i') }}
+                        | {{ __('common.time.updated_at') }}: {{ $program->updated_at->format('d/m/Y H:i') }}
                         @endif
                     </div>
                 </x-ui.card>
 
                 <div class="mt-6">
                     <x-ui.button href="{{ route('dashboard.entrepreneurship.index') }}" color="gray">
-                        <i class="fas fa-arrow-right"></i> العودة
+                        <i class="fas fa-arrow-right"></i> {{ __('common.actions.back') }}
                     </x-ui.button>
                 </div>
             </div>
@@ -70,17 +70,17 @@
 
                     <div class="space-y-4">
                         <div>
-                            <p class="text-sm text-gray-600">النوع</p>
+                            <p class="text-sm text-gray-600">{{ __('common.general.type') }}</p>
                             <p class="font-medium text-gray-900">
                                 @switch($program->type)
                                     @case('business')
-                                        عمل تجاري
+                                        {{ __('modules.entrepreneurship.types.business') }}
                                         @break
                                     @case('startup')
-                                        شركة ناشئة
+                                        {{ __('modules.entrepreneurship.types.startup') }}
                                         @break
                                     @case('mentorship')
-                                        إرشاد وتوجيه
+                                        {{ __('modules.entrepreneurship.types.mentorship') }}
                                         @break
                                 @endswitch
                             </p>
@@ -90,7 +90,7 @@
                             <p class="text-sm text-gray-600">الحالة</p>
                             <p class="font-medium text-gray-900">
                                 <x-ui.badge :color="$program->is_active ? 'green' : 'red'">
-                                    {{ $program->is_active ? 'نشط' : 'معطل' }}
+                                    {{ $program->is_active  ? __('common.status.active') : __('common.status.disabled') }}
                                 </x-ui.badge>
                             </p>
                         </div>
@@ -101,7 +101,7 @@
                         </div>
 
                         <div class="border-t border-gray-200 pt-4">
-                            <p class="text-sm text-gray-600">الترتيب</p>
+                            <p class="text-sm text-gray-600">{{ __('common.general.order') }}</p>
                             <p class="font-medium text-gray-900">{{ $program->order }}</p>
                         </div>
                     </div>

@@ -10,10 +10,13 @@ class PortalOpportunity extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'title_en',
+        'title_ar',
         'slug',
-        'description',
-        'content',
+        'description_en',
+        'description_ar',
+        'content_en',
+        'content_ar',
         'image_url',
         'opportunity_type',
         'start_date',
@@ -29,4 +32,19 @@ class PortalOpportunity extends Model
         'end_date' => 'date',
         'order' => 'integer',
     ];
+
+    public function getTitleAttribute()
+    {
+        return $this->{'title_' . app()->getLocale()};
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->{'description_' . app()->getLocale()};
+    }
+
+    public function getContentAttribute()
+    {
+        return $this->{'content_' . app()->getLocale()};
+    }
 }

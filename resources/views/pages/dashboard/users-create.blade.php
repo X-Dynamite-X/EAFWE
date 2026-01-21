@@ -1,6 +1,6 @@
 {{-- Create User Page --}}
 
-<x-layout.dashboard title="إنشاء مستخدم جديد">
+<x-layout.dashboard title="{{ __('common.actions.create') }} مستخدم جديد">
     <div class="max-w-2xl mx-auto">
         <x-ui.card title="بيانات المستخدم الجديد">
             <form action="{{ route('users.store') }}" method="POST">
@@ -18,7 +18,7 @@
                     <x-ui.input
                         type="email"
                         name="email"
-                        label="البريد الإلكتروني"
+                        label="{{ __('common.general.email') }}"
                         placeholder="user@example.com"
                         value="{{ old('email') }}"
                         required
@@ -27,7 +27,7 @@
 
                 <x-ui.input
                     name="phone"
-                    label="رقم الهاتف"
+                    label="رقم {{ __('common.general.phone') }}"
                     placeholder="+966 50 000 0000"
                     value="{{ old('phone') }}"
                 />
@@ -44,7 +44,7 @@
                     <x-ui.input
                         type="password"
                         name="password_confirmation"
-                        label="تأكيد كلمة المرور"
+                        label="{{ __('common.actions.confirm') }} كلمة المرور"
                         placeholder="••••••••"
                         required
                     />
@@ -60,10 +60,10 @@
 
                 <div class="flex gap-4 mt-6">
                     <x-ui.button type="submit" color="gold" class="flex-1 text-center">
-                        إنشاء المستخدم
+                        {{ __('common.actions.create') }} المستخدم
                     </x-ui.button>
                     <x-ui.button href="{{ route('users.index') }}" color="gray" class="flex-1 text-center">
-                        إلغاء
+                        {{ __('common.actions.cancel') }}
                     </x-ui.button>
                 </div>
             </form>

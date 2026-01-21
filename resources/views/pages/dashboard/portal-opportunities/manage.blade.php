@@ -1,4 +1,4 @@
-<x-layout.dashboard title="إدارة فرص البوابة">
+<x-layout.dashboard title="إدارة {{ __('modules.portal.title') }}">
     <div class="mb-8">
         <!-- Header Section -->
         <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg shadow-sm p-6 border border-cyan-100">
@@ -8,9 +8,9 @@
                         <div class="p-3 bg-cyan-100 rounded-lg">
                             <i class="fas fa-briefcase text-cyan-600 text-xl"></i>
                         </div>
-                        <h1 class="text-2xl md:text-3xl font-bold text-gray-900">إدارة فرص البوابة</h1>
+                        <h1 class="text-2xl md:text-3xl font-bold text-gray-900">إدارة {{ __('modules.portal.title') }}</h1>
                     </div>
-                    <p class="text-gray-600 text-sm md:text-base mt-1 ml-0 md:ml-12">أضف وعدل وحذف فرص التمويل والشراكات والتطوير الأعمال</p>
+                    <p class="text-gray-600 text-sm md:text-base mt-1 ml-0 md:ml-12">أضف وعدل و{{ __('common.actions.delete') }} فرص ال{{ __('modules.portal.opportunity_types.funding') }} والشراكات والتطوير الأعمال</p>
                 </div>
                 <div class="flex-shrink-0">
                     <a href="{{ route('dashboard.portal-opportunities.create') }}" class="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors whitespace-nowrap">
@@ -48,13 +48,13 @@
                     <x-ui.badge :color="$opportunity->status == 'active' ? 'green' : ($opportunity->status == 'closed' ? 'red' : 'yellow')" size="sm">
                         @switch($opportunity->status)
                             @case('active')
-                                <i class="fas fa-check text-xs"></i> نشط
+                                <i class="fas fa-check text-xs"></i> {{ __('common.status.active') }}
                             @break
                             @case('closed')
-                                <i class="fas fa-times text-xs"></i> مغلق
+                                <i class="fas fa-times text-xs"></i> {{ __('modules.portal.statuses.closed') }}
                             @break
                             @case('upcoming')
-                                <i class="fas fa-clock text-xs"></i> قريباً
+                                <i class="fas fa-clock text-xs"></i> {{ __('modules.portal.statuses.upcoming') }}
                             @break
                         @endswitch
                     </x-ui.badge>
@@ -70,13 +70,13 @@
                     <x-ui.badge color="cyan" size="sm">
                         @switch($opportunity->opportunity_type)
                             @case('business')
-                                <i class="fas fa-store"></i> عمل تجاري
+                                <i class="fas fa-store"></i> {{ __('modules.entrepreneurship.types.business') }}
                             @break
                             @case('partnership')
-                                <i class="fas fa-handshake"></i> شراكة
+                                <i class="fas fa-handshake"></i> {{ __('modules.participation.types.partner') }}
                             @break
                             @case('funding')
-                                <i class="fas fa-piggy-bank"></i> تمويل
+                                <i class="fas fa-piggy-bank"></i> {{ __('modules.portal.opportunity_types.funding') }}
                             @break
                         @endswitch
                     </x-ui.badge>
@@ -92,13 +92,13 @@
 
             <div class="mt-auto pt-4 border-t border-gray-200 flex gap-2">
                 <a href="{{ route('dashboard.portal-opportunities.show', $opportunity) }}" class="flex-1 text-center px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition text-sm">
-                    <i class="fas fa-eye"></i> عرض
+                    <i class="fas fa-eye"></i> {{ __('common.actions.view') }}
                 </a>
                 <a href="{{ route('dashboard.portal-opportunities.edit', $opportunity) }}" class="flex-1 text-center px-3 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium rounded-lg transition text-sm">
-                    <i class="fas fa-edit"></i> تعديل
+                    <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
                 </a>
                 <button type="button" onclick="openDeleteModal('{{ $opportunity->id }}', '{{ $opportunity->title }}', '{{ route('dashboard.portal-opportunities.destroy', $opportunity) }}')" class="flex-1 text-center px-3 py-2 bg-red-100 hover:bg-red-200 text-red-700 font-medium rounded-lg transition text-sm">
-                    <i class="fas fa-trash"></i> حذف
+                    <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
                 </button>
             </div>
         </x-ui.card>
@@ -109,9 +109,9 @@
         <div class="text-center py-12">
             <i class="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
             <p class="text-gray-600 text-lg font-medium">لا توجد فرص حالياً</p>
-            <p class="text-gray-500 text-sm mt-2 mb-6">ابدأ بإنشاء فرصة جديدة الآن</p>
+            <p class="text-gray-500 text-sm mt-2 mb-6">ابدأ ب{{ __('common.actions.create') }} فرصة جديدة الآن</p>
             <x-ui.button href="{{ route('dashboard.portal-opportunities.create') }}" color="primary">
-                <i class="fas fa-plus"></i> إضافة فرصة جديدة
+                <i class="fas fa-plus"></i> {{ __('common.actions.add') }} فرصة جديدة
             </x-ui.button>
         </div>
     </x-ui.card>

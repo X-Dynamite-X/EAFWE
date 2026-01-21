@@ -53,6 +53,9 @@ Route::prefix('about')->name('about.')->group(function () {
 });
 
 Route::get('programs', [PublicController::class, 'programs'])->name('programs.index');
+Route::get('entrepreneurship-programs/{entrepreneurship_program}', [PublicController::class, 'EntrepreneurshipProgramShow'])->name('programs.entrepreneurship.show');
+Route::get('training-programs/{training_program}', [PublicController::class, 'TrainingProgramShow'])->name('programs.training.show');
+
 Route::get('events', [EventController::class, 'index'])->name('events.index');
 
 Route::prefix('news')->name('news.')->group(function () {

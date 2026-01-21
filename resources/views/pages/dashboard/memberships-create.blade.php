@@ -24,13 +24,13 @@
 
                 <x-ui.input
                     name="company_name"
-                    label="اسم الشركة (اختياري)"
+                    label="اسم الشركة ({{ __('common.form.optional') }})"
                     value="{{ old('company_name') }}"
                 />
 
                 <x-ui.textarea
                     name="description"
-                    label="الوصف / الأهداف"
+                    label="{{ __('common.general.description') }} / الأهداف"
                     rows="5"
                     placeholder="أخبرنا عن أهداف عضويتك..."
                     value="{{ old('description') }}"
@@ -39,10 +39,10 @@
 
                 <div class="flex gap-4 mt-6">
                     <x-ui.button type="submit" color="gold" class="flex-1 text-center">
-                        إرسال الطلب
+                        {{ __('common.actions.submit') }} الطلب
                     </x-ui.button>
                     <x-ui.button href="{{ route('memberships.index') }}" color="gray" class="flex-1 text-center">
-                        إلغاء
+                        {{ __('common.actions.cancel') }}
                     </x-ui.button>
                 </div>
             </form>

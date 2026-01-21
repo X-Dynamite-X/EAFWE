@@ -10,9 +10,11 @@ class Communication extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'title_en',
+        'title_ar',
         'slug',
-        'message',
+        'message_en',
+        'message_ar',
         'type',
         'published_date',
         'is_active',
@@ -26,4 +28,14 @@ class Communication extends Model
         'published_date' => 'date',
         'order' => 'integer',
     ];
+
+    public function getTitleAttribute()
+    {
+        return $this->{'title_' . app()->getLocale()};
+    }
+
+    public function getMessageAttribute()
+    {
+        return $this->{'message_' . app()->getLocale()};
+    }
 }

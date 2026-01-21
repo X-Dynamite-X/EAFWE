@@ -32,6 +32,19 @@ return [
             'platform' => 'Go to Platform',
         ],
     ],
+    'nav' => [
+        'title' => 'Emirates Association for Women Entrepreneurs',
+        'home' => 'Home',
+        'about' => 'About Us',
+        'programs' => 'Areas of Work',
+        'contact' => 'Contact Us',
+        'menu' => 'Menu',
+        'login' => 'Login',
+        'register' => 'Join Us',
+        'dashboard' => 'Dashboard',
+        'welcome' => 'Welcome,',
+        'logout' => 'Logout',
+    ],
     'footer' => [
         'about' => [
             'title' => 'Emirates Association for Women Entrepreneurs',

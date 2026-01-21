@@ -1,7 +1,7 @@
-<x-layout.dashboard title="الموارد التسويقية">
+<x-layout.dashboard title="{{ __('modules.marketing.title') }}">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">موارد التسويق والتدريب</h1>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.marketing.index') }}</h1>
             <p class="text-gray-600 mt-1">اطّلع على أحدث الأدلة والنماذج التسويقية</p>
         </div>
         @can('manage marketing resources')
@@ -40,13 +40,13 @@
                     <x-ui.badge color="blue">
                         @switch($resource->resource_type)
                             @case('guide')
-                                دليل
+                                {{ __('modules.marketing.resource_types.guide') }}
                             @break
                             @case('template')
-                                نموذج
+                                {{ __('modules.marketing.resource_types.template') }}
                             @break
                             @case('case_study')
-                                دراسة حالة
+                                {{ __('modules.marketing.resource_types.case-study') }}
                             @break
                         @endswitch
                     </x-ui.badge>
@@ -55,7 +55,7 @@
 
             <div class="mt-auto pt-4 border-t border-gray-200">
                 <a href="{{ route('dashboard.marketing.show', $resource) }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium gap-1">
-                    عرض الموارد
+                    {{ __('common.actions.view') }} الموارد
                     <i class="fas fa-arrow-left"></i>
                 </a>
             </div>

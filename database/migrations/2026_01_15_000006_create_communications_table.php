@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('communications', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title_en');
+            $table->string('title_ar');
             $table->string('slug')->unique();
-            $table->text('message');
+            $table->text('message_en');
+            $table->text('message_ar');
             $table->string('type')->default('announcement'); // announcement, newsletter, notification
             $table->date('published_date')->nullable();
             $table->boolean('is_active')->default(true);
