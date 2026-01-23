@@ -90,4 +90,20 @@ return [
             'logo_vector' => 'صيغة vector',
         ],
     ],
+    'profile' => [
+        'title' => 'تعديل الملف الشخصي',
+        'subtitle' => 'تحديث بيانات حسابك وتفاصيل العضوية',
+        'basic_info' => 'البيانات الأساسية',
+        'membership_info' => 'تفاصيل العضوية',
+        'membership_type' => 'نوع العضوية',
+        'join_date' => 'تاريخ الانضمام',
+        'renewal_date' => 'تاريخ التجديد',
+        'download_card' => 'تحميل بطاقة العضوية',
+        'request_renewal' => 'طلب تجديد العضوية',
+        'full_name' => 'الاسم الكامل',
+        'save_changes' => 'حفظ التغييرات',
+        'placeholder' => [
+            'name' => 'أدخلي اسمك الكامل',
+        ],
+    ],
 ];

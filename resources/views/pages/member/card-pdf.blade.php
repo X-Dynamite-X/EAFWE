@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -210,58 +211,61 @@
         }
     </style>
 </head>
+
 <body>
     <div class="card-container">
         {{-- Main Card --}}
         <div class="card">
             <div class="card-header">
                 <div>
-                    <div class="card-title">MEMBER CARD</div>
-                    <div style="font-size: 12px; opacity: 0.7;">بطاقة العضوية</div>
+                    <div class="card-title">{{ __('member.pdf.card_label') }}</div>
+                    <div style="font-size: 12px; opacity: 0.7;">{{ __('member.pdf.title') }}</div>
                 </div>
                 <div class="card-logo">🎖️</div>
             </div>
 
             <div class="card-member">
-                <div class="card-member-label">حامل البطاقة</div>
+                <div class="card-member-label">{{ __('member.pdf.cardholder') }}</div>
                 <div class="card-member-name">{{ $user->name }}</div>
                 <div class="card-member-email">{{ $user->email }}</div>
             </div>
 
             <div class="card-details">
                 <div class="detail-item">
-                    <div class="detail-label">رقم العضو</div>
+                    <div class="detail-label">{{ __('member.pdf.member_id') }}</div>
                     <div class="detail-value">{{ str_pad($membership->user_id, 6, '0', STR_PAD_LEFT) }}</div>
                 </div>
                 <div class="detail-item">
-                    <div class="detail-label">نوع العضوية</div>
+                    <div class="detail-label">{{ __('member.pdf.membership_type') }}</div>
                     <div class="detail-value">
                         @switch($membership->membership_type)
                             @case('basic')
-                                أساسية
-                                @break
+                                {{ __('member.membership_types.basic') }}
+                            @break
+
                             @case('premium')
-                                متميزة
-                                @break
+                                {{ __('member.membership_types.premium') }}
+                            @break
+
                             @case('enterprise')
-                                مؤسسية
-                                @break
+                                {{ __('member.membership_types.enterprise') }}
+                            @break
                         @endswitch
                     </div>
                 </div>
                 <div class="detail-item">
-                    <div class="detail-label">البلد</div>
+                    <div class="detail-label">{{ __('member.pdf.country') }}</div>
                     <div class="detail-value">{{ $membership->country }}</div>
                 </div>
                 <div class="detail-item">
-                    <div class="detail-label">تاريخ الإصدار</div>
+                    <div class="detail-label">{{ __('member.pdf.issue_date') }}</div>
                     <div class="detail-value">{{ $membership->approval_date?->format('d/m/Y') }}</div>
                 </div>
             </div>
 
             <div class="card-footer">
                 <div class="card-footer-left">
-                    <div>صادرة: {{ $membership->approval_date?->format('d/m/Y') }}</div>
+                    <div>{{ __('member.card.issued') }}: {{ $membership->approval_date?->format('d/m/Y') }}</div>
                     <div style="font-family: monospace; margin-top: 5px; font-size: 9px;">
                         TOKEN: {{ substr($membership->card_token, 0, 20) }}
                     </div>
@@ -276,52 +280,56 @@
         <div class="page-break"></div>
 
         <div class="info-section">
-            <h3>📋 معلومات العضوية</h3>
-            <p><strong>الاسم الكامل:</strong> {{ $user->name }}</p>
-            <p><strong>البريد الإلكتروني:</strong> {{ $user->email }}</p>
-            @if($user->phone)
-                <p><strong>رقم الهاتف:</strong> {{ $user->phone }}</p>
+            <h3>📋 {{ __('member.pdf.info_title') }}</h3>
+            <p><strong>{{ __('member.pdf.full_name') }}:</strong> {{ $user->name }}</p>
+            <p><strong>{{ __('member.pdf.email') }}:</strong> {{ $user->email }}</p>
+            @if ($user->phone)
+                <p><strong>{{ __('member.pdf.phone') }}:</strong> {{ $user->phone }}</p>
             @endif
-            <p><strong>نوع العضوية:</strong>
+            <p><strong>{{ __('member.pdf.membership_type') }}:</strong>
                 @switch($membership->membership_type)
                     @case('basic')
-                        عضوية أساسية
-                        @break
+                        {{ __('member.membership_types.basic') }}
+                    @break
+
                     @case('premium')
-                        عضوية متميزة
-                        @break
+                        {{ __('member.membership_types.premium') }}
+                    @break
+
                     @case('enterprise')
-                        عضوية مؤسسية
-                        @break
+                        {{ __('member.membership_types.enterprise') }}
+                    @break
                 @endswitch
             </p>
-            @if($membership->company_name)
-                <p><strong>اسم الشركة:</strong> {{ $membership->company_name }}</p>
+            @if ($membership->company_name)
+                <p><strong>{{ __('member.pdf.company_name') }}:</strong> {{ $membership->company_name }}</p>
             @endif
-            <p><strong>البلد:</strong> {{ $membership->country }}</p>
-            <p><strong>تاريخ الموافقة:</strong> {{ $membership->approval_date?->format('d M, Y') }}</p>
+            <p><strong>{{ __('member.pdf.country') }}:</strong> {{ $membership->country }}</p>
+            <p><strong>{{ __('member.pdf.approval_date') }}:</strong>
+                {{ $membership->approval_date?->format('d M, Y') }}</p>
         </div>
 
         <div class="info-section">
-            <h3>🔒 كيفية التحقق من البطاقة</h3>
-            <p>هذه البطاقة تحتوي على رمز QR فريد وآمن. لتحقق من صحة البطاقة:</p>
+            <h3>🔒 {{ __('member.pdf.how_to_verify') }}</h3>
+            <p>{{ __('member.pdf.verify_desc') }}</p>
             <ol style="margin-right: 20px; margin-top: 10px;">
-                <li style="margin-bottom: 8px;">استخدم كاميرا الهاتف أو تطبيق QR reader</li>
-                <li style="margin-bottom: 8px;">امسح رمز QR على البطاقة</li>
-                <li style="margin-bottom: 8px;">ستنقلك إلى صفحة التحقق الرسمية</li>
-                <li style="margin-bottom: 8px;">إذا ظهرت بيانات العضو، فالبطاقة حقيقية وموثوقة</li>
+                <li style="margin-bottom: 8px;">{{ __('member.pdf.verify_steps.step1') }}</li>
+                <li style="margin-bottom: 8px;">{{ __('member.pdf.verify_steps.step2') }}</li>
+                <li style="margin-bottom: 8px;">{{ __('member.pdf.verify_steps.step3') }}</li>
+                <li style="margin-bottom: 8px;">{{ __('member.pdf.verify_steps.step4') }}</li>
             </ol>
-            <p style="margin-top: 15px;"><span class="security-badge">✓ آمنة</span></p>
+            <p style="margin-top: 15px;"><span class="security-badge">✓ {{ __('member.pdf.secure_badge') }}</span></p>
         </div>
 
         <div class="info-section">
-            <h3>⚡ الميزات</h3>
-            <p>✓ <strong>رمز QR فريد:</strong> لا يمكن تكرار أو تزوير</p>
-            <p>✓ <strong>تحقق فوري:</strong> التحقق الفوري من صحة العضوية</p>
-            <p>✓ <strong>آمنة:</strong> مشفرة وآمنة تماماً</p>
-            <p>✓ <strong>قابلة للتحديث:</strong> يمكن إعادة إصدار البطاقة عند الحاجة</p>
-            <p>✓ <strong>رقمية أو طبعية:</strong> استخدمها رقميياً أو اطبعها</p>
+            <h3>⚡ {{ __('member.pdf.features.title') ?? 'الميزات' }}</h3>
+            <p>✓ <strong>{{ __('member.pdf.features.unique_qr') }}</strong></p>
+            <p>✓ <strong>{{ __('member.pdf.features.instant_verify') }}</strong></p>
+            <p>✓ <strong>{{ __('member.pdf.features.secure') }}</strong></p>
+            <p>✓ <strong>{{ __('member.pdf.features.updatable') }}</strong></p>
+            <p>✓ <strong>{{ __('member.pdf.features.digital_print') }}</strong></p>
         </div>
     </div>
 </body>
+
 </html>

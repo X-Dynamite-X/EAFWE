@@ -90,4 +90,20 @@ return [
             'logo_vector' => 'Vector Format',
         ],
     ],
+    'profile' => [
+        'title' => 'Edit Profile',
+        'subtitle' => 'Update your account data and membership details',
+        'basic_info' => 'Basic Information',
+        'membership_info' => 'Membership Details',
+        'membership_type' => 'Membership Type',
+        'join_date' => 'Join Date',
+        'renewal_date' => 'Renewal Date',
+        'download_card' => 'Download Membership Card',
+        'request_renewal' => 'Request Membership Renewal',
+        'full_name' => 'Full Name',
+        'save_changes' => 'Save Changes',
+        'placeholder' => [
+            'name' => 'Enter your full name',
+        ],
+    ],
 ];

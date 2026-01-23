@@ -161,7 +161,7 @@
                 <span class="text-sm font-medium">{{ __('dashboard.sidebar.profile') }}</span>
             </a>
 
-            <a href="{{ route('settings.index') }}"
+            {{-- <a href="{{ route('settings.index') }}"
                 class="flex items-center gap-4 px-4 py-3 rounded-xl text-gold-100/60 hover:bg-gold-500/10 hover:text-gold-100 transition duration-300 group">
                 <span class="text-blue-400 group-hover:scale-110 transition-transform">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -173,7 +173,7 @@
                     </svg>
                 </span>
                 <span class="text-sm">{{ __('dashboard.sidebar.settings') }}</span>
-            </a>
+            </a> --}}
 
             <form action="{{ route('logout') }}" method="POST" class="block">
                 @csrf

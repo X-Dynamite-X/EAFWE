@@ -13,7 +13,19 @@ class ProfileController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        return view('pages.dashboard.profile.edit', compact('user'));
+        $membership = $user->memberships()
+            ->where('status', 'approved')
+            ->latest('approval_date')
+            ->first();
+
+        // إنشاء token للبطاقة إذا لم يكن موجوداً لضمان إمكانية التنزيل
+        if ($membership && !$membership->card_token) {
+            $membership->card_token = \Illuminate\Support\Str::random(32) . '-' . time();
+            $membership->card_issued_at = now();
+            $membership->save();
+        }
+
+        return view('pages.dashboard.profile.edit', compact('user', 'membership'));
     }
 
     /**

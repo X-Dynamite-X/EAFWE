@@ -109,7 +109,7 @@
                                 </svg>
                                 <span>{{ __('dashboard.sidebar.profile') }}</span>
                             </a>
-                            <a href="{{ route('settings.index') }}"
+                            {{-- <a href="{{ route('settings.index') }}"
                                 class="w-full flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 text-gold-200 hover:bg-gold-500/10 transition-all duration-300 text-xs sm:text-sm">
                                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
@@ -120,7 +120,7 @@
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
                                 <span>{{ __('dashboard.sidebar.settings') }}</span>
-                            </a>
+                            </a> --}}
                         </div>
 
                         {{-- Divider --}}

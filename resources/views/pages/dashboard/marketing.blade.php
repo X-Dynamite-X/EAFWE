@@ -1,34 +1,34 @@
 <x-layout.dashboard :title="__('dashboard.marketing.title')">
     <div class="mb-8">
         <h1 class="text-3xl font-black text-charcoal-900  mb-2">{{ __('dashboard.marketing.title') }}</h1>
-        <p class="text-charcoal-600 dark:text-gray-300">{{ __('dashboard.marketing.subtitle') }}</p>
+        <p class="text-charcoal-600">{{ __('dashboard.marketing.subtitle') }}</p>
     </div>
 
     <div class="grid lg:grid-cols-2 gap-8">
         {{-- Success Stories --}}
         <x-ui.card :title="__('dashboard.marketing.success_stories.title')">
             <div
-                class="p-6 rounded-2xl bg-gold-50 dark:bg-gold-500/10 border border-gold-100 dark:border-gold-500/20 mb-6">
+                class="p-6 rounded-2xl bg-gold-50 border border-gold-100 mb-6">
                 <h3 class="font-black text-charcoal-900  mb-2">
                     {{ __('dashboard.marketing.success_stories.call_to_action') }}</h3>
-                <p class="text-sm text-charcoal-600 dark:text-gray-300 mb-6 leading-relaxed">
+                <p class="text-sm text-charcoal-600 mb-6 leading-relaxed">
                     {{ __('dashboard.marketing.success_stories.description') }}</p>
                 <x-ui.button size="sm">{{ __('dashboard.marketing.success_stories.button') }}</x-ui.button>
             </div>
 
             <div class="space-y-4">
-                <p class="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                <p class="text-xs font-black text-gray-400 uppercase tracking-wider">
                     {{ __('dashboard.marketing.success_stories.previous_requests') }}</p>
                 <div
-                    class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl">
+                    class="flex items-center justify-between p-4 bg-white border border-gray-100 rounded-xl">
                     <div>
                         <p class="text-sm font-bold text-charcoal-900 ">
                             {{ __('dashboard.marketing.success_stories.example_project') }}</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                        <p class="text-xs text-gray-500">
                             {{ __('dashboard.marketing.success_stories.published_at') }}</p>
                     </div>
                     <span
-                        class="px-2 py-1 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded text-[10px] font-black">{{ __('dashboard.marketing.success_stories.status_published') }}
+                        class="px-2 py-1 bg-green-50 text-green-600 rounded text-[10px] font-black">{{ __('dashboard.marketing.success_stories.status_published') }}
                         ✅</span>
                 </div>
             </div>
@@ -59,12 +59,12 @@
 
                 @foreach ($services as $svc)
                     <div
-                        class="flex items-start gap-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-2xl transition-colors cursor-pointer border border-transparent hover:border-gold-100 dark:hover:border-gold-500/30">
+                        class="flex items-start gap-4 p-4 hover:bg-gray-50 rounded-2xl transition-colors cursor-pointer border border-transparent hover:border-gold-100">
                         <div class="text-3xl">{{ $svc['icon'] }}</div>
                         <div class="grow">
                             <h4 class="font-black text-charcoal-900  text-sm mb-1">{{ $svc['title'] }}
                             </h4>
-                            <p class="text-xs text-charcoal-500 dark:text-gray-400 leading-relaxed">{{ $svc['desc'] }}
+                            <p class="text-xs text-charcoal-500 leading-relaxed">{{ $svc['desc'] }}
                             </p>
                         </div>
                         <x-ui.button size="sm" variant="outline"
@@ -78,12 +78,12 @@
         <x-ui.card :title="__('dashboard.marketing.media_pack.title')" class="lg:col-span-2">
             <div class="flex flex-col md:flex-row items-center gap-8 py-4">
                 <div class="w-full md:w-1/3 text-center md:text-right">
-                    <div class="inline-block p-4 bg-gray-100 dark:bg-gray-800 rounded-3xl mb-4">
+                    <div class="inline-block p-4 bg-gray-100 rounded-3xl mb-4">
                         <span class="text-5xl">🎨</span>
                     </div>
                     <h3 class="text-lg font-black text-charcoal-900  mb-2">
                         {{ __('dashboard.marketing.media_pack.logos_title') }}</h3>
-                    <p class="text-sm text-charcoal-600 dark:text-gray-300">
+                    <p class="text-sm text-charcoal-600">
                         {{ __('dashboard.marketing.media_pack.logos_desc') }}</p>
                 </div>
                 <div class="grow grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
@@ -97,7 +97,7 @@
                     @endphp
                     @foreach ($logos as $logo)
                         <div
-                            class="p-4 border border-dashed border-gray-200 dark:border-gray-700 rounded-2xl text-center hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer group">
+                            class="p-4 border border-dashed border-gray-200 rounded-2xl text-center hover:bg-gray-50 transition-colors cursor-pointer group">
                             <div
                                 class="text-xl mb-2 opacity-20 group-hover:opacity-100 grayscale group-hover:grayscale-0">
                                 🖼️</div>

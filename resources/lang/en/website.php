@@ -145,4 +145,52 @@ return [
             'p2' => 'Through our diverse programs and extensive network of relationships, we provide members with access to exclusive resources, high-level training, and a platform to showcase their projects and achievements locally and internationally.',
         ],
     ],
+    'programs' => [
+        'hero' => [
+            'title' => 'Programs and Initiatives',
+            'subtitle' => 'Our initiatives to empower women entrepreneurs',
+            'bg_text' => 'Programs',
+        ],
+        'training' => [
+            'title' => 'Training Programs',
+            'desc' => 'Programs designed to support and develop entrepreneurial skills',
+        ],
+        'entrepreneurship' => [
+            'title' => 'Entrepreneurship Programs',
+            'desc' => 'Initiatives that support the launch and expansion of entrepreneurial projects',
+        ],
+        'view_details' => 'View Details',
+    ],
+    'contact' => [
+        'hero' => [
+            'title' => 'Contact Us',
+            'subtitle' => 'We are always happy to hear your feedback and inquiries.',
+        ],
+        'cards' => [
+            'email' => [
+                'title' => 'Email',
+                'desc' => 'Send us a message and we will get back to you as soon as possible.',
+            ],
+            'location' => [
+                'title' => 'Location',
+                'desc' => 'Visit us at our headquarters.',
+                'value' => 'United Arab Emirates',
+            ],
+            'social' => [
+                'title' => 'Follow Us',
+                'desc' => 'Stay up to date with our latest news and events.',
+            ],
+        ],
+        'form' => [
+            'title' => 'Send a Message',
+            'name' => 'Full Name',
+            'name_placeholder' => 'Enter your name',
+            'email' => 'Email Address',
+            'subject' => 'Subject',
+            'subject_placeholder' => 'How can we help you?',
+            'message' => 'Message',
+            'message_placeholder' => 'Write your message here...',
+            'submit' => 'Send Message',
+        ],
+    ],
 ];

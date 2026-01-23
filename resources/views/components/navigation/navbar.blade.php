@@ -49,7 +49,7 @@
 
                     @auth
                         <span
-                            class="text-charcoal-700 dark:text-gray-300 text-xs lg:text-sm font-medium hidden lg:inline-block px-3 py-2">
+                            class="text-charcoal-700  text-xs lg:text-sm font-medium hidden lg:inline-block px-3 py-2">
                             {{ __('website.nav.welcome') }} {{ Auth::user()->name }}
                         </span>
                         <button onclick="document.getElementById('logout-form').submit();"

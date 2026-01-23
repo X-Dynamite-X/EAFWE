@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Membership;
-use App\Models\User;
-use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
-use PDF;
 
 /**
  * Member Card Controller
@@ -28,9 +26,16 @@ class MemberCardController extends Controller
             ->latest('approval_date')
             ->first();
 
-        if (!$membership) {
+        if (! $membership) {
             return redirect()->route('dashboard')
-                ->with('warning', 'لم يتم الموافقة على عضويتك بعد');
+                ->with('warning', __('member.messages.not_approved'));
+        }
+
+        // إنشاء token للبطاقة إذا لم يكن موجوداً لضمان إمكانية التنزيل الفوري
+        if (! $membership->card_token) {
+            $membership->card_token = Str::random(32).'-'.time();
+            $membership->card_issued_at = now();
+            $membership->save();
         }
 
         return view('pages.member.profile', [
@@ -48,13 +53,13 @@ class MemberCardController extends Controller
         $membership = Membership::findOrFail($membershipId);
 
         // التحقق من أن المستخدم هو مالك العضوية
-        if ($membership->user_id !== Auth::id() && !Auth::user()->isAdmin()) {
+        if ($membership->user_id !== Auth::id() && ! Auth::user()->isAdmin()) {
             abort(403);
         }
 
         // إنشاء token للبطاقة إذا لم يكن موجود
-        if (!$membership->card_token) {
-            $membership->card_token = Str::random(32) . '-' . time();
+        if (! $membership->card_token) {
+            $membership->card_token = Str::random(32).'-'.time();
             $membership->card_issued_at = now();
             $membership->save();
         }
@@ -74,13 +79,13 @@ class MemberCardController extends Controller
         $membership = Membership::findOrFail($membershipId);
 
         // التحقق من الصلاحيات
-        if ($membership->user_id !== Auth::id() && !Auth::user()->isAdmin()) {
+        if ($membership->user_id !== Auth::id() && ! Auth::user()->isAdmin()) {
             abort(403);
         }
 
         // إنشاء token للبطاقة إذا لم يكن موجود
-        if (!$membership->card_token) {
-            $membership->card_token = Str::random(32) . '-' . time();
+        if (! $membership->card_token) {
+            $membership->card_token = Str::random(32).'-'.time();
             $membership->card_issued_at = now();
             $membership->save();
         }
@@ -97,25 +102,21 @@ class MemberCardController extends Controller
         ])->render();
 
         // حفظ كـ PDF
-        $fileName = 'membership-card-' . $membership->user_id . '-' . time() . '.pdf';
+        $fileName = 'membership-card-'.$membership->user_id.'-'.time().'.pdf';
 
-        // استخدام TCPDF أو دومنيل إذا كان متوفر
+        // استخدام dompdf
         try {
-            // إذا كان dompdf متوفر
-            if (class_exists('Barryvdh\DomPDF\Facade\Pdf')) {
-                return PDF::loadHTML($html)
-                    ->download($fileName);
-            }
+            return Pdf::loadHTML($html)
+                ->setPaper('a4', 'portrait')
+                ->download($fileName);
         } catch (\Exception $e) {
-            // تنزيل كـ HTML إذا لم يكن PDF متوفر
+            Log::error('PDF generation error: '.$e->getMessage());
+
+            // تنزيل كـ HTML إذا فشل الـ PDF
             return response($html)
                 ->header('Content-Type', 'text/html; charset=utf-8')
-                ->header('Content-Disposition', 'attachment; filename=' . $fileName . '.html');
+                ->header('Content-Disposition', 'attachment; filename='.$fileName.'.html');
         }
-
-        return response($html)
-            ->header('Content-Type', 'text/html; charset=utf-8')
-            ->header('Content-Disposition', 'attachment; filename=' . $fileName . '.html');
     }
 
     /**
@@ -150,7 +151,7 @@ class MemberCardController extends Controller
     private function getCardStatus($membership)
     {
         return [
-            'has_card' => !is_null($membership->card_token),
+            'has_card' => ! is_null($membership->card_token),
             'issued_at' => $membership->card_issued_at,
             'verified' => $membership->card_verified,
             'token' => $membership->card_token,
@@ -170,7 +171,7 @@ class MemberCardController extends Controller
         if ($membership->status !== 'approved') {
             return response()->json([
                 'valid' => false,
-                'message' => 'هذه العضوية غير موافق عليها',
+                'message' => __('member.messages.membership_not_approved'),
             ], 403);
         }
 
@@ -197,17 +198,17 @@ class MemberCardController extends Controller
         $membership = Membership::findOrFail($membershipId);
 
         // التحقق من الصلاحيات
-        if ($membership->user_id !== Auth::id() && !Auth::user()->isAdmin()) {
+        if ($membership->user_id !== Auth::id() && ! Auth::user()->isAdmin()) {
             abort(403);
         }
 
         // إنشاء token جديد
         $membership->update([
-            'card_token' => Str::random(32) . '-' . time(),
+            'card_token' => Str::random(32).'-'.time(),
             'card_issued_at' => now(),
             'card_verified' => false,
         ]);
 
-        return back()->with('success', 'تم إعادة إصدار البطاقة بنجاح');
+        return back()->with('success', __('member.messages.reissued_success'));
     }
 }
