@@ -1,0 +1,285 @@
+---
+alwaysApply: true
+---
+<laravel-boost-guidelines>
+=== foundation rules ===
+
+# Laravel Boost Guidelines
+
+The Laravel Boost guidelines are specifically curated by Laravel maintainers for this application. These guidelines should be followed closely to enhance the user's satisfaction building Laravel applications.
+
+## Foundational Context
+This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
+
+- php - 8.2+
+- laravel/framework (LARAVEL) - v12
+- laravel/mcp (MCP) - v0.5+
+- laravel/prompts (PROMPTS) - v0
+- laravel/pint (PINT) - v1
+- laravel/sail (SAIL) - v1
+- phpunit/phpunit (PHPUNIT) - v11
+- alpinejs (ALPINEJS) - v3
+- tailwindcss (TAILWINDCSS) - v4
+- spatie/laravel-permission - v6
+
+## Conventions
+- **Strict Compliance**: You must follow all existing code conventions used in this application. When creating or editing a file, always check sibling files for the correct structure, approach, and naming.
+- **Naming**: Use descriptive names for variables and methods. For example, `isRegisteredForDiscounts`, not `discount()`.
+- **Component Reuse**: Check for existing components to reuse before writing a new one. Specifically, check `resources/views/components` for `x-ui.button`, `x-app-layout`, etc.
+- **Route Naming**: Always use named routes. All routes in `web.php` are named (e.g., `users.index`, `dashboard.index`). Follow this pattern strictly.
+
+## Verification Scripts
+- Do not create verification scripts or tinker when tests cover that functionality and prove it works. Unit and feature tests are more important.
+
+## Application Structure & Architecture
+- **Structure**: Stick to existing directory structure; don't create new base folders without approval.
+- **Dependencies**: Do not change the application's dependencies without approval.
+- **Strictness**: This project has a high standard for code quality. Do not introduce technical debt.
+
+## Frontend Bundling
+- If the user doesn't see a frontend change reflected in the UI, they likely need to run `npm run build` or `npm run dev`. Remind them if necessary.
+
+## Replies
+- Be concise in your explanations - focus on what's important rather than explaining obvious details.
+- Do not apologize excessively. Focus on correcting the issue.
+
+## Documentation Files
+- You must only create documentation files if explicitly requested by the user.
+
+=== boost rules ===
+
+## Laravel Boost
+- Laravel Boost is an MCP server that comes with powerful tools designed specifically for this application. Use them.
+
+## Artisan
+- **Mandatory Check**: Use the `list-artisan-commands` tool when you need to call an Artisan command to double-check the available parameters. Do not guess command arguments.
+
+## URLs
+- **Validation**: Whenever you share a project URL with the user, you should use the `get-absolute-url` tool to ensure you're using the correct scheme, domain/IP, and port.
+
+## Tinker / Debugging
+- You should use the `tinker` tool when you need to execute PHP to debug code or query Eloquent models directly.
+- Use the `database-query` tool when you only need to read from the database.
+
+## Reading Browser Logs With the `browser-logs` Tool
+- You can read browser logs, errors, and exceptions using the `browser-logs` tool from Boost.
+- Only recent browser logs will be useful - ignore old logs.
+
+## Searching Documentation (Critically Important)
+- **Primary Source**: Boost comes with a powerful `search-docs` tool you should use before any other approaches when dealing with Laravel or Laravel ecosystem packages. This tool automatically passes a list of installed packages and their versions to the remote Boost API, so it returns only version-specific documentation for the user's circumstance.
+- **Scope**: The `search-docs` tool is perfect for all Laravel-related packages, including Laravel, Inertia, Livewire, Filament, Tailwind, Pest, Nova, Nightwatch, Spatie, etc.
+- **Mandatory Usage**: You must use this tool to search for Laravel ecosystem documentation before falling back to other approaches.
+- **Strategy**: Use multiple, broad, simple, topic-based queries to start. For example: `['rate limiting', 'routing rate limiting', 'routing']`.
+- **No Hallucinations**: Do not make up package features. If you are unsure, search.
+
+### Available Search Syntax
+- You can and should pass multiple queries at once. The most relevant results will be returned first.
+
+1. Simple Word Searches with auto-stemming - query=authentication - finds 'authenticate' and 'auth'.
+2. Multiple Words (AND Logic) - query=rate limit - finds knowledge containing both "rate" AND "limit".
+3. Quoted Phrases (Exact Position) - query="infinite scroll" - words must be adjacent and in that order.
+4. Mixed Queries - query=middleware "rate limit" - "middleware" AND exact phrase "rate limit".
+5. Multiple Queries - queries=["authentication", "middleware"] - ANY of these terms.
+
+=== php rules ===
+
+## PHP
+
+- **Braces**: Always use curly braces for control structures, even if it has one line.
+- **Strict Types**: Always use strict types where possible (`declare(strict_types=1);` is optional but good practice to keep in mind).
+
+### Constructors
+- Use PHP 8 constructor property promotion in `__construct()`.
+    - <code-snippet>public function __construct(public GitHub $github) { }</code-snippet>
+- Do not allow empty `__construct()` methods with zero parameters unless the constructor is private.
+
+### Type Declarations
+- **Mandatory Return Types**: Always use explicit return type declarations for methods and functions.
+- **Parameter Types**: Use appropriate PHP type hints for method parameters. Avoid `mixed` unless absolutely necessary.
+
+<code-snippet name="Explicit Return Types and Method Params" lang="php">
+protected function isAccessible(User $user, ?string $path = null): bool
+{
+    // ...
+}
+</code-snippet>
+
+## Comments
+- **PHPDoc**: Prefer PHPDoc blocks over inline comments. Never use comments within the code itself unless there is something very complex going on that code cannot express.
+- **Clean Code**: Code should be self-documenting.
+
+## PHPDoc Blocks
+- Add useful array shape type definitions for arrays when appropriate.
+
+## Enums
+- Typically, keys in an Enum should be TitleCase. For example: `FavoritePerson`, `BestLake`, `Monthly`.
+- Use Backed Enums where appropriate for database storage.
+
+=== permissions rules ===
+
+## Spatie Permissions
+- **Middleware**: Use `middleware('permission:permission name')` or `middleware('role:role name')` in routes. Do not check permissions in controllers if middleware can handle it.
+- **Blade**: Use `@can('permission name')` or `@role('role name')` directives for UI elements.
+- **Check First**: Before checking a permission, verify it exists or is spelled correctly using `search-docs` or `list-artisan-commands` (if applicable).
+
+=== tests rules ===
+
+## Test Enforcement
+
+- **No Regressions**: Every change must be programmatically tested. Write a new test or update an existing test, then run the affected tests to make sure they pass.
+- **Efficiency**: Run the minimum number of tests needed to ensure code quality and speed. Use `php artisan test --compact` with a specific filename or filter.
+- **Do Not Delete**: You must not remove any tests or test files from the tests directory without explicit approval. If a test fails, fix the code or update the test, do not delete it.
+
+=== laravel/core rules ===
+
+## Do Things the Laravel Way
+
+- **Artisan**: Use `php artisan make:` commands to create new files (i.e. migrations, controllers, models, etc.). You can list available Artisan commands using the `list-artisan-commands` tool.
+- **Generic Classes**: If you're creating a generic PHP class, use `php artisan make:class`.
+- **Interaction**: Pass `--no-interaction` to all Artisan commands to ensure they work without user input. You should also pass the correct `--options` to ensure correct behavior.
+
+### Database
+- **Eloquent**: Always use proper Eloquent relationship methods with return type hints. Prefer relationship methods over raw queries or manual joins.
+- **Query Builder**: Use Laravel's query builder for very complex database operations, but prefer Eloquent where possible.
+- **Optimization**: Generate code that prevents N+1 query problems by using eager loading (`with()`).
+- **No DB Facade**: Avoid `DB::`; prefer `Model::query()`. Generate code that leverages Laravel's ORM capabilities rather than bypassing them.
+
+### Model Creation
+- **Factories**: When creating new models, create useful factories and seeders for them too.
+- **Options**: Ask the user if they need any other things, using `list-artisan-commands` to check the available options to `php artisan make:model`.
+
+### APIs & Eloquent Resources
+- **Resources**: For APIs, default to using Eloquent API Resources and API versioning.
+- **Consistency**: Follow existing application convention.
+
+### Controllers & Validation
+- **Form Requests**: Always create Form Request classes for validation rather than inline validation in controllers. Include both validation rules and custom error messages.
+- **Style**: Check sibling Form Requests to see if the application uses array or string based validation rules (Array preferred).
+
+### Queues
+- **Background Jobs**: Use queued jobs for time-consuming operations with the `ShouldQueue` interface.
+
+### Authentication & Authorization
+- **Native Tools**: Use Laravel's built-in authentication and authorization features (gates, policies, Sanctum, etc.).
+
+### URL Generation
+- **Named Routes**: When generating links to other pages, prefer named routes and the `route()` function.
+
+### Configuration
+- **Env**: Use environment variables only in configuration files - never use the `env()` function directly outside of config files. Always use `config('app.name')`, not `env('APP_NAME')`.
+
+### Testing
+- **Factories**: When creating models for tests, use the factories for the models. Check if the factory has custom states that can be used before manually setting up the model.
+- **Faker**: Use methods such as `$this->faker->word()` or `fake()->randomDigit()`. Follow existing conventions whether to use `$this->faker` or `fake()`.
+- **Creation**: When creating tests, make use of `php artisan make:test [options] {name}` to create a feature test, and pass `--unit` to create a unit test. Most tests should be feature tests.
+
+### Vite Error
+- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
+
+=== laravel/v12 rules ===
+
+## Laravel 12
+
+- **Documentation**: Use the `search-docs` tool to get version-specific documentation.
+- **Structure**: Since Laravel 11, Laravel has a new streamlined file structure which this project uses.
+
+### Laravel 12 Structure
+- **Middleware**: In Laravel 12, middleware are no longer registered in `app/Http/Kernel.php`. They are configured declaratively in `bootstrap/app.php` using `Application::configure()->withMiddleware()`.
+- **Providers**: `bootstrap/providers.php` contains application specific service providers.
+- **Console**: The `app\Console\Kernel.php` file no longer exists; use `bootstrap/app.php` or `routes/console.php` for console configuration.
+- **Commands**: Console commands in `app/Console/Commands/` are automatically available and do not require manual registration.
+
+### Database
+- **Modifications**: When modifying a column, the migration must include all of the attributes that were previously defined on the column. Otherwise, they will be dropped and lost.
+- **Limits**: Laravel 12 allows limiting eagerly loaded records natively: `$query->latest()->limit(10);`.
+
+### Models
+- **Casts**: Casts can and likely should be set in a `casts()` method on a model rather than the `$casts` property. Follow existing conventions from other models.
+
+=== mcp/core rules ===
+
+## Laravel MCP
+
+- **Documentation**: MCP (Model Context Protocol) is very new. You must use the `search-docs` tool to get documentation for how to write and test Laravel MCP servers, tools, resources, and prompts effectively.
+- **Registration**: MCP servers need to be registered with a route or handle in `routes/ai.php`. Typically, they will be registered using `Mcp::web()` to register an HTTP streaming MCP server.
+- **Testing**: Servers are very testable; use the `search-docs` tool to find testing instructions.
+- **Do Not Use**: Do not run `mcp:start`. This command hangs waiting for JSON-RPC MCP requests.
+- **Certificates**: Some MCP clients use Node, which has its own certificate store. If a user tries to connect to their web MCP server locally using HTTPS, it could fail due to this reason. They will need to switch to HTTP during local development.
+
+=== pint/core rules ===
+
+## Laravel Pint Code Formatter
+
+- **Mandatory**: You must run `vendor/bin/pint --dirty` before finalizing changes to ensure your code matches the project's expected style.
+- **Fixing**: Do not run `vendor/bin/pint --test`, simply run `vendor/bin/pint` to fix any formatting issues.
+
+=== phpunit/core rules ===
+
+## PHPUnit
+
+- **Standard**: This application uses PHPUnit for testing. All tests must be written as PHPUnit classes. Use `php artisan make:test --phpunit {name}` to create a new test.
+- **Pest**: If you see a test using "Pest", convert it to PHPUnit.
+- **Workflow**: Every time a test has been updated, run that singular test.
+- **Full Suite**: When the tests relating to your feature are passing, ask the user if they would like to also run the entire test suite to make sure everything is still passing.
+- **Coverage**: Tests should test all of the happy paths, failure paths, and weird paths.
+
+### Running Tests
+- Run the minimal number of tests, using an appropriate filter, before finalizing.
+- To run all tests: `php artisan test --compact`.
+- To run all tests in a file: `php artisan test --compact tests/Feature/ExampleTest.php`.
+- To filter on a particular test name: `php artisan test --compact --filter=testName` (recommended after making a change to a related file).
+
+=== tailwindcss/core rules ===
+
+## Tailwind CSS
+
+- **Usage**: Use Tailwind CSS classes to style HTML; check and use existing Tailwind conventions within the project before writing your own.
+- **Components**: Offer to extract repeated patterns into components (`x-ui.*` or similar) that match the project's conventions.
+- **Optimization**: Think through class placement, order, priority, and defaults. Remove redundant classes, add classes to parent or child carefully to limit repetition, and group elements logically.
+- **Docs**: You can use the `search-docs` tool to get exact examples from the official documentation when needed.
+
+### Spacing
+- When listing items, use gap utilities for spacing; don't use margins.
+
+<code-snippet name="Valid Flex Gap Spacing Example" lang="html">
+    <div class="flex gap-8">
+        <div>Superior</div>
+        <div>Michigan</div>
+        <div>Erie</div>
+    </div>
+</code-snippet>
+
+### Dark Mode
+- **Mandatory**: New pages and components must support dark mode (`dark:` classes) to match existing pages.
+
+=== tailwindcss/v4 rules ===
+
+## Tailwind CSS 4
+
+- **Version**: Always use Tailwind CSS v4; do not use the deprecated utilities.
+- **Config**: In Tailwind v4, configuration is CSS-first using the `@theme` directive — no separate `tailwind.config.js` file is needed.
+- **Import**: In Tailwind v4, you import Tailwind using a regular CSS `@import` statement, not using the `@tailwind` directives used in v3.
+
+<code-snippet name="Extending Theme in CSS" lang="css">
+@theme {
+  --color-brand: oklch(0.72 0.11 178);
+}
+</code-snippet>
+
+### Replaced Utilities
+- Tailwind v4 removed deprecated utilities. Do not use the deprecated option; use the replacement.
+
+| Deprecated |	Replacement |
+|------------+--------------|
+| bg-opacity-* | bg-black/* |
+| text-opacity-* | text-black/* |
+| border-opacity-* | border-black/* |
+| divide-opacity-* | divide-black/* |
+| ring-opacity-* | ring-black/* |
+| placeholder-opacity-* | placeholder-black/* |
+| flex-shrink-* | shrink-* |
+| flex-grow-* | grow-* |
+| overflow-ellipsis | text-ellipsis |
+| decoration-slice | box-decoration-slice |
+| decoration-clone | box-decoration-clone |
+</laravel-boost-guidelines>

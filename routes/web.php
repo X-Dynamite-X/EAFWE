@@ -9,22 +9,23 @@ use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntrepreneurshipProgramController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MarketingResourceController;
+use App\Http\Controllers\MemberCardController;
 use App\Http\Controllers\MemberFileController;
+use App\Http\Controllers\MemberServiceController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ParticipationOpportunityController;
 use App\Http\Controllers\PortalOpportunityController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\MemberCardController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TrainingProgramController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -122,6 +123,20 @@ Route::post('logout', [LogoutController::class, 'logout'])
 Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Member Services Routes - للوصول لصفحات الأعضاء
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::get('services/entrepreneurship', [MemberServiceController::class, 'entrepreneurship'])->name('services.entrepreneurship');
+        Route::get('services/training', [MemberServiceController::class, 'training'])->name('services.training');
+        Route::get('services/files', [MemberServiceController::class, 'files'])->name('files');
+        Route::get('services/communication', [MemberServiceController::class, 'communication'])->name('communication');
+        Route::get('services/marketing', [MemberServiceController::class, 'marketing'])->name('services.marketing');
+    });
+
     // Training Programs - مع صلاحيات الإدارة
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::prefix('training')->name('training.')->group(function () {

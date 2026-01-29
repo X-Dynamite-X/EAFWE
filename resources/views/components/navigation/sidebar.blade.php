@@ -6,8 +6,13 @@
     <div class="p-8 h-full flex flex-col overflow-y-auto">
         <div class="flex items-center justify-between mb-10 lg:block">
             {{-- Logo --}}
-            <h2 class="text-xl font-black text-gold-500 tracking-tight">{{ __('dashboard.sidebar.title') }} <br> <span
-                    class="text-sm font-normal text-gold-300">{{ __('dashboard.sidebar.subtitle') }}</span></h2>
+            <a href="{{ route('dashboard') }}" class="flex items-center gap-3">
+                <img src="{{ asset(config('app.logo')) }}" alt="Logo" class="w-10 h-10">
+                <div>
+                    <h2 class="text-xl font-black text-gold-500 tracking-tight">{{ __('dashboard.sidebar.title') }}</h2>
+                    <span class="text-sm font-normal text-gold-300">{{ __('dashboard.sidebar.subtitle') }}</span>
+                </div>
+            </a>
 
             <button @click="sidebarOpen = false" class="lg:hidden text-gold-400 p-2">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

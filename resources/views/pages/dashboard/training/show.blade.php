@@ -1,25 +1,29 @@
-<x-layout.dashboard title="{{ __('common.actions.view') }} برنامج ال{{ __('modules.training.categories.training') }}">
+<x-layout.dashboard title="{{ __('modules.training.show') }}">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2">
             <x-ui.card>
                 <div class="flex justify-between items-start mb-6 pb-6 border-b border-gray-200">
                     <h1 class="text-3xl font-bold text-gray-900">{{ $program->title }}</h1>
                     @can('manage training programs')
-                    <div class="flex gap-2">
-                        <x-ui.button href="{{ route('dashboard.training.edit', $program) }}" color="primary" size="sm">
-                            <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
-                        </x-ui.button>
-                        <button type="button" onclick="openDeleteModal('{{ $program->id }}', '{{ $program->title }}', '{{ route('dashboard.training.destroy', $program) }}')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded text-sm transition-colors">
-                            <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
-                        </button>
-                    </div>
+                        <div class="flex gap-2">
+                            <x-ui.button href="{{ route('dashboard.training.edit', $program) }}" color="primary"
+                                size="sm">
+                                <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
+                            </x-ui.button>
+                            <button type="button"
+                                onclick="openDeleteModal('{{ $program->id }}', '{{ $program->title }}', '{{ route('dashboard.training.destroy', $program) }}')"
+                                class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded text-sm transition-colors">
+                                <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
+                            </button>
+                        </div>
                     @endcan
                 </div>
 
-                @if($program->image_url)
-                <div class="mb-6 rounded-lg overflow-hidden shadow-lg">
-                    <img src="{{ $program->image_url }}" class="w-full h-80 object-cover" alt="{{ $program->title }}">
-                </div>
+                @if ($program->image_url)
+                    <div class="mb-6 rounded-lg overflow-hidden shadow-lg">
+                        <img src="{{ $program->image_url }}" class="w-full h-80 object-cover"
+                            alt="{{ $program->title }}">
+                    </div>
                 @endif
 
                 <div class="mb-6">
@@ -28,9 +32,11 @@
                             @case('training')
                                 {{ __('modules.training.categories.training') }}
                             @break
+
                             @case('workshop')
                                 {{ __('modules.training.categories.workshop') }}
                             @break
+
                             @case('seminar')
                                 {{ __('modules.training.categories.seminar') }}
                             @break
@@ -47,9 +53,9 @@
                 <div class="mt-6 pt-6 border-t border-gray-200">
                     <p class="text-xs text-gray-500">
                         <i class="fas fa-clock"></i>
-                        تم ال{{ __('common.actions.create') }}: {{ $program->created_at->format('d/m/Y H:i') }}
-                        @if($program->updated_at != $program->created_at)
-                        | {{ __('common.time.updated_at') }}: {{ $program->updated_at->format('d/m/Y H:i') }}
+                        {{ __('common.time.created_at') }}: {{ $program->created_at->format('d/m/Y H:i') }}
+                        @if ($program->updated_at != $program->created_at)
+                            | {{ __('common.time.updated_at') }}: {{ $program->updated_at->format('d/m/Y H:i') }}
                         @endif
                     </p>
                 </div>
@@ -62,7 +68,7 @@
 
         <div>
             <x-ui.card>
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">معلومات البرنامج</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('modules.training.program_info') }}</h3>
 
                 <dl class="space-y-4">
                     <div>
@@ -73,9 +79,11 @@
                                     @case('training')
                                         {{ __('modules.training.categories.training') }}
                                     @break
+
                                     @case('workshop')
                                         {{ __('modules.training.categories.workshop') }}
                                     @break
+
                                     @case('seminar')
                                         {{ __('modules.training.categories.seminar') }}
                                     @break
@@ -85,16 +93,16 @@
                     </div>
 
                     <div>
-                        <dt class="text-sm font-medium text-gray-600">الحالة</dt>
+                        <dt class="text-sm font-medium text-gray-600">{{ __('modules.training.status_label') }}</dt>
                         <dd class="text-gray-900 mt-1">
                             <x-ui.badge color="{{ $program->is_active ? 'green' : 'red' }}">
-                                {{ $program->is_active  ? __('common.status.active') : __('common.status.disabled') }}
+                                {{ $program->is_active ? __('common.status.active') : __('common.status.disabled') }}
                             </x-ui.badge>
                         </dd>
                     </div>
 
                     <div>
-                        <dt class="text-sm font-medium text-gray-600">المعرف</dt>
+                        <dt class="text-sm font-medium text-gray-600">{{ __('modules.training.identifier') }}</dt>
                         <dd class="text-gray-900 mt-1 text-xs font-mono">{{ $program->slug }}</dd>
                     </div>
 

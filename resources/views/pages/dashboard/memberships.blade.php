@@ -1,11 +1,11 @@
 {{-- Memberships Management Page --}}
-<x-layout.dashboard title="طلبات العضوية">
+<x-layout.dashboard title="{{ __('dashboard.memberships.title') }}">
     {{-- Header --}}
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold">{{ __('dashboard.sidebar.memberships') }}</h2>
+        <h2 class="text-2xl font-bold">{{ __('dashboard.memberships.title') }}</h2>
         @can('create memberships')
             <x-ui.button href="{{ route('memberships.create') }}" color="gold">
-                طلب عضوية جديد
+                {{ __('dashboard.memberships.create_button') }}
             </x-ui.button>
         @endcan
     </div>
@@ -15,10 +15,10 @@
         <div class="flex gap-4">
             @php
                 $statuses = [
-                    '' => 'الكل',
-                    'pending' => __('common.status.pending'),
-                    'approved' => __('common.status.approved'),
-                    'rejected' => __('common.status.rejected'),
+                    '' => __('dashboard.memberships.filter.all'),
+                    'pending' => __('dashboard.memberships.filter.pending'),
+                    'approved' => __('dashboard.memberships.filter.approved'),
+                    'rejected' => __('dashboard.memberships.filter.rejected'),
                 ];
             @endphp
 
@@ -35,31 +35,36 @@
     <x-ui.card>
         <div class="overflow-x-auto">
             <table id="membershipsTable" class="w-full">
-                <thead class="bg-gray-100 border-b">
+                <thead class="bg-gray-100 border-b ">
                     <tr>
-                        <th class="text-right px-6 py-3 font-semibold">الاسم</th>
-                        <th class="text-right px-6 py-3 font-semibold">البريد</th>
-                        <th class="text-right px-6 py-3 font-semibold">نوع العضوية</th>
-                        <th class="text-right px-6 py-3 font-semibold">{{ __('common.time.date') }}</th>
-                        <th class="text-right px-6 py-3 font-semibold">الحالة</th>
-                        <th class="text-right px-6 py-3 font-semibold">الإجراءات</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.memberships.table.name') }}</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.memberships.table.email') }}</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.memberships.table.type') }}</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.memberships.table.date') }}</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.memberships.table.status') }}
+                        </th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.memberships.table.actions') }}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($memberships ?? [] as $membership)
                         <tr class="border-b hover:bg-gray-50 transition">
-                            <td class="px-6 py-3 font-medium">{{ $membership->user->name ?? 'N/A' }}</td>
-                            <td class="px-6 py-3">{{ $membership->user->email ?? 'N/A' }}</td>
-                            <td class="px-6 py-3">{{ $membership->getMembershipTypeLabel() }}</td>
-                            <td class="px-6 py-3 text-sm text-gray-600">
+                            <td class="text-left px-6 py-3 font-medium">{{ $membership->user->name ?? 'N/A' }}</td>
+                            <td class="text-left px-6 py-3">{{ $membership->user->email ?? 'N/A' }}</td>
+                            <td class="text-left px-6 py-3">{{ $membership->getMembershipTypeLabel() }}</td>
+                            <td class="text-left px-6 py-3 text-sm text-gray-600">
                                 {{ $membership->created_at->format('Y-m-d H:i') }}</td>
-                            <td class="px-6 py-3">
+                            <td class="text-left px-6 py-3">
                                 @if ($membership->status === 'pending')
-                                    <x-ui.badge color="yellow">{{ __('common.status.pending') }}</x-ui.badge>
+                                    <x-ui.badge
+                                        color="yellow">{{ __('dashboard.memberships.status.pending') }}</x-ui.badge>
                                 @elseif($membership->status === 'approved')
-                                    <x-ui.badge color="green">{{ __('common.status.approved') }}</x-ui.badge>
+                                    <x-ui.badge
+                                        color="green">{{ __('dashboard.memberships.status.approved') }}</x-ui.badge>
                                 @else
-                                    <x-ui.badge color="red">{{ __('common.status.rejected') }}</x-ui.badge>
+                                    <x-ui.badge
+                                        color="red">{{ __('dashboard.memberships.status.rejected') }}</x-ui.badge>
                                 @endif
                             </td>
                             <td class="px-6 py-3">
@@ -67,7 +72,7 @@
                                     {{-- View Button --}}
                                     <x-ui.button href="{{ route('memberships.show', $membership) }}" color="gray"
                                         size="sm">
-                                        {{ __('common.actions.view') }}
+                                        {{ __('dashboard.memberships.actions.view') }}
                                     </x-ui.button>
 
                                     {{-- Approve Button --}}
@@ -77,7 +82,7 @@
                                                 data-id="{{ $membership->id }}"
                                                 data-name="{{ $membership->user->name ?? 'N/A' }}" color="green"
                                                 size="sm">
-                                                موافقة
+                                                {{ __('dashboard.memberships.actions.approve') }}
                                             </x-ui.button>
                                         @endif
                                     @endcan
@@ -89,7 +94,7 @@
                                                 data-id="{{ $membership->id }}"
                                                 data-name="{{ $membership->user->name ?? 'N/A' }}" color="red"
                                                 size="sm">
-                                                رفض
+                                                {{ __('dashboard.memberships.actions.reject') }}
                                             </x-ui.button>
                                         @endif
                                     @endcan
@@ -101,7 +106,7 @@
                                                 data-id="{{ $membership->id }}"
                                                 data-name="{{ $membership->user->name ?? 'N/A' }}" color="gray"
                                                 size="sm">
-                                                {{ __('common.actions.delete') }}
+                                                {{ __('dashboard.memberships.actions.delete') }}
                                             </x-ui.button>
                                         @endif
                                     @endcan
@@ -111,7 +116,7 @@
                     @empty
                         <tr>
                             <td colspan="6" class="text-center px-6 py-8 text-gray-500">
-                                لا توجد طلبات عضوية
+                                {{ __('dashboard.memberships.table.empty') }}
                             </td>
                         </tr>
                     @endforelse
@@ -128,25 +133,26 @@
     @endif
 
     {{-- Action Confirmation Modal --}}
-    <x-ui.modal id="actionModal" title="{{ __('common.actions.confirm') }} الإجراء">
+    <x-ui.modal id="actionModal" title="{{ __('dashboard.memberships.actions.confirm_title') }}">
         <p id="modalBody" class="text-center text-lg mb-4"></p>
 
         {{-- Rejection Reason Input --}}
         <div id="rejectionReasonGroup" class="hidden mb-4">
-            <label for="rejectionReason" class="block text-sm font-medium text-gray-700 mb-1">سبب الرفض</label>
+            <label for="rejectionReason"
+                class="block text-sm font-medium text-gray-700 mb-1">{{ __('dashboard.memberships.actions.rejection_reason') }}</label>
             <textarea id="rejectionReason" name="rejection_reason" rows="3"
                 class="w-full border-gray-300 rounded-lg shadow-sm focus:border-gold-500 focus:ring-gold-500"
-                placeholder="أدخل سبب رفض الطلب هنا..."></textarea>
+                placeholder="{{ __('dashboard.memberships.actions.rejection_placeholder') }}"></textarea>
         </div>
 
         <div class="flex justify-center gap-4 mt-6">
             <button type="button" id="confirmButton"
                 class="w-full sm:w-auto px-4 py-2 rounded-lg text-white font-semibold transition">
-                {{ __('common.actions.confirm') }}
+                {{ __('dashboard.memberships.actions.confirm_title') }}
             </button>
             <button type="button" onclick="closeModal('actionModal')"
                 class="w-full sm:w-auto px-4 py-2 rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-300 font-semibold transition">
-                {{ __('common.actions.cancel') }}
+                {{ __('dashboard.memberships.actions.cancel') }}
             </button>
         </div>
     </x-ui.modal>

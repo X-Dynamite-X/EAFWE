@@ -19,7 +19,7 @@ class MemberServiceController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('pages.dashboard.training.index', compact('programs'));
+        return view('pages.dashboard.services.training', compact('programs'));
     }
 
     public function entrepreneurship()
@@ -28,7 +28,7 @@ class MemberServiceController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('pages.dashboard.entrepreneurship.index', compact('programs'));
+        return view('pages.dashboard.services.entrepreneurship', compact('programs'));
     }
 
     public function participationOpportunities()
@@ -46,7 +46,7 @@ class MemberServiceController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('pages.dashboard.marketing.index', compact('resources'));
+        return view('pages.dashboard.marketing', compact('resources'));
     }
 
     public function files()
@@ -55,7 +55,7 @@ class MemberServiceController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('pages.dashboard.files.index', compact('files'));
+        return view('pages.dashboard.files', compact('files'));
     }
 
     public function communication()
@@ -65,7 +65,7 @@ class MemberServiceController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('pages.dashboard.communication.index', compact('communications'));
+        return view('pages.dashboard.communication', compact('communications'));
     }
 
     public function portalOpportunities()

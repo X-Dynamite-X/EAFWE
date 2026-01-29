@@ -1,12 +1,12 @@
-<x-layout.dashboard title="مركز {{ __('common.general.file') . 'ات'">
+<x-layout.dashboard title="{{ __('dashboard.files.title') }}">
     <div class="mb-8 flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-black text-charcoal-900 mb-2">مركز {{ __('common.general.file') . 'ات' الخاص بالأعضاء</h1>
-            <p class="text-charcoal-600">{{ __('common.actions.download') }} النماذج الرسمية، السياسات، والأدلة الإرشادية الخاصة بالجمعية.</p>
+            <h1 class="text-3xl font-black text-charcoal-900 mb-2">{{ __('dashboard.files.title') }}</h1>
+            <p class="text-charcoal-600">{{ __('dashboard.files.subtitle') }}</p>
         </div>
         <div class="hidden md:block">
             <div class="relative">
-                <input type="text" placeholder="{{ __('common.actions.search') }} عن ملف..."
+                <input type="text" placeholder="{{ __('dashboard.files.search_placeholder') }}"
                     class="pr-10 pl-4 py-2 border rounded-xl focus:ring-2 focus:ring-gold-500 border-gray-200 text-sm">
                 <span class="absolute right-3 top-2.5 text-gray-400">🔍</span>
             </div>
@@ -16,22 +16,12 @@
     <div class="grid lg:grid-cols-4 gap-6">
         {{-- File Categories --}}
         <div class="space-y-4">
-            @php
-                $categories = [
-                    ['label' => 'جميع {{ __('common.general.file') . 'ات'', 'count' => 24, 'active' => true],
-                    ['label' => 'نماذج رسمية', 'count' => 8, 'active' => false],
-                    ['label' => 'سياسات وقوانين', 'count' => 5, 'active' => false],
-                    ['label' => 'أدلة إرشادية', 'count' => 7, 'active' => false],
-                    ['label' => 'تقارير داخلية', 'count' => 4, 'active' => false],
-                ];
-            @endphp
-            @foreach ($categories as $cat)
-                <button
-                    class="w-full flex items-center justify-between px-4 py-3 rounded-xl transition-colors {{ $cat['active'] ? 'bg-gold-500 text-charcoal-900 font-black' : 'bg-white border border-gray-100 text-charcoal-600 hover:bg-gray-50' }}">
-                    <span>{{ $cat['label'] }}</span>
-                    <span class="text-xs opacity-60">{{ $cat['count'] }}</span>
-                </button>
-            @endforeach
+            {{-- TODO: Dynamic Categories if needed --}}
+            <button
+                class="w-full flex items-center justify-between px-4 py-3 rounded-xl transition-colors bg-gold-500 text-charcoal-900 font-black">
+                <span>{{ __('dashboard.files.categories.all') }}</span>
+                <span class="text-xs opacity-60">{{ $files->count() }}</span>
+            </button>
         </div>
 
         {{-- Files List --}}
@@ -43,72 +33,45 @@
                             <tr>
                                 <th
                                     class="text-right px-6 py-4 text-xs font-black text-charcoal-500 uppercase tracking-wider">
-                                    اسم {{ __('common.general.file') }}</th>
+                                    {{ __('dashboard.files.table.name') }}</th>
                                 <th
                                     class="text-right px-6 py-4 text-xs font-black text-charcoal-500 uppercase tracking-wider">
-                                    التصنيف</th>
+                                    {{ __('dashboard.files.table.category') }}</th>
                                 <th
                                     class="text-right px-6 py-4 text-xs font-black text-charcoal-500 uppercase tracking-wider">
-                                    الحجم</th>
+                                    {{ __('dashboard.files.table.size') }}</th>
                                 <th
                                     class="text-right px-6 py-4 text-xs font-black text-charcoal-500 uppercase tracking-wider">
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            @php
-                                $files = [
-                                    [
-                                        'name' => '{{ __('modules.marketing.resource_types.template') }} طلب {{ __('modules.participation.types.sponsor') }} مشروع جديد',
-                                        'cat' => 'نماذج رسمية',
-                                        'size' => '450 KB',
-                                        'type' => __('modules.files.file_types.pdf'),
-                                    ],
-                                    [
-                                        'name' => 'سياسة العضوية المحدثة 2026',
-                                        'cat' => 'سياسات وقوانين',
-                                        'size' => '1.2 MB',
-                                        'type' => __('modules.files.file_types.pdf'),
-                                    ],
-                                    [
-                                        'name' => '{{ __('modules.marketing.resource_types.guide') }} الخدمات الإلكترونية للعضوات',
-                                        'cat' => 'أدلة إرشادية',
-                                        'size' => '3.8 MB',
-                                        'type' => __('modules.files.file_types.pdf'),
-                                    ],
-                                    [
-                                        'name' => 'استمارة المشاركة في المعارض الدولية',
-                                        'cat' => 'نماذج رسمية',
-                                        'size' => '320 KB',
-                                        'type' => 'DOCX',
-                                    ],
-                                    [
-                                        'name' => 'التقرير السنوي لإنجازات رائدات الأعمال',
-                                        'cat' => 'تقارير داخلية',
-                                        'size' => '5.5 MB',
-                                        'type' => __('modules.files.file_types.pdf'),
-                                    ],
-                                ];
-                            @endphp
-                            @foreach ($files as $file)
+                            @forelse ($files as $file)
                                 <tr class="hover:bg-gray-50 transition-colors group">
                                     <td class="px-6 py-4">
                                         <div class="flex items-center gap-3">
-                                            <span class="text-2xl">{{ $file['type'] == __('modules.files.file_types.pdf') ? '📕' : '📘' }}</span>
-                                            <span class="font-bold text-charcoal-900">{{ $file['name'] }}</span>
+                                            <span class="text-2xl">{{ $file->file_type == 'pdf' ? '📕' : '📘' }}</span>
+                                            <span class="font-bold text-charcoal-900">{{ $file->title }}</span>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
                                         <span
-                                            class="px-3 py-1 bg-gray-100 text-charcoal-600 rounded-lg text-xs font-bold">{{ $file['cat'] }}</span>
+                                            class="px-3 py-1 bg-gray-100 text-charcoal-600 rounded-lg text-xs font-bold">{{ $file->category ?? 'General' }}</span>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-charcoal-500">{{ $file['size'] }}</td>
+                                    <td class="px-6 py-4 text-sm text-charcoal-500">
+                                        {{ $file->file_size ? round($file->file_size / 1024) . ' KB' : '-' }}</td>
                                     <td class="px-6 py-4 text-left">
-                                        <button
-                                            class="text-gold-500 hover:text-gold-600 font-bold transition-colors">{{ __('common.actions.download') }}</button>
+                                        <a href="{{ $file->file_url }}" target="_blank"
+                                            class="text-gold-500 hover:text-gold-600 font-bold transition-colors">{{ __('dashboard.files.table.download') }}</a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center py-8 text-gray-500">
+                                        {{ __('dashboard.files.table.empty') }}
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

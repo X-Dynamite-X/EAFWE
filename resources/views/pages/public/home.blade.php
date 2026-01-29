@@ -44,11 +44,7 @@
                         {{-- Placeholder for logo/icon --}}
                         <div
                             class="w-64 h-64 lg:w-80 lg:h-80 bg-white/5 backdrop-blur-sm border border-gold-500/30 rounded-full flex items-center justify-center p-8 relative">
-                            <svg class="w-32 h-32 text-blue-400" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
+                            <img src="{{ asset(config('app.logo')) }}" alt="Logo" class="w-full h-full object-contain">
                         </div>
                     </div>
                 </div>

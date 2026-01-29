@@ -1,19 +1,22 @@
 {{-- Users Management Page --}}
-
-<x-layout.dashboard title="{{ __('dashboard.sidebar.users') }}">
+<x-layout.dashboard title="{{ __('dashboard.users.title') }}">
     {{-- Header --}}
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold">{{ __('dashboard.sidebar.users') }}</h2>
+        <h2 class="text-2xl font-bold">{{ __('dashboard.users.title') }}</h2>
         <x-ui.button href="{{ route('users.create') }}" color="gold">
-            {{ __('common.actions.add') }} مستخدم
+            {{ __('dashboard.users.create_button') }}
         </x-ui.button>
     </div>
 
     {{-- Search and Filter --}}
     <x-ui.card class="mb-6">
         <div class="grid md:grid-cols-2 gap-4">
-            <x-ui.input name="search" id="userSearch" placeholder="ا{{ __('common.actions.search') }} عن مستخدم..." />
-            <x-ui.select name="role" :options="['admin' => 'مدير', 'staff' => 'موظف', 'member' => 'عضو']" placeholder="اختر الدور" />
+            <x-ui.input name="search" id="userSearch" placeholder="{{ __('dashboard.users.search_placeholder') }}" />
+            <x-ui.select name="role" :options="[
+                'admin' => __('dashboard.users.roles.admin'),
+                'staff' => __('dashboard.users.roles.staff'),
+                'member' => __('dashboard.users.roles.member'),
+            ]" placeholder="{{ __('dashboard.users.role_placeholder') }}" />
         </div>
     </x-ui.card>
 
@@ -23,12 +26,12 @@
             <table id="usersTable" class="w-full">
                 <thead class="bg-gray-100 border-b">
                     <tr>
-                        <th class="text-right px-6 py-3 font-semibold">الاسم</th>
-                        <th class="text-right px-6 py-3 font-semibold">البريد</th>
-                        <th class="text-right px-6 py-3 font-semibold">{{ __('common.general.phone') }}</th>
-                        <th class="text-right px-6 py-3 font-semibold">الدور</th>
-                        <th class="text-right px-6 py-3 font-semibold">الحالة</th>
-                        <th class="text-right px-6 py-3 font-semibold">الإجراءات</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.users.table.name') }}</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.users.table.email') }}</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.users.table.phone') }}</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.users.table.role') }}</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.users.table.status') }}</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.users.table.actions') }}</th>
                     </tr>
                 </thead>
                 <tbody id="usersTableBody">
@@ -39,7 +42,7 @@
                             <td class="px-6 py-3">{{ $user->phone ?? '-' }}</td>
                             <td class="px-6 py-3">
                                 <x-ui.badge color="gold">
-                                    {{ $user->roles->first()->name ?? 'بدون دور' }}
+                                    {{ $user->roles->first()?->name ?? __('dashboard.users.table.no_role') }}
                                 </x-ui.badge>
                             </td>
                             <td class="px-6 py-3">
@@ -64,7 +67,7 @@
                     @empty
                         <tr>
                             <td colspan="6" class="text-center px-6 py-8 text-gray-500">
-                                لا توجد مستخدمون
+                                {{ __('dashboard.users.table.empty') }}
                             </td>
                         </tr>
                     @endforelse
@@ -80,12 +83,14 @@
         </div>
     @endif
     {{-- Delete Confirmation Modal --}}
-    <x-ui.modal id="deleteUserModal" title="{{ __('common.actions.confirm') }} ال{{ __('common.actions.delete') }}">
-        <p class="text-gray-700">هل أنت متأكد {{ __('common.time.from') }} رغبتك في {{ __('common.actions.delete') }} هذا المستخدم؟ لا يمكن التراجع عن هذا الإجراء.</p>
+    <x-ui.modal id="deleteUserModal" title="{{ __('dashboard.users.delete_modal.title') }}">
+        <p class="text-gray-700">{{ __('dashboard.users.delete_modal.message') }}</p>
 
         <x-slot:footer>
-            <x-ui.button onclick="confirmDeleteUser(event)" color="red">{{ __('common.actions.delete') }} نهائي</x-ui.button>
-            <x-ui.button onclick="closeModal('deleteUserModal')" color="gray">{{ __('common.actions.cancel') }}</x-ui.button>
+            <x-ui.button onclick="confirmDeleteUser(event)"
+                color="red">{{ __('dashboard.users.delete_modal.confirm') }}</x-ui.button>
+            <x-ui.button onclick="closeModal('deleteUserModal')"
+                color="gray">{{ __('common.actions.cancel') }}</x-ui.button>
         </x-slot:footer>
     </x-ui.modal>
 
@@ -117,29 +122,30 @@
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        // إخفاء المودال
+                        // Hide Modal
                         closeModal('deleteUserModal');
 
-                        // {{ __('common.actions.delete') }} الصف {{ __('common.time.from') }} الجدول
+                        // Remove row from table
                         $(`#user-row-${userToDeleteId}`).fadeOut(300, function() {
                             $(this).remove();
                         });
 
-                        // {{ __('common.actions.view') }} رسالة {{ __('common.general.success') }}
+                        // Show success message
                         window.dispatchEvent(new CustomEvent('notify', {
                             detail: {
-                                message: 'تم {{ __('common.actions.delete') }} المستخدم ب{{ __('common.general.success') }}',
+                                message: '{{ __('dashboard.users.messages.deleted') }}',
                                 type: 'success'
                             }
                         }));
 
-                        // إعادة تعيين المتغيرات
+                        // Reset
                         userToDeleteId = null;
                         isDeleting = false;
                     },
                     error: function(xhr) {
                         isDeleting = false;
-                        let errorMessage = 'حدث {{ __('common.general.error') }} أثناء ال{{ __('common.actions.delete') }}';
+                        let errorMessage =
+                            '{{ __('dashboard.users.messages.error_delete') }}';
                         if (xhr.responseJSON && xhr.responseJSON.error) {
                             errorMessage = xhr.responseJSON.error;
                         }

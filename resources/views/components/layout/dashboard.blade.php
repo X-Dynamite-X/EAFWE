@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'لوحة التحكم' }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset(config('app.logo')) }}">
 
     {{-- Vite CSS & JS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -19,7 +20,7 @@
     <div class="flex h-screen overflow-hidden">
         {{-- Sidebar --}}
         @if ($show_sidebar == true)
-        <x-navigation.sidebar />
+            <x-navigation.sidebar />
         @endif
 
 

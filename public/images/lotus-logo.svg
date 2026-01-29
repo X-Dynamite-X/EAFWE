@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#000000"/>
+
+  <!-- Lotus petals with integrated feminine silhouette -->
+  <g fill="#FFD700" stroke="none">
+    <!-- Left petal -->
+    <path d="M 50 120 Q 40 90 50 60 Q 60 70 65 90 Q 62 110 50 120 Z"/>
+
+    <!-- Center petal with face integration -->
+    <g>
+      <!-- Female face silhouette -->
+      <path d="M 85 65 Q 90 55 100 50 Q 105 55 108 65 Q 110 75 108 85 Q 106 95 104 105 L 102 110 Q 98 100 95 90 Q 92 80 90 70 Q 88 67 85 65 Z"/>
+
+      <!-- Hair flowing like flames -->
+      <path d="M 100 50 Q 110 45 115 50 Q 118 60 120 70 L 122 85 Q 118 90 115 85 Q 112 75 108 65 Q 105 55 100 50 Z"/>
+
+      <path d="M 115 50 Q 125 48 130 55 Q 132 65 133 75 Q 130 82 127 80 Q 125 72 122 65 Q 120 57 115 50 Z"/>
+
+      <path d="M 130 55 Q 138 58 142 68 Q 143 78 140 85 Q 137 83 135 77 Q 133 68 130 60 Q 129 57 130 55 Z"/>
+
+      <!-- Neck and shoulder -->
+      <path d="M 104 105 Q 102 115 98 120 L 95 118 Q 97 110 102 110 Z"/>
+    </g>
+
+    <!-- Right petal -->
+    <path d="M 150 120 Q 160 90 150 60 Q 140 70 135 90 Q 138 110 150 120 Z"/>
+
+    <!-- Bottom left petal -->
+    <path d="M 65 120 Q 55 135 60 150 Q 75 145 85 135 Q 80 125 65 120 Z"/>
+
+    <!-- Bottom center petal -->
+    <path d="M 85 135 Q 90 145 100 150 Q 110 145 115 135 Q 105 128 100 125 Q 95 128 85 135 Z"/>
+
+    <!-- Bottom right petal -->
+    <path d="M 135 120 Q 145 135 140 150 Q 125 145 115 135 Q 120 125 135 120 Z"/>
+  </g>
+</svg>

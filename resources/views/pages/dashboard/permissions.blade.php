@@ -1,8 +1,7 @@
 {{-- Permissions Management Page --}}
-
-<x-layout.dashboard title="{{ __('dashboard.sidebar.roles') }}">
+<x-layout.dashboard title="{{ __('dashboard.permissions.title') }}">
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold">{{ __('dashboard.sidebar.roles') }}</h2>
+        <h2 class="text-2xl font-bold">{{ __('dashboard.permissions.title') }}</h2>
     </div>
 
     {{-- Permissions Table --}}
@@ -11,9 +10,12 @@
             <table class="w-full">
                 <thead class="bg-gray-100 border-b">
                     <tr>
-                        <th class="text-right px-6 py-3 font-semibold">اسم الصلاحية</th>
-                        <th class="text-right px-6 py-3 font-semibold">الأدوار المسندة</th>
-                        <th class="text-right px-6 py-3 font-semibold">الإجراءات</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.permissions.table.permission') }}
+                        </th>
+                        <th class="text-left px-6 py-3 font-semibold">
+                            {{ __('dashboard.permissions.table.assigned_roles') }}</th>
+                        <th class="text-left px-6 py-3 font-semibold">{{ __('dashboard.permissions.table.actions') }}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,7 +27,8 @@
                                     @forelse($permission->roles as $role)
                                         <x-ui.badge size="sm" color="gray">{{ $role->name }}</x-ui.badge>
                                     @empty
-                                        <span class="text-gray-400 text-sm">غير مسندة</span>
+                                        <span
+                                            class="text-gray-400 text-sm">{{ __('dashboard.permissions.table.no_roles') }}</span>
                                     @endforelse
                                 </div>
                             </td>
@@ -33,14 +36,14 @@
                                 <x-ui.button
                                     onclick="manageRoles({{ $permission->id }}, '{{ $permission->name }}', {{ json_encode($permission->roles->pluck('id')) }})"
                                     color="gray" size="sm">
-                                    أدوار الصلاحية
+                                    {{ __('dashboard.permissions.actions.manage_roles') }}
                                 </x-ui.button>
                             </td>
                         </tr>
                     @empty
                         <tr>
                             <td colspan="3" class="text-center px-6 py-8 text-gray-500">
-                                لا توجد صلاحيات
+                                {{ __('dashboard.permissions.table.empty') }}
                             </td>
                         </tr>
                     @endforelse
@@ -54,12 +57,12 @@
     </div>
 
     {{-- Manage Roles Modal --}}
-    <x-ui.modal id="manageRolesModal" title="{{ __('dashboard.sidebar.roles') }}">
+    <x-ui.modal id="manageRolesModal" title="{{ __('dashboard.permissions.modal.title') }}">
         <form id="manageRolesForm" method="POST">
             @csrf
 
-            <p class="mb-4 text-gray-600">حدد الأدوار التي يجب أن تمتلك صلاحية: <span
-                    id="permissionName" class="font-bold text-gray-800"></span></p>
+            <p class="mb-4 text-gray-600">{{ __('dashboard.permissions.modal.description') }} <span id="permissionName"
+                    class="font-bold text-gray-800"></span></p>
 
             <div class="mb-6 space-y-2 max-h-60 overflow-y-auto border p-4 rounded-lg">
                 @foreach ($roles as $role)
@@ -72,8 +75,8 @@
             </div>
 
             <div class="flex gap-3">
-                <x-ui.button type="submit" color="gold" class="flex-1">{{ __('common.actions.save') }}
-                    التغييرات</x-ui.button>
+                <x-ui.button type="submit" color="gold"
+                    class="flex-1">{{ __('dashboard.permissions.modal.save') }}</x-ui.button>
                 <x-ui.button type="button" onclick="closeModal('manageRolesModal')" color="gray"
                     class="flex-1">{{ __('common.actions.cancel') }}</x-ui.button>
             </div>
