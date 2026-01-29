@@ -29,31 +29,46 @@
                     @else
                         <div class="w-full h-48 bg-gray-100 rounded-t-lg flex items-center justify-center -m-4 mb-4">
                             <i class="fas fa-briefcase text-5xl text-gray-300"></i>
-                            <x-layout.dashboard title="{{ __('dashboard.portal.title') }}">
-                                <div class="mb-8">
-                                    <h1 class="text-3xl font-black text-charcoal-900 mb-2">
-                                        {{ __('dashboard.portal.title') }}</h1>
-                                    <p class="text-charcoal-600">{{ __('dashboard.portal.subtitle') }}</p>
-                                </div>
+                        </div>
+                    @endif
 
-                                {{-- Filters --}}
-                                <div class="mb-6 overflow-x-auto pb-2">
-                                    <div class="flex gap-2 min-w-max">
-                                        @php
-                                            $types = [
-                                                '' => __('dashboard.portal.filter.all'),
-                                                'business' => __('dashboard.portal.filter.business'),
-                                                'investment' => __('dashboard.portal.filter.investment'),
-                                                'partnership' => __('dashboard.portal.filter.partnership'),
-                                                'volunteer' => __('dashboard.portal.filter.volunteer'),
-                                            ];
-                                        @endphp
-                                        @foreach ($types as $key => $label)
-                                            <a href="{{ route('dashboard.portal-opportunities.index', ['type' => $key]) }}"
-                                                class="px-4 py-2 rounded-xl text-sm font-bold transition-colors {{ request('type') == $key ? 'bg-gold-500 text-charcoal-900' : 'bg-white border border-gray-200 text-charcoal-600 hover:bg-gray-50' }}">
-                                                {{ $label }}
-                                            </a>
-                                    </div>
+                    <div class="flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-gray-900">{{ $opportunity->title }}</h3>
+                        <p class="text-gray-600 text-sm mt-2">{{ Str::limit($opportunity->description, 100) }}</p>
+
+                        <div class="mt-4">
+                            <x-ui.badge color="purple">
+                                @switch($opportunity->type)
+                                    @case('business')
+                                        {{ __('modules.portal.opportunity_types.business') }}
+                                    @break
+
+                                    @case('investment')
+                                        {{ __('modules.portal.opportunity_types.investment') }}
+                                    @break
+
+                                    @case('partnership')
+                                        {{ __('modules.portal.opportunity_types.partnership') }}
+                                    @break
+
+                                    @case('volunteer')
+                                        {{ __('modules.portal.opportunity_types.volunteer') }}
+                                    @break
+
+                                    @default
+                                        {{ $opportunity->type }}
+                                @endswitch
+                            </x-ui.badge>
+                        </div>
+
+                        <div class="mt-auto pt-4 border-t border-gray-200">
+                            <a href="{{ route('dashboard.portal-opportunities.show', $opportunity) }}"
+                                class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium gap-1">
+                                {{ __('common.actions.view') }} {{ __('common.general.details') }}
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
                 </x-ui.card>
             @endforeach
         </div>

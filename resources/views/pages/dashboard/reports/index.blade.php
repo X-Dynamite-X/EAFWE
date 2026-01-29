@@ -50,7 +50,7 @@
     <div class="bg-white rounded-lg shadow mb-8">
         <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
             <h3 class="text-lg font-semibold text-gray-900">{{ __('dashboard.reports.recent_users') }}</h3>
-            <a href="{{ route('dashboard.users.index') }}"
+            <a href="{{ route('users.index') }}"
                 class="text-gold-600 hover:text-gold-700 text-sm">{{ __('dashboard.index.recent_users.view_all') }}</a>
         </div>
         <div class="overflow-x-auto">
