@@ -1,8 +1,9 @@
-<x-layout.dashboard title="{{ __('common.actions.add') }} مورد تسويقي جديد">
+<x-layout.dashboard title="{{ __('common.actions.add') }} {{ __('modules.marketing.new_resource') }}">
     <div class="max-w-2xl mx-auto">
         <div class="mb-6">
-            <h1 class="text-3xl font-bold text-gray-900">{{ __('common.actions.add') }} مورد تسويقي جديد</h1>
-            <p class="text-gray-600 mt-1">ملأ ال{{ __('modules.marketing.resource_types.template') }} أدناه ل{{ __('common.actions.create') }} مورد تسويقي جديد</p>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('common.actions.add') }}
+                {{ __('modules.marketing.new_resource') }}</h1>
+            <p class="text-gray-600 mt-1">{{ __('modules.marketing.start_creating') }}</p>
         </div>
 
         @if ($errors->any())
@@ -31,27 +32,31 @@
                         <button type="button" @click="lang = 'en'" class="px-4 py-2 text-sm font-medium"
                             :class="lang === 'en' ? 'bg-gold-500 text-charcoal-900 rounded-t-lg' :
                                 'text-gray-500 hover:text-gray-700'">
-                            English
+                            {{ __('common.tabs.english') }}
                         </button>
                     </div>
 
                     {{-- Arabic Fields --}}
                     <div x-show="lang === 'ar'" class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.title') }} (ب{{ __('common.tabs.arabic') }}) <span
-                                    class="text-red-600">*</span></label>
+                            <label
+                                class="block text-sm font-medium text-gray-900 mb-2">{{ __('modules.marketing.fields.title') }}
+                                {{ __('common.general.in_arabic') }} <span class="text-red-600">*</span></label>
                             <input type="text"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 id="title_ar" name="title_ar" value="{{ old('title_ar') }}" required>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.description') }} (ب{{ __('common.tabs.arabic') }}) <span
-                                    class="text-red-600">*</span></label>
+                            <label
+                                class="block text-sm font-medium text-gray-900 mb-2">{{ __('modules.marketing.fields.description') }}
+                                {{ __('common.general.in_arabic') }} <span class="text-red-600">*</span></label>
                             <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="description_ar" rows="3" required>{{ old('description_ar') }}</textarea>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-900 mb-2">المحتوى (ب{{ __('common.tabs.arabic') }})</label>
+                            <label
+                                class="block text-sm font-medium text-gray-900 mb-2">{{ __('modules.marketing.fields.content') }}
+                                {{ __('common.general.in_arabic') }}</label>
                             <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" name="content_ar"
                                 rows="6">{{ old('content_ar') }}</textarea>
                         </div>
@@ -60,21 +65,24 @@
                     {{-- English Fields --}}
                     <div x-show="lang === 'en'" class="space-y-4" style="display: none;">
                         <div>
-                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left" dir="ltr">Title
-                                (English) <span class="text-red-600">*</span></label>
+                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left"
+                                dir="ltr">{{ __('modules.marketing.fields.title') }}
+                                {{ __('common.general.in_english') }} <span class="text-red-600">*</span></label>
                             <input type="text" dir="ltr"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="title_en" value="{{ old('title_en') }}" required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-900 mb-2 text-left"
-                                dir="ltr">Description (English) <span class="text-red-600">*</span></label>
+                                dir="ltr">{{ __('modules.marketing.fields.description') }}
+                                {{ __('common.general.in_english') }} <span class="text-red-600">*</span></label>
                             <textarea dir="ltr" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="description_en" rows="3" required>{{ old('description_en') }}</textarea>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left" dir="ltr">Content
-                                (English)</label>
+                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left"
+                                dir="ltr">{{ __('modules.marketing.fields.content') }}
+                                {{ __('common.general.in_english') }}</label>
                             <textarea dir="ltr" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="content_en" rows="6">{{ old('content_en') }}</textarea>
                         </div>
@@ -82,17 +90,20 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-900 mb-2">المعرف (Slug) <span
-                            class="text-red-600">*</span></label>
+                    <label
+                        class="block text-sm font-medium text-gray-900 mb-2">{{ __('modules.marketing.fields.slug') }}
+                        <span class="text-red-600">*</span></label>
                     <input type="text"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                         id="slug" name="slug" value="{{ old('slug') }}" required dir="ltr">
-                    <p class="text-xs text-gray-500 mt-1">يستخدم في الرابط. مثال: marketing-guide-v1</p>
+                    <p class="text-xs text-gray-500 mt-1">{{ __('common.hints.slug') }}.
+                        {{ __('common.tabs.english') }}: marketing-guide-v1</p>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.image') }}</label>
+                        <label
+                            class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.image') }}</label>
                         <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-blue-500 transition"
                             id="imageDropZone">
                             <input type="file" class="hidden" id="image" name="image"
@@ -104,7 +115,8 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.file') }} ({{ __('modules.files.file_types.pdf') }}, Doc)</label>
+                        <label class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.file') }}
+                            ({{ __('modules.files.file_types.pdf') }}, Doc)</label>
                         <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-blue-500 transition"
                             id="fileDropZone">
                             <input type="file" class="hidden" id="file" name="file"
@@ -120,10 +132,12 @@
                     <div class="flex items-center">
                         <input type="checkbox" class="w-4 h-4 rounded" id="is_active" name="is_active"
                             value="1" {{ old('is_active') ? 'checked' : '' }}>
-                        <label class="mr-2 text-sm text-gray-900">نشر المورد</label>
+                        <label
+                            class="mr-2 text-sm text-gray-900">{{ __('modules.marketing.fields.is_active') }}</label>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.order') }}</label>
+                        <label
+                            class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.order') }}</label>
                         <input type="number"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             id="order" name="order" value="{{ old('order', 0) }}" min="0">
@@ -131,7 +145,8 @@
                 </div>
 
                 <div class="flex gap-3 mt-6 pt-6 border-t border-gray-200">
-                    <x-ui.button type="submit" color="primary"><i class="fas fa-save"></i> {{ __('common.actions.save') }}</x-ui.button>
+                    <x-ui.button type="submit" color="primary"><i class="fas fa-save"></i>
+                        {{ __('common.actions.save') }}</x-ui.button>
                     <x-ui.button href="{{ route('dashboard.marketing.manage') }}" color="gray"><i
                             class="fas fa-times"></i> {{ __('common.actions.cancel') }}</x-ui.button>
                 </div>

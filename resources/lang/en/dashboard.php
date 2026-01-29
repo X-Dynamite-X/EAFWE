@@ -220,6 +220,8 @@ return [
             'quick_consultation' => 'Quick Consultation',
             'consultation_placeholder' => 'Type your question here...',
             'submit_request' => 'Submit Request',
+            'no_programs_available' => 'No programs available at the moment',
+            'discover_opportunities' => 'Browse available opportunities in the opportunities portal.',
         ],
         'training' => [
             'title' => 'Empowerment & Development Services',
@@ -233,6 +235,8 @@ return [
             'help' => 'Help',
             'help_desc' => 'If you face any issue with registration or downloading materials, please contact support.',
             'contact_us' => 'Contact Us',
+            'no_trainings_available' => 'No training courses available at the moment',
+            'coming_soon' => 'Coming Soon',
         ],
     ],
     'files' => [

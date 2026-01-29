@@ -1,4 +1,4 @@
-<x-layout.dashboard title="إدارة {{ __('modules.portal.title') }}">
+<x-layout.dashboard title="{{ __('common.actions.manage') }} {{ __('modules.portal.index') }}">
     <div class="mb-8">
         <!-- Header Section -->
         <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg shadow-sm p-6 border border-cyan-100">
@@ -8,18 +8,17 @@
                         <div class="p-3 bg-cyan-100 rounded-lg">
                             <i class="fas fa-briefcase text-cyan-600 text-xl"></i>
                         </div>
-                        <h1 class="text-2xl md:text-3xl font-bold text-gray-900">إدارة {{ __('modules.portal.title') }}
-                        </h1>
+                        <h1 class="text-2xl md:text-3xl font-bold text-gray-900">{{ __('common.actions.manage') }}
+                            {{ __('modules.portal.index') }}</h1>
                     </div>
-                    <p class="text-gray-600 text-sm md:text-base mt-1 ml-0 md:ml-12">أضف وعدل
-                        و{{ __('common.actions.delete') }} فرص ال{{ __('modules.portal.opportunity_types.funding') }}
-                        والشراكات والتطوير الأعمال</p>
+                    <p class="text-gray-600 text-sm md:text-base mt-1 ml-0 md:ml-12">
+                        {{ __('modules.portal.manage_subtitle') }}</p>
                 </div>
                 <div class="flex-shrink-0">
                     <a href="{{ route('dashboard.portal-opportunities.create') }}"
                         class="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors whitespace-nowrap">
                         <i class="fas fa-plus"></i>
-                        <span>فرصة جديدة</span>
+                        <span>{{ __('modules.portal.add_opportunity') }}</span>
                     </a>
                 </div>
             </div>
@@ -33,34 +32,51 @@
     @endif
 
     @if ($opportunities->count())
-        </a>
-        <a href="{{ route('dashboard.portal-opportunities.edit', $opportunity) }}"
-            class="flex-1 text-center px-3 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium rounded-lg transition text-sm">
-            <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
-        </a>
-        <button type="button"
-            onclick="openDeleteModal('{{ $opportunity->id }}', '{{ $opportunity->title }}', '{{ route('dashboard.portal-opportunities.destroy', $opportunity) }}')"
-            class="flex-1 text-center px-3 py-2 bg-red-100 hover:bg-red-200 text-red-700 font-medium rounded-lg transition text-sm">
-            <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
-        </button>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach ($opportunities as $opportunity)
+                <x-ui.card class="h-full flex flex-col">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <x-ui.badge color="purple">
+                                {{ __('modules.portal.types.' . $opportunity->opportunity_type) }}
+                            </x-ui.badge>
+                            <x-ui.badge :color="$opportunity->is_active ? 'green' : 'gray'">
+                                {{ $opportunity->is_active ? __('common.status.active') : __('common.status.disabled') }}
+                            </x-ui.badge>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $opportunity->title }}</h3>
+                        <p class="text-gray-600 text-sm line-clamp-2">{{ $opportunity->description }}</p>
+                    </div>
+                    <div class="mt-6 flex gap-2">
+                        <a href="{{ route('dashboard.portal-opportunities.show', $opportunity) }}"
+                            class="flex-1 text-center px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition text-sm">
+                            <i class="fas fa-eye"></i> {{ __('common.actions.view') }}
+                        </a>
+                        <a href="{{ route('dashboard.portal-opportunities.edit', $opportunity) }}"
+                            class="flex-1 text-center px-3 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium rounded-lg transition text-sm">
+                            <i class="fas fa-edit"></i> {{ __('common.actions.edit') }}
+                        </a>
+                        <button type="button"
+                            onclick="openDeleteModal('{{ $opportunity->id }}', '{{ $opportunity->title }}', '{{ route('dashboard.portal-opportunities.destroy', $opportunity) }}')"
+                            class="flex-1 text-center px-3 py-2 bg-red-100 hover:bg-red-200 text-red-700 font-medium rounded-lg transition text-sm">
+                            <i class="fas fa-trash"></i> {{ __('common.actions.delete') }}
+                        </button>
+                    </div>
+                </x-ui.card>
+            @endforeach
         </div>
+    @else
+        <x-ui.card>
+            <div class="text-center py-12">
+                <i class="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
+                <p class="text-gray-600 text-lg font-medium">{{ __('modules.portal.no_opportunities') }}</p>
+                <p class="text-gray-500 text-sm mt-2 mb-6">{{ __('modules.portal.start_creating') }}</p>
+                <x-ui.button href="{{ route('dashboard.portal-opportunities.create') }}" color="primary">
+                    <i class="fas fa-plus"></i> {{ __('modules.portal.add_opportunity') }}
+                </x-ui.button>
+            </div>
         </x-ui.card>
-    @endforeach
-    </div>
-@else
-    <x-ui.card>
-        <div class="text-center py-12">
-            <i class="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
-            <p class="text-gray-600 text-lg font-medium">لا توجد فرص حالياً</p>
-            <p class="text-gray-500 text-sm mt-2 mb-6">ابدأ ب{{ __('common.actions.create') }} فرصة جديدة الآن</p>
-            <x-ui.button href="{{ route('dashboard.portal-opportunities.create') }}" color="primary">
-                <i class="fas fa-plus"></i> {{ __('common.actions.add') }} فرصة جديدة
-            </x-ui.button>
-        </div>
-    </x-ui.card>
     @endif
 
     @include('components.delete-modal')
-
-    </div>
 </x-layout.dashboard>

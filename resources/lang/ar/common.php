@@ -27,6 +27,7 @@ return [
         'view_all' => 'عرض الكل',
         'view_details' => 'عرض التفاصيل',
         'read_more' => 'اقرأ المزيد',
+        'apply' => 'تقديم الطلب',
     ],
 
     // Status
@@ -81,6 +82,7 @@ return [
             'enter' => 'أدخل',
             'select' => 'اختر',
         ],
+        'fill' => 'املأ',
     ],
 
     // Pagination
@@ -103,6 +105,7 @@ return [
         'time' => 'الوقت',
         'from' => 'من',
         'to' => 'إلى',
+        'available' => 'متاح',
     ],
 
     // General
@@ -111,6 +114,7 @@ return [
         'no' => 'لا',
         'all' => 'الكل',
         'none' => 'لا شيء',
+        'no_date' => 'بدون تاريخ',
         'other' => 'أخرى',
         'loading' => 'جاري التحميل...',
         'no_data' => 'لا توجد بيانات',
@@ -127,10 +131,19 @@ return [
         'phone' => 'الهاتف',
         'address' => 'العنوان',
         'image' => 'الصورة',
+        'current_image' => 'الصورة الحالية',
+        'selected_image' => 'الصورة المختارة',
         'file' => 'الملف',
+        'current_file' => 'الملف الحالي',
+        'selected_file' => 'الملف المختار',
+        'size' => 'الحجم',
         'type' => 'النوع',
         'category' => 'الفئة',
         'order' => 'الترتيب',
+        'not_specified' => 'غير محدد',
+        'in_data' => 'في البيانات المدخلة',
+        'in_arabic' => '(بالعربية)',
+        'in_english' => '(بالإنجليزية)',
     ],
 
     // Tabs
@@ -146,5 +159,12 @@ return [
         'image_formats' => 'الصيغ المدعومة: JPG, PNG, GIF, WEBP',
         'max_file_size' => 'الحد الأقصى لحجم الملف',
         'html_allowed' => 'يمكنك استخدام HTML للتنسيق',
+    ],
+
+    // Units
+    'units' => [
+        'mb' => 'ميجابايت',
+        'kb' => 'كيلوبايت',
+        'bytes' => 'بايت',
     ],
 ];

@@ -62,7 +62,8 @@
             </x-ui.card>
 
             <x-ui.button href="{{ route('dashboard.training.index') }}" color="gray" class="mt-4">
-                <i class="fas fa-arrow-right"></i> {{ __('common.actions.back') }}
+                <i class="fas fa-arrow-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}"></i>
+                {{ __('common.actions.back') }}
             </x-ui.button>
         </div>
 

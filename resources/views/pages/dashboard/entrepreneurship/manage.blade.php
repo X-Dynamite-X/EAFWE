@@ -1,4 +1,4 @@
-<x-layout.dashboard title="إدارة برامج الريادة">
+<x-layout.dashboard title="{{ __('modules.entrepreneurship.manage') }}">
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.entrepreneurship.manage') }}</h1>
@@ -106,7 +106,7 @@
                 </p>
                 <p class="text-gray-500 text-sm mt-2 mb-6">{{ __('modules.entrepreneurship.start_creating') }}</p>
                 <x-ui.button href="{{ route('dashboard.entrepreneurship.create') }}" color="primary">
-                    <i class="fas fa-plus"></i> {{ __('common.actions.add') }} برنامج جديد
+                    <i class="fas fa-plus"></i> {{ __('modules.entrepreneurship.new_program') }}
                 </x-ui.button>
             </div>
         </x-ui.card>

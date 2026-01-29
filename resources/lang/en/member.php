@@ -54,6 +54,8 @@ return [
         'view_button' => 'View Card',
         'download_button' => 'Download Card',
         'reissue_button' => 'Reissue Card',
+        'download_ar' => 'Download in Arabic (AR)',
+        'download_en' => 'Download in English (EN)',
         'verified' => 'Card Verified',
         'no_card_created' => 'No card created yet. Card will be created on first login',
         'confirm_reissue' => 'Are you sure you want to reissue the card? A new QR code will be created.',

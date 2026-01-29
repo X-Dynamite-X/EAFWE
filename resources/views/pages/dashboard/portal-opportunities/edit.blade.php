@@ -1,4 +1,4 @@
-<x-layout.dashboard title="{{ __('common.actions.edit') }} الفرصة">
+<x-layout.dashboard title="{{ __('common.actions.edit') }} {{ __('modules.portal.index') }}">
     <div class="max-w-2xl mx-auto">
         <!-- Header Section -->
         <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg shadow-sm p-6 border border-cyan-100 mb-6">
@@ -7,16 +7,16 @@
                     <i class="fas fa-edit text-cyan-600 text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900">{{ __('common.actions.edit') }} الفرصة</h1>
-                    <p class="text-gray-600 text-sm md:text-base mt-1">قم بتحديث معلومات الفرصة
-                        و{{ __('common.general.details') }} أدناه</p>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900">{{ __('common.actions.edit') }}
+                        {{ __('modules.portal.index') }}</h1>
+                    <p class="text-gray-600 text-sm md:text-base mt-1">{{ __('modules.marketing.update_info') }}</p>
                 </div>
             </div>
         </div>
 
         @if ($errors->any())
             <x-ui.alert type="danger" class="mb-6">
-                <strong>{{ __('common.general.error') }} في البيانات المدخلة:</strong>
+                <strong>{{ __('common.general.error') }} {{ __('common.general.in_data') }}:</strong>
                 <ul class="mt-2 space-y-1">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -41,29 +41,31 @@
                         <button type="button" @click="lang = 'en'" class="px-4 py-2 text-sm font-medium"
                             :class="lang === 'en' ? 'bg-gold-500 text-charcoal-900 rounded-t-lg' :
                                 'text-gray-500 hover:text-gray-700'">
-                            English
+                            {{ __('common.tabs.english') }}
                         </button>
                     </div>
 
                     {{-- Arabic Fields --}}
                     <div x-show="lang === 'ar'" class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.title') }}
-                                (ب{{ __('common.tabs.arabic') }}) <span class="text-red-600">*</span></label>
-                            <input type="text"
+                            <label
+                                class="block text-sm font-medium text-gray-900 mb-2">{{ __('modules.portal.fields.title') }}
+                                {{ __('common.general.in_arabic') }} <span class="text-red-600">*</span></label>
+                            <input type="text" id="title_ar"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="title_ar" value="{{ old('title_ar', $opportunity->title_ar) }}" required>
                         </div>
                         <div>
                             <label
-                                class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.description') }}
-                                (ب{{ __('common.tabs.arabic') }}) <span class="text-red-600">*</span></label>
+                                class="block text-sm font-medium text-gray-900 mb-2">{{ __('modules.portal.fields.description') }}
+                                {{ __('common.general.in_arabic') }} <span class="text-red-600">*</span></label>
                             <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="description_ar" rows="3" required>{{ old('description_ar', $opportunity->description_ar) }}</textarea>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-900 mb-2">المحتوى
-                                (ب{{ __('common.tabs.arabic') }}) <span class="text-red-600">*</span></label>
+                            <label
+                                class="block text-sm font-medium text-gray-900 mb-2">{{ __('modules.portal.fields.content') }}
+                                {{ __('common.general.in_arabic') }} <span class="text-red-600">*</span></label>
                             <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" name="content_ar"
                                 rows="6" required>{{ old('content_ar', $opportunity->content_ar) }}</textarea>
                         </div>
@@ -72,21 +74,24 @@
                     {{-- English Fields --}}
                     <div x-show="lang === 'en'" class="space-y-4" style="display: none;">
                         <div>
-                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left" dir="ltr">Title
-                                (English) <span class="text-red-600">*</span></label>
+                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left"
+                                dir="ltr">{{ __('modules.portal.fields.title') }}
+                                {{ __('common.general.in_english') }} <span class="text-red-600">*</span></label>
                             <input type="text" dir="ltr"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="title_en" value="{{ old('title_en', $opportunity->title_en) }}" required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-900 mb-2 text-left"
-                                dir="ltr">Description (English) <span class="text-red-600">*</span></label>
+                                dir="ltr">{{ __('modules.portal.fields.description') }}
+                                {{ __('common.general.in_english') }} <span class="text-red-600">*</span></label>
                             <textarea dir="ltr" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="description_en" rows="3" required>{{ old('description_en', $opportunity->description_en) }}</textarea>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left" dir="ltr">Content
-                                (English) <span class="text-red-600">*</span></label>
+                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left"
+                                dir="ltr">{{ __('modules.portal.fields.content') }}
+                                {{ __('common.general.in_english') }} <span class="text-red-600">*</span></label>
                             <textarea dir="ltr" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="content_en" rows="6" required>{{ old('content_en', $opportunity->content_en) }}</textarea>
                         </div>
@@ -94,8 +99,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-900 mb-2">المعرف (Slug) <span
-                            class="text-red-600">*</span></label>
+                    <label class="block text-sm font-medium text-gray-900 mb-2">{{ __('modules.portal.fields.slug') }}
+                        <span class="text-red-600">*</span></label>
                     <input type="text"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('slug') border-red-500 @enderror"
                         name="slug" value="{{ old('slug', $opportunity->slug) }}" required>
@@ -106,20 +111,17 @@
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-900 mb-2">نوع الفرصة <span
-                                class="text-red-600">*</span></label>
+                        <label
+                            class="block text-sm font-medium text-gray-900 mb-2">{{ __('modules.portal.fields.opportunity_type') }}
+                            <span class="text-red-600">*</span></label>
                         <select
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             name="opportunity_type" required>
-                            <option value="business"
-                                {{ old('opportunity_type', $opportunity->opportunity_type) == 'business' ? 'selected' : '' }}>
-                                {{ __('modules.entrepreneurship.types.business') }}</option>
-                            <option value="partnership"
-                                {{ old('opportunity_type', $opportunity->opportunity_type) == 'partnership' ? 'selected' : '' }}>
-                                {{ __('modules.participation.types.partner') }}</option>
-                            <option value="funding"
-                                {{ old('opportunity_type', $opportunity->opportunity_type) == 'funding' ? 'selected' : '' }}>
-                                {{ __('modules.portal.opportunity_types.funding') }}</option>
+                            @foreach (__('modules.portal.types') as $value => $label)
+                                <option value="{{ $value }}"
+                                    {{ old('opportunity_type', $opportunity->opportunity_type) == $value ? 'selected' : '' }}>
+                                    {{ $label }}</option>
+                            @endforeach
                         </select>
                         @error('opportunity_type')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -127,8 +129,9 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-900 mb-2">الحالة <span
-                                class="text-red-600">*</span></label>
+                        <label
+                            class="block text-sm font-medium text-gray-900 mb-2">{{ __('modules.portal.fields.status') }}
+                            <span class="text-red-600">*</span></label>
                         <select
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             name="status" required>
@@ -140,8 +143,7 @@
                                 {{ __('modules.portal.statuses.closed') }}</option>
                             <option value="upcoming"
                                 {{ old('status', $opportunity->status) == 'upcoming' ? 'selected' : '' }}>
-                                {{ __('modules.portal.statuses.upcoming') }}
-                            </option>
+                                {{ __('modules.portal.statuses.upcoming') }}</option>
                         </select>
                         @error('status')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -149,122 +151,98 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.image') }}</label>
-                        @if ($opportunity->image_url)
-                            <div class="mb-3 p-3 bg-gray-100 rounded-lg">
-                                <img src="{{ $opportunity->image_url }}" alt="{{ $opportunity->title }}"
-                                    class="h-24 object-cover rounded">
-                            </div>
-                        @endif
-                        <x-layout.dashboard title="{{ __('dashboard.portal.edit_title') }}">
-                            <div class="max-w-2xl mx-auto">
-                                <x-ui.card title="{{ __('dashboard.portal.edit_title') }}">
-                                    <form action="{{ route('dashboard.portal-opportunities.update', $opportunity) }}"
-                                        method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('PATCH')
+                <div>
+                    <label
+                        class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.image') }}</label>
+                    @if ($opportunity->image_url)
+                        <div class="mb-3 p-3 bg-gray-100 rounded-lg flex items-center gap-4">
+                            <img src="{{ $opportunity->image_url }}" alt="{{ $opportunity->title }}"
+                                class="h-20 w-20 object-cover rounded shadow-sm">
+                            <span class="text-sm text-gray-500">{{ __('common.general.current_image') }}</span>
+                        </div>
+                    @endif
+                    <div id="dropZone"
+                        class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition"
+                        style="min-height: 120px; display: flex; align-items: center; justify-content: center;">
+                        <div>
+                            <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 text-sm">{{ __('common.form.drag_drop') }}</p>
+                            <p class="text-gray-500 text-xs mt-1">{{ __('common.hints.image_formats') }} -
+                                {{ __('common.hints.max_file_size') }} 5MB</p>
+                        </div>
+                        <input type="file" id="image" name="image"
+                            accept="image/jpeg,image/png,image/gif,image/webp" style="display: none;">
+                    </div>
+                    <p id="fileName" class="text-green-600 text-sm mt-2" style="display: none;"></p>
+                </div>
 
-                                        <x-ui.input name="title" label="{{ __('dashboard.portal.form.title') }}"
-                                            value="{{ old('title', $opportunity->title) }}" required />
+                <div>
+                    <label
+                        class="block text-sm font-medium text-gray-900 mb-2">{{ __('common.general.order') }}</label>
+                    <input type="number"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        name="order" value="{{ old('order', $opportunity->order) }}" min="0">
+                </div>
 
-                                        <x-ui.select name="type" label="{{ __('dashboard.portal.form.type') }}"
-                                            :options="[
-                                                'business' => __('dashboard.portal.filter.business'),
-                                                'investment' => __('dashboard.portal.filter.investment'),
-                                                'partnership' => __('dashboard.portal.filter.partnership'),
-                                                'volunteer' => __('dashboard.portal.filter.volunteer'),
-                                            ]" value="{{ old('type', $opportunity->type) }}"
-                                            required />
+                <div class="flex items-center">
+                    <input type="checkbox" class="w-4 h-4 rounded" name="is_active" id="is_active" value="1"
+                        {{ old('is_active', $opportunity->is_active) ? 'checked' : '' }}>
+                    <label for="is_active"
+                        class="mr-2 text-sm text-gray-900">{{ __('modules.portal.fields.is_active') }}</label>
+                </div>
 
-                                        <x-ui.textarea name="description"
-                                            label="{{ __('dashboard.portal.form.description') }}" rows="4"
-                                            value="{{ old('description', $opportunity->description) }}" required />
+                <div class="flex gap-3 mt-6 pt-6 border-t border-gray-200">
+                    <x-ui.button type="submit" color="primary"><i class="fas fa-save"></i>
+                        {{ __('common.actions.update') }}</x-ui.button>
+                    <x-ui.button href="{{ route('dashboard.portal-opportunities.manage') }}" color="gray"><i
+                            class="fas fa-times"></i> {{ __('common.actions.cancel') }}</x-ui.button>
+                </div>
+            </form>
+        </x-ui.card>
+    </div>
 
-                                        <x-ui.textarea name="requirements"
-                                            label="{{ __('dashboard.portal.form.requirements') }}" rows="3"
-                                            value="{{ old('requirements', $opportunity->requirements) }}" />
+    <script>
+        document.getElementById('title_ar').addEventListener('input', function(e) {
+            const slug = e.target.value.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            document.querySelector('[name="slug"]').value = slug;
+        });
 
-                                        <x-ui.input type="date" name="deadline"
-                                            label="{{ __('dashboard.portal.form.deadline') }}"
-                                            value="{{ old('deadline', $opportunity->deadline ? $opportunity->deadline->format('Y-m-d') : '') }}" />
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('image');
+        const fileName = document.getElementById('fileName');
 
-                                        <x-ui.input type="file" name="image"
-                                            label="{{ __('dashboard.portal.form.image') }}" accept="image/*" />
-                                        @if ($opportunity->image_url)
-                                            <div class="mb-4">
-                                                <img src="{{ $opportunity->image_url }}" alt="Current Image"
-                                                    class="w-32 h-32 object-cover rounded-lg">
-                                            </div>
-                                        @endif
+        dropZone.addEventListener('click', () => fileInput.click());
 
-                                        <div class="mb-4">
-                                            <label class="flex items-center">
-                                                <input type="checkbox" name="is_active" value="1"
-                                                    class="w-4 h-4 rounded border-gray-300"
-                                                    {{ old('is_active', $opportunity->is_active) ? 'checked' : '' }}>
-                                                <span
-                                                    class="mr-2 text-sm text-gray-700">{{ __('dashboard.portal.form.is_active') }}</span>
-                                            </label>
-                                        </div>
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('border-blue-500', 'bg-blue-50');
+        });
 
-                                        <div class="flex gap-4 mt-6">
-                                            <x-ui.button type="submit" color="gold" class="flex-1 text-center">
-                                                {{ __('dashboard.portal.form.save') }}
-                                            </x-ui.button>
-                                            <x-ui.button href="{{ route('dashboard.portal-opportunities.manage') }}"
-                                                color="gray" class="flex-1 text-center">
-                                                {{ __('common.actions.cancel') }}
-                                            </x-ui.button>
-                                        </div>
-                                    </form>
-                                </x-ui.card>
-                            </div>
-                        </x-layout.dashboard>
-                        document.querySelector('[name="title_ar"]').addEventListener('input', function(e) {
-                        const slug = e.target.value.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g,
-                        '-')
-                        .replace(/^-+|-+$/g, '');
-                        document.querySelector('[name="slug"]').value = slug;
-                        });
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('border-blue-500', 'bg-blue-50');
+        });
 
-                        const dropZone = document.getElementById('dropZone');
-                        const fileInput = document.getElementById('image');
-                        const fileName = document.getElementById('fileName');
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-blue-500', 'bg-blue-50');
+            if (e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+                updateFileName();
+            }
+        });
 
-                        dropZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', updateFileName);
 
-                        dropZone.addEventListener('dragover', (e) => {
-                        e.preventDefault();
-                        dropZone.classList.add('border-blue-500', 'bg-blue-50');
-                        });
-
-                        dropZone.addEventListener('dragleave', () => {
-                        dropZone.classList.remove('border-blue-500', 'bg-blue-50');
-                        });
-
-                        dropZone.addEventListener('drop', (e) => {
-                        e.preventDefault();
-                        dropZone.classList.remove('border-blue-500', 'bg-blue-50');
-                        if (e.dataTransfer.files.length > 0) {
-                        fileInput.files = e.dataTransfer.files;
-                        updateFileName();
-                        }
-                        });
-
-                        fileInput.addEventListener('change', updateFileName);
-
-                        function updateFileName() {
-                        if (fileInput.files.length > 0) {
-                        const file = fileInput.files[0];
-                        const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
-                        fileName.textContent = `✓ ${file.name} (${sizeMB} MB)`;
-                        fileName.style.display = 'block';
-                        } else {
-                        fileName.style.display = 'none';
-                        }
-                        }
-                        </script>
+        function updateFileName() {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                fileName.textContent = `✓ ${file.name} (${sizeMB} MB)`;
+                fileName.style.display = 'block';
+            } else {
+                fileName.style.display = 'none';
+            }
+        }
+    </script>
 </x-layout.dashboard>

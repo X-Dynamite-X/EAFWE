@@ -123,14 +123,24 @@
                                 {{ __('member.card.view_button') }}
                             </a>
 
-                            <a href="{{ route('member-card.download', $membership->id) }}"
-                                class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition text-center flex items-center justify-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                                </svg>
-                                {{ __('member.card.download_button') }}
-                            </a>
+                            <div class="grid grid-cols-2 gap-3">
+                                <a href="{{ route('member-card.download', [$membership->id, 'locale' => 'ar']) }}"
+                                    class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-2 rounded-lg transition text-center flex items-center justify-center gap-1 text-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
+                                    {{ __('member.card.download_ar') }}
+                                </a>
+                                <a href="{{ route('member-card.download', [$membership->id, 'locale' => 'en']) }}"
+                                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-2 rounded-lg transition text-center flex items-center justify-center gap-1 text-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
+                                    {{ __('member.card.download_en') }}
+                                </a>
+                            </div>
 
                             <button onclick="confirmReissue({{ $membership->id }})"
                                 class="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-lg transition">
@@ -138,15 +148,13 @@
                             </button>
 
                             @if ($cardStatus['verified'])
-                                <div
-                                    class="bg-green-100 border border-green-300 rounded-lg p-3 text-sm">
+                                <div class="bg-green-100 border border-green-300 rounded-lg p-3 text-sm">
                                     <p class="text-green-800 font-semibold">✓
                                         {{ __('member.card.verified') }}</p>
                                 </div>
                             @endif
                         @else
-                            <div
-                                class="bg-yellow-100 border border-yellow-300 rounded-lg p-4 mb-4">
+                            <div class="bg-yellow-100 border border-yellow-300 rounded-lg p-4 mb-4">
                                 <p class="text-yellow-800">{{ __('member.card.no_card_created') }}
                                 </p>
                             </div>

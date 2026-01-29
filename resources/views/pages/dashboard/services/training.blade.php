@@ -29,7 +29,7 @@
                         </div>
                     @empty
                         <div class="col-span-2 text-center py-4 text-gray-500">
-                            لا توجد دورات تدريبية متاحة حالياً
+                            {{ __('dashboard.services.training.no_trainings_available') }}
                         </div>
                     @endforelse
                 </div>
@@ -39,7 +39,7 @@
                 <div class="divide-y divide-gray-100">
                     {{-- Assuming we fetch materials related to training programs or a separate model --}}
                     <div class="text-center py-4 text-gray-500">
-                        قريباً
+                        {{ __('dashboard.services.training.coming_soon') }}
                     </div>
                 </div>
             </x-ui.card>

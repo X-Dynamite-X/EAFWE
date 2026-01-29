@@ -1,4 +1,4 @@
-<x-layout.dashboard title="إدارة {{ __('modules.training.title') }}">
+<x-layout.dashboard title="{{ __('modules.training.manage') }}">
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.training.manage') }}</h1>
@@ -108,7 +108,7 @@
                 <p class="text-gray-600 text-lg font-medium">{{ __('modules.training.no_programs_create') }}</p>
                 <p class="text-gray-500 text-sm mt-2 mb-6">{{ __('modules.training.start_creating') }}</p>
                 <x-ui.button href="{{ route('dashboard.training.create') }}" color="primary">
-                    <i class="fas fa-plus"></i> {{ __('common.actions.add') }} برنامج جديد
+                    <i class="fas fa-plus"></i> {{ __('modules.training.create') }}
                 </x-ui.button>
             </div>
         </x-ui.card>

@@ -32,7 +32,7 @@
                         <button type="button" @click="lang = 'en'" class="px-4 py-2 text-sm font-medium"
                             :class="lang === 'en' ? 'bg-gold-500 text-charcoal-900 rounded-t-lg' :
                                 'text-gray-500 hover:text-gray-700'">
-                            English
+                            {{ __('common.tabs.english') }}
                         </button>
                     </div>
 
@@ -65,21 +65,23 @@
                     {{-- English Fields --}}
                     <div x-show="lang === 'en'" class="space-y-4" style="display: none;">
                         <div>
-                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left" dir="ltr">Title
-                                (English) <span class="text-red-600">*</span></label>
+                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left"
+                                dir="ltr">{{ __('modules.training.fields.title_en') }} <span
+                                    class="text-red-600">*</span></label>
                             <input type="text" dir="ltr"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="title_en" value="{{ old('title_en', $program->title_en) }}" required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-900 mb-2 text-left"
-                                dir="ltr">Description (English)</label>
+                                dir="ltr">{{ __('modules.training.fields.description_en') }}</label>
                             <textarea dir="ltr" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="description_en" rows="3">{{ old('description_en', $program->description_en) }}</textarea>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left" dir="ltr">Content
-                                (English) <span class="text-red-600">*</span></label>
+                            <label class="block text-sm font-medium text-gray-900 mb-2 text-left"
+                                dir="ltr">{{ __('modules.training.fields.content_en') }} <span
+                                    class="text-red-600">*</span></label>
                             <textarea dir="ltr" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 name="content_en" rows="6" required>{{ old('content_en', $program->content_en) }}</textarea>
                         </div>
@@ -87,8 +89,9 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-900 mb-2">المعرف (Slug) <span
-                            class="text-red-600">*</span></label>
+                    <label
+                        class="block text-sm font-medium text-gray-900 mb-2">{{ __('modules.training.fields.slug') }}
+                        <span class="text-red-600">*</span></label>
                     <input type="text"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('slug') border-red-500 @enderror"
                         id="slug" name="slug" value="{{ old('slug', $program->slug) }}" required>

@@ -27,6 +27,7 @@ return [
         'view_all' => 'View All',
         'view_details' => 'View Details',
         'read_more' => 'Read More',
+        'apply' => 'Apply Now',
     ],
 
     // Status
@@ -81,6 +82,7 @@ return [
             'enter' => 'Enter',
             'select' => 'Select',
         ],
+        'fill' => 'Fill',
     ],
 
     // Pagination
@@ -103,6 +105,7 @@ return [
         'time' => 'Time',
         'from' => 'From',
         'to' => 'To',
+        'available' => 'Available',
     ],
 
     // General
@@ -111,6 +114,7 @@ return [
         'no' => 'No',
         'all' => 'All',
         'none' => 'None',
+        'no_date' => 'No Date',
         'other' => 'Other',
         'loading' => 'Loading...',
         'no_data' => 'No data available',
@@ -127,10 +131,19 @@ return [
         'phone' => 'Phone',
         'address' => 'Address',
         'image' => 'Image',
+        'current_image' => 'Current Image',
+        'selected_image' => 'Selected Image',
         'file' => 'File',
+        'current_file' => 'Current File',
+        'selected_file' => 'Selected File',
+        'size' => 'Size',
         'type' => 'Type',
         'category' => 'Category',
         'order' => 'Order',
+        'not_specified' => 'Not Specified',
+        'in_data' => 'in the input data',
+        'in_arabic' => '(In Arabic)',
+        'in_english' => '(In English)',
     ],
 
     // Tabs
@@ -146,5 +159,12 @@ return [
         'image_formats' => 'Supported formats: JPG, PNG, GIF, WEBP',
         'max_file_size' => 'Maximum file size',
         'html_allowed' => 'You can use HTML for formatting',
+    ],
+
+    // Units
+    'units' => [
+        'mb' => 'MB',
+        'kb' => 'KB',
+        'bytes' => 'Bytes',
     ],
 ];

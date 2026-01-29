@@ -2,11 +2,11 @@
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.communication.title') }}</h1>
-            <p class="text-gray-600 mt-1">اطلع على أحدث الإعلانات والأخبار</p>
+            <p class="text-gray-600 mt-1">{{ __('modules.communication.subtitle') }}</p>
         </div>
         @can('manage communications')
             <x-ui.button href="{{ route('dashboard.communication.manage') }}" color="primary">
-                <i class="fas fa-cog"></i> إدارة الاتصالات
+                <i class="fas fa-cog"></i> {{ __('modules.communication.manage') }}
             </x-ui.button>
         @endcan
     </div>
@@ -27,20 +27,21 @@
                                 <h3 class="text-lg font-semibold text-gray-900">{{ $communication->title }}</h3>
                                 @if ($communication->is_pinned)
                                     <x-ui.badge color="yellow">
-                                        <i class="fas fa-thumbtack text-xs"></i> مثبت
+                                        <i class="fas fa-thumbtack text-xs"></i>
+                                        {{ __('modules.communication.pinned') }}
                                     </x-ui.badge>
                                 @endif
                             </div>
                             <p class="text-sm text-gray-500 mt-1">
                                 <i class="fas fa-calendar text-xs"></i>
-                                {{ $communication->published_date ? $communication->published_date->format('d/m/Y') : 'بدون تاريخ' }}
+                                {{ $communication->published_date ? $communication->published_date->format('d/m/Y') : __('common.general.no_date') }}
                             </p>
                         </div>
                         <x-ui.badge
                             color="{{ $communication->type == 'announcement' ? 'blue' : ($communication->type == 'newsletter' ? 'cyan' : 'green') }}">
                             @switch($communication->type)
                                 @case('announcement')
-                                    إعلان
+                                    {{ __('modules.communication.types.announcement') }}
                                 @break
 
                                 @case('newsletter')
@@ -71,8 +72,7 @@
         <x-ui.card>
             <div class="text-center py-8">
                 <i class="fas fa-info-circle text-4xl text-gray-300 mb-3"></i>
-                <p class="text-gray-600">لا توجد اتصالات متاحة
-                    حالياً</p>
+                <p class="text-gray-600">{{ __('modules.communication.no_communications') }}</p>
             </div>
         </x-ui.card>
     @endif

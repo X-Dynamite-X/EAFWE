@@ -1,10 +1,8 @@
 <x-layout.dashboard title="{{ __('modules.portal.title') }}">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.portal.title') }}
-                وال{{ __('modules.portal.opportunity_types.funding') }}</h1>
-            <p class="text-gray-600 mt-1">اكتشف فرص الأعمال وال{{ __('modules.portal.opportunity_types.funding') }}
-                والشراكات المتاحة</p>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.portal.index') }}</h1>
+            <p class="text-gray-600 mt-1">{{ __('modules.portal.subtitle') }}</p>
         </div>
         @can('manage portal opportunities')
             <x-ui.button href="{{ route('dashboard.portal-opportunities.manage') }}" color="primary">
@@ -38,25 +36,25 @@
 
                         <div class="mt-4">
                             <x-ui.badge color="purple">
-                                @switch($opportunity->type)
+                                @switch($opportunity->opportunity_type)
                                     @case('business')
-                                        {{ __('modules.portal.opportunity_types.business') }}
+                                        {{ __('modules.portal.types.business') }}
                                     @break
 
                                     @case('investment')
-                                        {{ __('modules.portal.opportunity_types.investment') }}
+                                        {{ __('modules.portal.types.investment') }}
                                     @break
 
                                     @case('partnership')
-                                        {{ __('modules.portal.opportunity_types.partnership') }}
+                                        {{ __('modules.portal.types.partnership') }}
                                     @break
 
                                     @case('volunteer')
-                                        {{ __('modules.portal.opportunity_types.volunteer') }}
+                                        {{ __('modules.portal.types.volunteer') }}
                                     @break
 
                                     @default
-                                        {{ $opportunity->type }}
+                                        {{ $opportunity->opportunity_type }}
                                 @endswitch
                             </x-ui.badge>
                         </div>
@@ -77,9 +75,8 @@
             <div class="flex justify-center mb-2">
                 <i class="fas fa-info-circle text-4xl text-blue-400"></i>
             </div>
-            <p class="text-gray-700 font-medium">لا توجد فرص متاحة حالياً</p>
-            <p class="text-gray-500 text-sm mt-1">سيتم {{ __('common.actions.add') }} فرص جديدة
-                {{ __('modules.portal.statuses.upcoming') }}</p>
+            <p class="text-gray-700 font-medium">{{ __('modules.portal.no_opportunities') }}</p>
+            <p class="text-gray-500 text-sm mt-1">{{ __('modules.portal.start_creating') }}</p>
         </x-ui.alert>
     @endif
 </x-layout.dashboard>

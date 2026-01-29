@@ -48,7 +48,7 @@
                         </div>
                     @empty
                         <div class="text-center py-4 text-gray-500">
-                            لا توجد برامج متاحة حالياً
+                            {{ __('dashboard.services.entrepreneurship.no_programs_available') }}
                         </div>
                     @endforelse
                 </div>
@@ -63,7 +63,8 @@
                     <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
                         <p class="text-sm font-black text-blue-900 mb-1">
                             {{ __('modules.participation.types.partner') }}</p>
-                        <p class="text-xs text-blue-700 leading-relaxed">تصفحص الفرص المتاحة في بوابة الفرص.</p>
+                        <p class="text-xs text-blue-700 leading-relaxed">
+                            {{ __('dashboard.services.entrepreneurship.discover_opportunities') }}</p>
                         <a href="{{ route('dashboard.portal-opportunities.index') }}"
                             class="text-xs font-black text-blue-900 mt-2 inline-block">{{ __('common.general.details') }}
                             ←</a>

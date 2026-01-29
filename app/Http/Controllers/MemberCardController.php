@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Membership;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -83,6 +82,13 @@ class MemberCardController extends Controller
             abort(403);
         }
 
+        // الحصول على اللغة المطلوبة من الطلب (الافتراضية هي الحالية)
+        $locale = request('locale', app()->getLocale());
+
+        // تغيير لغة التطبيق مؤقتاً لإنشاء الـ PDF
+        $originalLocale = app()->getLocale();
+        app()->setLocale($locale);
+
         // إنشاء token للبطاقة إذا لم يكن موجود
         if (! $membership->card_token) {
             $membership->card_token = Str::random(32).'-'.time();
@@ -90,25 +96,52 @@ class MemberCardController extends Controller
             $membership->save();
         }
 
-        // إنشاء PDF للبطاقة
-        $qrCodeData = QrCode::format('svg')->size(200)->generate(
-            route('member-card.verify', $membership->card_token)
-        );
+        // إنشاء QR Code كـ PNG وتحويله إلى base64
+        $qrCodePng = QrCode::format('png')
+            ->size(300)
+            ->errorCorrection('H')
+            ->generate(route('member-card.verify', $membership->card_token));
+
+        $qrCodeBase64 = 'data:image/png;base64,'.base64_encode($qrCodePng);
 
         $html = view('pages.member.card-pdf', [
             'membership' => $membership,
             'user' => $membership->user,
-            'qrCodeData' => $qrCodeData,
+            'qrCodeData' => $qrCodeBase64,
+            'locale' => $locale,
         ])->render();
 
-        // حفظ كـ PDF
-        $fileName = 'membership-card-'.$membership->user_id.'-'.time().'.pdf';
+        // استعادة اللغة الأصلية
+        app()->setLocale($originalLocale);
 
-        // استخدام dompdf
+        // حفظ كـ PDF
+        $fileName = 'membership-card-'.$locale.'-'.$membership->user_id.'-'.time().'.pdf';
+
+        // استخدام mPDF مع دعم العربية
         try {
-            return Pdf::loadHTML($html)
-                ->setPaper('a4', 'portrait')
-                ->download($fileName);
+            $mpdf = new \Mpdf\Mpdf([
+                'mode' => 'utf-8',
+                'format' => 'A4',
+                'orientation' => 'P',
+                'margin_left' => 10,
+                'margin_right' => 10,
+                'margin_top' => 10,
+                'margin_bottom' => 10,
+                'margin_header' => 0,
+                'margin_footer' => 0,
+                'default_font' => 'DejaVuSans',
+                'directionality' => $locale === 'ar' ? 'rtl' : 'ltr',
+                'autoScriptToLang' => true,
+                'autoLangToFont' => true,
+            ]);
+
+            $mpdf->WriteHTML($html);
+
+            return response()->streamDownload(function () use ($mpdf) {
+                echo $mpdf->Output('', 'S');
+            }, $fileName, [
+                'Content-Type' => 'application/pdf',
+            ]);
         } catch (\Exception $e) {
             Log::error('PDF generation error: '.$e->getMessage());
 

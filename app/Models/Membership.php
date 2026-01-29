@@ -33,10 +33,15 @@ class Membership extends Model
         'approved_by',
         'approval_date',
         'rejection_reason',
+        'card_token',
+        'card_issued_at',
+        'card_verified',
     ];
 
     protected $casts = [
         'approval_date' => 'datetime',
+        'card_issued_at' => 'datetime',
+        'card_verified' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

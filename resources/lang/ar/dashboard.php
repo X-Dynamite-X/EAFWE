@@ -220,6 +220,8 @@ return [
             'quick_consultation' => 'استشارة سريعة',
             'consultation_placeholder' => 'اكتبي سؤالك هنا...',
             'submit_request' => 'إرسال الطلب',
+            'no_programs_available' => 'لا توجد برامج متاحة حالياً',
+            'discover_opportunities' => 'تصفحي الفرص المتاحة في بوابة الفرص.',
         ],
         'training' => [
             'title' => 'خدمات التمكين والتطوير',
@@ -233,6 +235,8 @@ return [
             'help' => 'مساعدة',
             'help_desc' => 'إذا واجهتك أي مشكلة في التسجيل أو تحميل المواد، يسعدنا تواصلك مع قسم الدعم الفني.',
             'contact_us' => 'تواصل معنا',
+            'no_trainings_available' => 'لا توجد دورات تدريبية متاحة حالياً',
+            'coming_soon' => 'قريباً',
         ],
     ],
     'files' => [

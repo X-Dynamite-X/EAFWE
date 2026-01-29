@@ -1,8 +1,11 @@
-<x-layout.dashboard title="{{ __('common.actions.add') }} اتصال جديد">
+<x-layout.dashboard title="{{ __('modules.communication.create') }}">
     <div class="max-w-2xl mx-auto">
         <div class="mb-6">
-            <h1 class="text-3xl font-bold text-gray-900">{{ __('common.actions.add') }} اتصال جديد</h1>
-            <p class="text-gray-600 mt-1">ملأ ال{{ __('modules.marketing.resource_types.template') }} أدناه ل{{ __('common.actions.add') }} إعلان أو {{ __('modules.communication.types.newsletter') }} جديدة</p>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('modules.communication.create') }}</h1>
+            <p class="text-gray-600 mt-1">{{ __('common.form.fill') }}
+                {{ __('modules.marketing.resource_types.template') }} {{ __('common.time.to') }}
+                {{ __('common.actions.add') }} {{ __('modules.communication.types.announcement') }}
+                {{ __('common.form.or') }} {{ __('modules.communication.types.newsletter') }}</p>
         </div>
 
         @if ($errors->any())
@@ -38,13 +41,15 @@
                     <div x-show="lang === 'ar'" class="space-y-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-900 mb-2">
-                                <i class="fas fa-heading"></i> {{ __('common.general.title') }} (ب{{ __('common.tabs.arabic') }})
+                                <i class="fas fa-heading"></i> {{ __('common.general.title') }}
+                                (ب{{ __('common.tabs.arabic') }})
                                 <span class="text-red-600">*</span>
                             </label>
                             <input type="text"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title_ar') border-red-500 @enderror"
+                                class="w-full px-4 py-2 border {{ $errors->has('title_ar') ? 'border-red-500' : 'border-gray-300' }} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 id="title_ar" name="title_ar" value="{{ old('title_ar') }}"
-                                placeholder="أدخل {{ __('common.general.title') }} ب{{ __('common.tabs.arabic') }}" required>
+                                placeholder="أدخل {{ __('common.general.title') }} ب{{ __('common.tabs.arabic') }}"
+                                required>
                             @error('title_ar')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror
@@ -52,12 +57,14 @@
 
                         <div>
                             <label class="block text-sm font-medium text-gray-900 mb-2">
-                                <i class="fas fa-file-alt"></i> نص الإعلان (ب{{ __('common.tabs.arabic') }})
+                                <i class="fas fa-file-alt"></i> {{ __('modules.communication.fields.message_ar') }}
                                 <span class="text-red-600">*</span>
                             </label>
                             <textarea
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('message_ar') border-red-500 @enderror"
-                                name="message_ar" rows="6" placeholder="نص الإعلان ب{{ __('common.tabs.arabic') }}" required>{{ old('message_ar') }}</textarea>
+                                class="w-full px-4 py-2 border {{ $errors->has('message_ar') ? 'border-red-500' : 'border-gray-300' }} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                name="message_ar" rows="6"
+                                placeholder="{{ __('common.form.placeholder.enter') }} {{ __('modules.communication.fields.message_ar') }}"
+                                required>{{ old('message_ar') }}</textarea>
                             @error('message_ar')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror
@@ -68,12 +75,13 @@
                     <div x-show="lang === 'en'" class="space-y-4" style="display: none;">
                         <div>
                             <label class="block text-sm font-medium text-gray-900 mb-2 text-left" dir="ltr">
-                                <i class="fas fa-heading"></i> Title (English)
+                                <i class="fas fa-heading"></i> {{ __('modules.communication.fields.title_en') }}
                                 <span class="text-red-600">*</span>
                             </label>
                             <input type="text" dir="ltr"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title_en') border-red-500 @enderror"
-                                name="title_en" value="{{ old('title_en') }}" placeholder="Enter title in English"
+                                class="w-full px-4 py-2 border {{ $errors->has('title_en') ? 'border-red-500' : 'border-gray-300' }} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                name="title_en" value="{{ old('title_en') }}"
+                                placeholder="{{ __('common.form.placeholder.enter') }} {{ __('modules.communication.fields.title_en') }}"
                                 required>
                             @error('title_en')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -82,12 +90,14 @@
 
                         <div>
                             <label class="block text-sm font-medium text-gray-900 mb-2 text-left" dir="ltr">
-                                <i class="fas fa-file-alt"></i> Message (English)
+                                <i class="fas fa-file-alt"></i> {{ __('modules.communication.fields.message_en') }}
                                 <span class="text-red-600">*</span>
                             </label>
                             <textarea dir="ltr"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('message_en') border-red-500 @enderror"
-                                name="message_en" rows="6" placeholder="Message content in English" required>{{ old('message_en') }}</textarea>
+                                class="w-full px-4 py-2 border {{ $errors->has('message_en') ? 'border-red-500' : 'border-gray-300' }} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                name="message_en" rows="6"
+                                placeholder="{{ __('common.form.placeholder.enter') }} {{ __('modules.communication.fields.message_en') }}"
+                                required>{{ old('message_en') }}</textarea>
                             @error('message_en')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror
@@ -97,14 +107,14 @@
 
                 <div>
                     <label for="slug" class="block text-sm font-medium text-gray-900 mb-2">
-                        <i class="fas fa-link"></i> المعرف (Slug)
+                        <i class="fas fa-link"></i> {{ __('modules.communication.fields.slug') }}
                         <span class="text-red-600">*</span>
                     </label>
                     <input type="text"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('slug') border-red-500 @enderror"
+                        class="w-full px-4 py-2 border {{ $errors->has('slug') ? 'border-red-500' : 'border-gray-300' }} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         id="slug" name="slug" value="{{ old('slug') }}" placeholder="announcement-name"
                         required dir="ltr">
-                    <p class="text-gray-500 text-sm mt-1">يُستخدم في الرابط</p>
+                    <p class="text-gray-500 text-sm mt-1">{{ __('common.hints.slug') }}</p>
                     @error('slug')
                         <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -117,14 +127,17 @@
                             <span class="text-red-600">*</span>
                         </label>
                         <select
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('type') border-red-500 @enderror"
+                            class="w-full px-4 py-2 border {{ $errors->has('type') ? 'border-red-500' : 'border-gray-300' }} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             id="type" name="type" required>
                             <option value="">-- اختر {{ __('common.general.type') }} --</option>
-                            <option value="announcement" {{ old('type') == 'announcement' ? 'selected' : '' }}>إعلان
+                            <option value="announcement" {{ old('type') == 'announcement' ? 'selected' : '' }}>
+                                {{ __('modules.communication.types.announcement') }}
                             </option>
-                            <option value="newsletter" {{ old('type') == 'newsletter' ? 'selected' : '' }}>{{ __('modules.communication.types.newsletter') }} بريدية
+                            <option value="newsletter" {{ old('type') == 'newsletter' ? 'selected' : '' }}>
+                                {{ __('modules.communication.types.newsletter') }} بريدية
                             </option>
-                            <option value="notification" {{ old('type') == 'notification' ? 'selected' : '' }}>{{ __('modules.communication.types.notification') }}
+                            <option value="notification" {{ old('type') == 'notification' ? 'selected' : '' }}>
+                                {{ __('modules.communication.types.notification') }}
                             </option>
                         </select>
                         @error('type')
@@ -134,10 +147,10 @@
 
                     <div>
                         <label for="published_date" class="block text-sm font-medium text-gray-900 mb-2">
-                            <i class="fas fa-calendar"></i> تاريخ النشر
+                            <i class="fas fa-calendar"></i> {{ __('modules.communication.fields.published_date') }}
                         </label>
                         <input type="date"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('published_date') border-red-500 @enderror"
+                            class="w-full px-4 py-2 border {{ $errors->has('published_date') ? 'border-red-500' : 'border-gray-300' }} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             id="published_date" name="published_date" value="{{ old('published_date') }}">
                         @error('published_date')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -150,7 +163,7 @@
                         <input type="checkbox" class="w-4 h-4 rounded" id="is_active" name="is_active"
                             value="1" {{ old('is_active') ? 'checked' : '' }}>
                         <label class="mr-2 text-sm text-gray-900" for="is_active">
-                            <i class="fas fa-check-circle"></i> نشر الإعلان
+                            <i class="fas fa-check-circle"></i> {{ __('modules.communication.fields.is_active') }}
                         </label>
                     </div>
 
@@ -158,19 +171,19 @@
                         <input type="checkbox" class="w-4 h-4 rounded" id="is_pinned" name="is_pinned"
                             value="1" {{ old('is_pinned') ? 'checked' : '' }}>
                         <label class="mr-2 text-sm text-gray-900" for="is_pinned">
-                            <i class="fas fa-thumbtack"></i> تثبيت الإعلان
+                            <i class="fas fa-thumbtack"></i> {{ __('modules.communication.fields.is_pinned') }}
                         </label>
                     </div>
                 </div>
 
                 <div>
                     <label for="order" class="block text-sm font-medium text-gray-900 mb-2">
-                        <i class="fas fa-sort-numeric-up"></i> ترتيب ال{{ __('common.actions.view') }}
+                        <i class="fas fa-sort-numeric-up"></i> {{ __('modules.communication.fields.order') }}
                     </label>
                     <input type="number"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('order') border-red-500 @enderror"
+                        class="w-full px-4 py-2 border {{ $errors->has('order') ? 'border-red-500' : 'border-gray-300' }} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         id="order" name="order" value="{{ old('order', 0) }}" min="0">
-                    <p class="text-gray-500 text-sm mt-1">الأرقام الأقل تظهر أولاً</p>
+                    <p class="text-gray-500 text-sm mt-1">{{ __('common.hints.order') }}</p>
                     @error('order')
                         <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -178,7 +191,7 @@
 
                 <div class="flex gap-3 mt-6 pt-6 border-t border-gray-200">
                     <x-ui.button type="submit" color="primary">
-                        <i class="fas fa-save"></i> {{ __('common.actions.save') }} الإعلان
+                        <i class="fas fa-save"></i> {{ __('common.actions.save') }}
                     </x-ui.button>
                     <x-ui.button href="{{ route('dashboard.communication.manage') }}" color="gray">
                         <i class="fas fa-times"></i> {{ __('common.actions.cancel') }}

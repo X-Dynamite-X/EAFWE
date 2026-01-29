@@ -31,7 +31,7 @@
                         <button type="button" @click="lang = 'en'" class="px-4 py-2 text-sm font-medium"
                             :class="lang === 'en' ? 'bg-gold-500 text-charcoal-900 rounded-t-lg' :
                                 'text-gray-500 hover:text-gray-700'">
-                            English
+                            {{ __('common.tabs.english') }}
                         </button>
                     </div>
 
@@ -143,8 +143,7 @@
 
                 <div class="flex gap-3 mt-6 pt-6 border-t border-gray-200">
                     <x-ui.button type="submit" color="primary"><i class="fas fa-save"></i>
-                        {{ __('common.actions.save') }}
-                        البرنامج</x-ui.button>
+                        {{ __('common.actions.save') }}</x-ui.button>
                     <x-ui.button href="{{ route('dashboard.training.manage') }}" color="gray"><i
                             class="fas fa-times"></i> {{ __('common.actions.cancel') }}</x-ui.button>
                 </div>
