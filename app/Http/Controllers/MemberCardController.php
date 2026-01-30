@@ -145,7 +145,7 @@ class MemberCardController extends Controller
         } catch (\Exception $e) {
             Log::error('PDF generation error: '.$e->getMessage());
 
-            // تنزيل كـ HTML إذا فشل الـ PDF
+            
             return response($html)
                 ->header('Content-Type', 'text/html; charset=utf-8')
                 ->header('Content-Disposition', 'attachment; filename='.$fileName.'.html');
