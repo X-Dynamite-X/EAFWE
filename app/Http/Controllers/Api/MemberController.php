@@ -273,6 +273,52 @@ class MemberController extends Controller
     }
 
     /**
+     * Submit membership request
+     */
+    public function submitMembershipRequest(Request $request): JsonResponse
+    {
+        try {
+            $validated = $request->validate([
+                'membership_type' => 'required|in:basic,premium,enterprise',
+                'country' => 'required|string',
+                'company_name' => 'nullable|string|max:255',
+                'description' => 'required|string|min:10|max:1000',
+            ], [
+                'membership_type.required' => 'نوع العضوية مطلوب',
+                'country.required' => 'البلد مطلوب',
+                'description.required' => 'الوصف مطلوب',
+                'description.min' => 'الوصف يجب أن يكون 10 أحرف على الأقل',
+            ]);
+
+            $membership = Membership::create([
+                'user_id' => $request->user()->id,
+                'membership_type' => $validated['membership_type'],
+                'country' => $validated['country'],
+                'company_name' => $validated['company_name'],
+                'description' => $validated['description'],
+                'status' => 'pending',
+            ]);
+
+            return response()->json([
+                'message' => 'Membership request submitted successfully',
+                'data' => [
+                    'id' => $membership->id,
+                    'membership_type' => $membership->membership_type,
+                    'country' => $membership->country,
+                    'company_name' => $membership->company_name,
+                    'description' => $membership->description,
+                    'status' => $membership->status,
+                ],
+            ], 201);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $e->errors(),
+            ], 422);
+        }
+    }
+
+    /**
      * Verify membership token (public endpoint)
      */
     public function verifyToken(string $cardToken): JsonResponse

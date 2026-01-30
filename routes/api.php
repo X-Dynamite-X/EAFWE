@@ -66,14 +66,19 @@ Route::middleware('auth:sanctum')->prefix('member')->name('api.member.')->group(
         Route::get('download', [MemberController::class, 'downloadCard'])->name('download');
     });
 
+    // Membership request endpoint
+    Route::prefix('membership')->name('membership.')->group(function () {
+        Route::post('request', [MemberController::class, 'submitMembershipRequest'])->name('request');
+    });
+
     // Member Services
-    Route::prefix('services')->group(function () {
-        Route::get('training', [ApiServiceController::class, 'training']);
-        Route::get('entrepreneurship', [ApiServiceController::class, 'entrepreneurship']);
-        Route::get('participation', [ApiServiceController::class, 'participationOpportunities']);
-        Route::get('marketing', [ApiServiceController::class, 'marketing']);
-        Route::get('files', [ApiServiceController::class, 'files']);
-        Route::get('communication', [ApiServiceController::class, 'communication']);
-        Route::get('portal', [ApiServiceController::class, 'portalOpportunities']);
+    Route::prefix('services')->name('services.')->group(function () {
+        Route::get('training', [ApiServiceController::class, 'training'])->name('training');
+        Route::get('entrepreneurship', [ApiServiceController::class, 'entrepreneurship'])->name('entrepreneurship');
+        Route::get('participation', [ApiServiceController::class, 'participationOpportunities'])->name('participation');
+        Route::get('marketing', [ApiServiceController::class, 'marketing'])->name('marketing');
+        Route::get('files', [ApiServiceController::class, 'files'])->name('files');
+        Route::get('communication', [ApiServiceController::class, 'communication'])->name('communication');
+        Route::get('portal', [ApiServiceController::class, 'portalOpportunities'])->name('portal');
     });
 });
