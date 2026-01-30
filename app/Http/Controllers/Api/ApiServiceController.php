@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\TrainingProgram;
+use App\Models\Communication;
 use App\Models\EntrepreneurshipProgram;
-use App\Models\ParticipationOpportunity;
 use App\Models\MarketingResource;
 use App\Models\MemberFile;
-use App\Models\Communication;
+use App\Models\ParticipationOpportunity;
 use App\Models\PortalOpportunity;
+use App\Models\TrainingProgram;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class ApiServiceController extends Controller
 {
@@ -20,10 +19,10 @@ class ApiServiceController extends Controller
      */
     public function training(): JsonResponse
     {
-        $programs = TrainingProgram::where('is_active', true)
+        $programs = TrainingProgram::where('is_active', '=', true)
             ->orderBy('order')
             ->get()
-            ->map(fn($program) => [
+            ->map(fn ($program) => [
                 'id' => $program->id,
                 'title_ar' => $program->title['ar'] ?? 'Unknown',
                 'title_en' => $program->title['en'] ?? 'Unknown',
@@ -34,7 +33,7 @@ class ApiServiceController extends Controller
             ]);
 
         return response()->json([
-            'data' => $programs
+            'data' => $programs,
         ]);
     }
 
@@ -43,10 +42,10 @@ class ApiServiceController extends Controller
      */
     public function entrepreneurship(): JsonResponse
     {
-        $programs = EntrepreneurshipProgram::where('is_active', true)
+        $programs = EntrepreneurshipProgram::where('is_active', '=', true)
             ->orderBy('order')
             ->get()
-            ->map(fn($program) => [
+            ->map(fn ($program) => [
                 'id' => $program->id,
                 'title_ar' => $program->title['ar'] ?? 'Unknown',
                 'title_en' => $program->title['en'] ?? 'Unknown',
@@ -56,7 +55,7 @@ class ApiServiceController extends Controller
             ]);
 
         return response()->json([
-            'data' => $programs
+            'data' => $programs,
         ]);
     }
 
@@ -65,10 +64,10 @@ class ApiServiceController extends Controller
      */
     public function participationOpportunities(): JsonResponse
     {
-        $opportunities = ParticipationOpportunity::where('is_active', true)
+        $opportunities = ParticipationOpportunity::where('is_active', '=', true)
             ->orderBy('order')
             ->get()
-            ->map(fn($opp) => [
+            ->map(fn ($opp) => [
                 'id' => $opp->id,
                 'title_ar' => $opp->title['ar'] ?? 'Unknown',
                 'title_en' => $opp->title['en'] ?? 'Unknown',
@@ -78,7 +77,7 @@ class ApiServiceController extends Controller
             ]);
 
         return response()->json([
-            'data' => $opportunities
+            'data' => $opportunities,
         ]);
     }
 
@@ -87,10 +86,10 @@ class ApiServiceController extends Controller
      */
     public function marketing(): JsonResponse
     {
-        $resources = MarketingResource::where('is_active', true)
+        $resources = MarketingResource::where('is_active', '=', true)
             ->orderBy('order')
             ->get()
-            ->map(fn($resource) => [
+            ->map(fn ($resource) => [
                 'id' => $resource->id,
                 'title_ar' => $resource->title['ar'] ?? 'Unknown',
                 'title_en' => $resource->title['en'] ?? 'Unknown',
@@ -100,7 +99,7 @@ class ApiServiceController extends Controller
             ]);
 
         return response()->json([
-            'data' => $resources
+            'data' => $resources,
         ]);
     }
 
@@ -109,10 +108,10 @@ class ApiServiceController extends Controller
      */
     public function files(): JsonResponse
     {
-        $files = MemberFile::where('is_active', true)
+        $files = MemberFile::where('is_active', '=', true)
             ->orderBy('order')
             ->get()
-            ->map(fn($file) => [
+            ->map(fn ($file) => [
                 'id' => $file->id,
                 'title_ar' => $file->title_ar ?? 'Unknown',
                 'title_en' => $file->title_en ?? 'Unknown',
@@ -121,7 +120,7 @@ class ApiServiceController extends Controller
             ]);
 
         return response()->json([
-            'data' => $files
+            'data' => $files,
         ]);
     }
 
@@ -130,11 +129,11 @@ class ApiServiceController extends Controller
      */
     public function communication(): JsonResponse
     {
-        $communications = Communication::where('is_active', true)
+        $communications = Communication::where('is_active', '=', true)
             ->orderByRaw('is_pinned DESC')
             ->orderBy('order')
             ->get()
-            ->map(fn($comm) => [
+            ->map(fn ($comm) => [
                 'id' => $comm->id,
                 'subject_ar' => $comm->title['ar'] ?? 'Unknown',
                 'subject_en' => $comm->title['en'] ?? 'Unknown',
@@ -145,7 +144,7 @@ class ApiServiceController extends Controller
             ]);
 
         return response()->json([
-            'data' => $communications
+            'data' => $communications,
         ]);
     }
 
@@ -158,7 +157,7 @@ class ApiServiceController extends Controller
             ->where('status', '!=', 'closed')
             ->orderBy('order')
             ->get()
-            ->map(fn($opp) => [
+            ->map(fn ($opp) => [
                 'id' => $opp->id,
                 'title_ar' => $opp->title['ar'] ?? 'Unknown',
                 'title_en' => $opp->title['en'] ?? 'Unknown',
@@ -168,7 +167,7 @@ class ApiServiceController extends Controller
             ]);
 
         return response()->json([
-            'data' => $opportunities
+            'data' => $opportunities,
         ]);
     }
 }
